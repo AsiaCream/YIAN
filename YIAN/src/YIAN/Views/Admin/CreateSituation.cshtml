@@ -1,0 +1,142 @@
+﻿@model Family
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>@Model.Name 家庭情况</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="CreateSituation" asp-controller="Admin" asp-route-id="@Model.Id">
+                <table class="table">
+                    <caption>生产资料状况</caption>
+                    <thead>
+                        <tr>
+                            <td>农用四轮机(台)</td>
+                            <td><input type="text" value="0" name="FourTurbines" class="form-control"/></td>
+                            <td>农机具(套)</td>
+                            <td><input type="text" value="0" name="AgriculturalMachinery " class="form-control"/></td>
+                            <td>耕地面积(亩)</td>
+                            <td><input type="text" value="0" name="ArableLand " class="form-control"/></td>
+                            <td>住房状况(面积)</td>
+                            <td><input type="text" value="0" name="HousingArea " class="form-control"/></td>
+                            <td>房屋结构</td>
+                            <td>
+                                <select name="BuildingStructure " class="form-control">
+                                    <option>砖混</option>
+                                    <option>土木</option>
+                                    <option>危房</option>
+                                </select>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                </table>
+                <table class="table">
+                    <caption>家庭养殖业状况</caption>
+                    <thead>
+                        <tr>
+                            <td>牛(头)</td>
+                            <td><input type="text" value="0" name="Cow" class="form-control"/></td>
+                            <td>马(匹)</td>
+                            <td><input type="text" value="0" name="Horse" class="form-control"/></td>
+                            <td>羊(只)</td>
+                            <td><input type="text" value="0" name="Sheep" class="form-control"/></td>
+                            <td>鸡(只)</td>
+                            <td><input type="text" value="0" name="Chicken" class="form-control"/></td>
+                        </tr>
+                        <tr>
+                            <td>鸭(只)</td>
+                            <td><input type="text" value="0" name="Duck" class="form-control"/></td>
+                            <td>鹅(只)</td>
+                            <td><input type="text" value="0" name="Goose" class="form-control"/></td>
+                            <td>猪(头)</td>
+                            <td><input type="text" value="0" name="Pig" class="form-control"/></td>
+                            <td>其它(头,只)</td>
+                            <td><input type="text" value="0" name="OthersAnimal" class="form-control"/></td>
+                        </tr>
+                    </thead>
+                </table>
+                <table class="table">
+                    <caption>家庭种植情况</caption>
+                    <thead>
+                        <tr>
+                            <td>玉米(亩)</td>
+                            <td><input type="text" value="0" name="Corn" class="form-control"/></td>
+                            <td>大豆(亩)</td>
+                            <td><input type="text" value="0" name="SoyBeans" class="form-control"/></td>
+                            <td>马铃薯(亩)</td>
+                            <td><input type="text" value="0" name="Potato" class="form-control" /></td>
+                            <td>葵花(亩)</td>
+                            <td><input type="text" value="0" name="Sunflower" class="form-control"/></td>
+                            <td>高粱(亩)</td>
+                            <td><input type="text" value="0" name="Sorghum" class="form-control"/></td>
+                            @*绿豆芸豆删除*@
+                        </tr>
+                        <tr>
+                            <td>杂粮(亩)</td>
+                            <td><input type="text" value="0" name="Grains" class="form-control"/></td>
+                            <td>水稻(亩)</td>
+                            <td><input type="text" value="0" name="Rice" class="form-control"/></td>
+                            <td>瓜菜(亩)</td>
+                            <td><input type="text" value="0" name="Vegetables" class="form-control"/></td>
+                            <td>杂豆(亩)</td>
+                            <td><input type="text" value="0" name="MixedBeans" class="form-control" /></td>
+                            <td>其它(亩)</td>
+                            <td><input type="text" value="0" name="OhtersArea" class="form-control"/></td>
+                        </tr>
+                    </thead>
+                </table>
+                <table class="table">
+                    <caption>家庭收入情况</caption>
+                    <thead>
+                        <tr>
+                            <td>年总收入(元)</td>
+                            <td><input type="text" value="0" name="YearTotalIncome" class="form-control"/></td>
+                            <td>每人年均收入(元)</td>
+                            <td><input type="text" value="0" name="YearAnnualPerCapitaIncome" class="form-control"/></td>
+                            <td>种植业收入(元)</td>
+                            <td><input type="text" value="0" name="FarmingIncome" class="form-control"/></td>
+                        </tr>
+                        <tr>
+                            <td>养殖业收入(元)</td>
+                            <td><input type="text" value="0" name="BreedingIncome" class="form-control" /></td>
+                            <td>其它收入(元)</td>
+                            <td><input type="text" value="0" name="OthersIncome" class="form-control" /></td>
+                            <td>各类补贴(元)</td>
+                            <td><input type="text" value="0" name="TipsIncome" class="form-control" /></td>
+                        </tr>
+                    </thead>
+                </table>
+                <table class="table">
+                    <caption>导致贫困原因</caption>
+                    <thead>
+                        <tr>
+                            <td>原因类型</td>
+                            <td>
+                                <select name="PoorReasion" class="form-control">
+                                    <option>因病</option>
+                                    <option>教育投入</option>
+                                    <option>自然灾害</option>
+                                    <option>地少人多</option>
+                                    <option>技能缺乏</option>
+                                    <option>其它</option>
+                                </select>
+                            </td>
+                            <td>帮扶措施</td>
+                            <td><input type="text" name="SupportMeasures" class="form-control"/></td>
+                        </tr>
+                    </thead>
+                </table>
+                <input type="submit" value="提交" class="btn btn-success form-control"/>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="text-center">版权所有</h4>
+        </div>
+    </div>
+
+
+</div>

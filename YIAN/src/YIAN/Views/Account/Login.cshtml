@@ -1,0 +1,80 @@
+﻿@{ 
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>依安扶贫管理后台登陆</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="~/styles/bootstrap.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="~/styles/metisMenu.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="~/styles/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="~/styles/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="~/scripts/html5shiv.js"></script>
+        <script src="~/scripts/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">依安扶贫后台管理登陆</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form role="form" asp-action="Login" asp-controller="Account" method="post">
+                            <fieldset>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="用户名" name="username" type="text" autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="密码" name="password" type="password" value="">
+                                </div>
+                                <!-- Change this to a button or input when using this as a form -->
+                                <input type="submit" class="btn btn-lg btn-success btn-block" value="登陆">
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="~/scripts/jquery-2.1.1.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/scripts/bootstrap.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="~/scripts/metisMenu.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="~/scripts/sb-admin-2.js"></script>
+
+</body>
+
+</html>

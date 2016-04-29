@@ -1,0 +1,190 @@
+﻿@model Family
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>@Model.Name 家庭成员 <span style="font-size:18px;">当前家庭成员人数：<i class="fa fa-users"></i>&nbsp; @ViewBag.FamilyCount</span></h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5 col-sx-12 col-lg-5 col-sm-12">
+            <form asp-action="CreateFamilyMember" asp-controller="Admin" asp-route-id="@Model.Id" method="post" id="createfamilymember">
+                <select name="townname" class="form-control" id="townname">
+                    <option>@Model.Town.Title</option>
+                </select><br />
+                <label>
+                    贫困户编号：
+                </label>
+                <input type="text" class="form-control" name="PoorNo" placeholder="贫困户编号" value="@Model.PoorNo" disabled="disabled" /><br />
+                <label>
+                    联系电话：
+                </label>
+                <input type="text" class="form-control" name="PhoneNumber" id="PhoneNumber" placeholder="联系电话" /><br />
+                <label>
+                    成员姓名：
+                </label>
+                <input type="text" class="form-control" name="Name" placeholder="成员姓名" /><br />
+                <label>
+                    年龄：
+                </label>
+                <input type="text" class="form-control" name="Age" placeholder="年龄" /><br />
+                <label>
+                    性别：
+                </label>
+                <select name="Sex" class="form-control">
+                    <option>男</option>
+                    <option>女</option>
+                </select><br />
+                <label>
+                    地址：
+                </label>
+                <input type="text" class="form-control" name="Address" placeholder="地址" /><br />
+                <label>
+                    身份证号：
+                </label>
+                <input type="text" class="form-control" name="CardNo" placeholder="身份证号" /><br />
+                <label>
+                    属否残疾：
+                </label>
+                <select name="IsDisability" class="form-control">
+                    <option>否</option>
+                    <option>是</option>
+                </select><br />
+                <label>
+                    与户主关系：
+                </label>
+                <select name="RelationShip" class="form-control">
+                    <option>父母</option>
+                    <option>妻子</option>
+                    <option>子女</option>
+                    <option>孙子</option>
+                    <option>孙女</option>
+                    <option>其他</option>
+                </select><br />
+                <label>
+                    教育程度：
+                </label>
+                <select name="Education" class="form-control">
+                    <option>小学</option>
+                    <option>中学</option>
+                    <option>高中</option>
+                    <option>大学</option>
+                </select><br />
+                <label>
+                    在校生情况：
+                </label>
+                <select name="IsOnSchool" class="form-control">
+                    <option>否</option>
+                    <option>是</option>
+                </select><br />
+                <label>
+                    劳动能力：
+                </label>
+                <select name="Ability" class="form-control">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                </select><br />
+                <label>
+                    身体状况：
+                </label>
+                <select name="IsHealth" class="form-control">
+                    <option>健康</option>
+                    <option>患病</option>
+                </select><br />
+                <label>
+                    务工情况：
+                </label>
+                <select name="Word" class="form-control">
+                    <option>赋闲</option>
+                    <option>临时工</option>
+                    <option>短工</option>
+                    <option>长期工</option>
+                </select><br />
+                <label>
+                    是否低（五）保：
+                </label>
+                <select name="IsLow" class="form-control">
+                    <option>是</option>
+                    <option>否</option>
+                </select><br />
+                <label>
+                    是否参加新农合：
+                </label>
+                <select name="IsNewFarm" class="form-control">
+                    <option>是</option>
+                    <option>否</option>
+                </select><br />
+                <label>
+                    是否参加养老保险：
+                </label>
+                <select name="IsOldInsurance" class="form-control">
+                    <option>是</option>
+                    <option>否</option>
+                </select><br />
+                <label>
+                    是否务工保险：
+                </label>
+                <select name="IsWorkInsurance" class="form-control">
+                    <option>是</option>
+                    <option>否</option>
+                </select><br />
+                <label>
+                    是否一技之长：
+                </label>
+                <select name="Skills" class="form-control">
+                    <option>无</option>
+                    <option>瓦工</option>
+                    <option>木工</option>
+                    <option>力工</option>
+                    <option>手工业</option>
+                    <option>农业机械驾驶</option>
+                    <option>养殖</option>
+                    <option>种植</option>
+                </select><br />
+                <label>
+                    对接人：
+                </label>
+                <input type="text" name="Helper" class="form-control" /><br />
+                <label>
+                    方法：
+                </label>
+                <input type="text" name="Measures" class="form-control" /><br />
+                @*<label>
+                贫困原因：
+            </label>
+            <select name="PoorReasion" class="form-control">
+                <option>因病</option>
+                <option>教育投入</option>
+                <option>自然灾害</option>
+                <option>地少人多</option>
+                <option>技能缺乏</option>
+                <option>其它</option>
+            </select><br />
+            <label>
+                帮扶措施：
+            </label>
+            <input type="text" name="SupportMeasures" class="form-control" /><br />*@
+            </form>
+            <button type="button" id="send" class="btn btn-success form-control">添加</button><br />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="text-center">版权所有</h4>
+        </div>
+    </div>
+
+</div>
+<script src="~/scripts/jquery-2.1.1.js"></script>
+<script type="text/javascript">
+    $("#send").click(function () {
+            $("#createfamilymember").submit();
+    });
+</script>

@@ -1,0 +1,86 @@
+﻿<div id="page-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            <h5>数据分析 
+            <select id="year">
+                <option>2016</option>
+                <option>2017</option>
+                <option>2018</option>
+                <option>2019</option>
+                <option>2020</option>
+                </select>
+            <select id="town">
+                <option>全镇</option>
+                @foreach(Town x in ViewBag.Town)
+                {
+                    <option>@x.Title</option>
+                }
+            </select>
+            <button id="send">统计</button>
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <canvas id="myChart"></canvas>
+        </div>
+    </div>
+    <div id="getbar"></div>
+</div>
+<script src="~/scripts/jquery-2.1.1.js"></script>
+<script type="text/javascript">
+    var barChartData = {
+        labels: ["一月", "二月", "三月", "四月", "五月", "六月", "七月","八月","九月","十月","十一月","十二月"],
+        datasets: [
+            {
+                label: '脱贫人口',
+                backgroundColor: "rgba(0,51,255,0.8)",
+                data: [685, 690, 67, 86, 3, 45, 469, 788, 584, 651, 327, 589],
+            }, {
+            label: '贫困人口平均收入',
+            backgroundColor: "rgba(204,0,0,0.7)",
+            data: [2654, 2689, 67, 86, 3, 45, 469, 788, 584, 651, 327, 589],
+        }, 
+        {
+            label: '脱贫人口平均收入',
+            backgroundColor: "rgba(0,255,51,0.7)",
+            data: [3546, 3265, 83, 94, 36, 46, 46,577,784,674,649,384]
+        }]
+
+    };
+    window.onload = function () {
+        var ctx = document.getElementById("myChart").getContext("2d");
+        window.myBar = new Chart(ctx, {
+            type: 'bar',
+            data: barChartData,
+            options: {
+                // Elements options apply to all of the options unless overridden in a dataset
+                // In this case, we are setting the border of each bar to be 2px wide and green
+                elements: {
+                    rectangle: {
+                        borderWidth: 1,
+                        borderColor: 'rgb(255, 255, 255)',
+                        borderSkipped: 'bottom'
+                    }
+                },
+                responsive: true,
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: '柱状图表'
+                }
+            }
+        });
+
+    };
+    $("#send").click(function () {
+        var year = $("#year").val();
+        var town = $("#town").val();
+        $.get("/Home/GetBar", { year: year, town: town }, function (html) {
+            $("#getbar").html(html)
+        });
+
+    });
+</script>

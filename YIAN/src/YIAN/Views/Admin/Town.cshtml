@@ -1,0 +1,146 @@
+﻿@model IEnumerable<Town>
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>村镇管理&nbsp;<a href="#" id="createTown" style="font-size:20px;">添加村镇</a></h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>编号ID</th>
+                        <th>村名称</th>
+                        <th>添加时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var x in Model)
+                    {
+                        <tr id="tr-@x.Id">
+                            <td>@x.Id</td>
+                            <td id="td-@x.Id">@x.Title</td>
+                            <td>@x.CreateTime</td>
+                            <td><a href="javascript:edit(@x.Id)" class="btn btn-primary">编辑</a><a href="javascript:remove(@x.Id)" class="btn btn-danger">删除</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="townModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    添加村镇
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form id="townForm" asp-action="CreateTown" asp-controller="Admin">
+                    <input type="text" name="title" id="title" placeholder="请填写村镇名称" class="form-control" />
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">
+                    关闭
+                </button>
+                <button type="button" id="send" class="btn btn-primary">
+                    添加
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<div class="modal fade" id="townEditModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    修改村镇
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form id="townEdit" asp-action="EditTown" asp-controller="Admin">
+                    <input type="hidden" name="id" id="townid" />
+                    <input type="text" name="title" id="editTitle" placeholder="请填写修改村镇名称" class="form-control" />
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">
+                    关闭
+                </button>
+                <button type="button" id="sendEdit" class="btn btn-primary">
+                    修改
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<script src="~/scripts/jquery-2.1.1.js"></script>
+<script type="text/javascript">
+        $("#createTown").click(function () {
+            $("#townModal").modal("show");
+        });
+        $("#send").click(function () {
+            var title=$("#title").val();
+            if (title == "") {
+                alert("请填写村镇名称");
+            }
+            else {
+                $("#townForm").submit();
+            }
+        });
+        function remove(id) {
+            var jug = confirm("确定删除吗?");
+            if (jug) {
+                $.post("/Admin/DeleteTown", { id: id }, function (data) {
+                    if (data == "success") {
+                        alert("删除成功");
+                        $("#tr-" + id).remove();
+                    }
+                    else if (data == "error") {
+                        alert("删除失败");
+                    }
+                    else {
+                        alert("未知错误");
+
+                    }
+
+                });
+
+            }
+
+        }
+        function edit(id) {
+            $("#townEditModal").find("input[name='title']").val($("#td-" + id).html());
+            $("#townEditModal").modal("show");
+            $("#sendEdit").click(function () {
+                var title = $("#editTitle").val();
+                if (title == "") {
+                    alert("请填写村镇名称");
+                }
+                else {
+                    $("#townid").val(id);
+                    $("#townEdit").submit();
+                }
+
+            });
+
+        }
+</script>
