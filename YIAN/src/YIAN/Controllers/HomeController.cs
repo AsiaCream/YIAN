@@ -16,46 +16,60 @@ namespace YIAN.Controllers
             
             return View();
         }
+        /// <summary>
+        /// 错误页面
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Error()
         {
             return View();
         }
+        /// <summary>
+        /// 数据分析页面
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Analysis()
         {
             var town = DB.Towns.OrderBy(x => x.Id).ToList();
             ViewBag.Town = town;
+            ViewBag.LowLine = DB.LowLines.SingleOrDefault(x => x.Id == 1);
             return View();
         }
+        /// <summary>
+        /// 数据分析查询页面
+        /// </summary>
+        /// <param name="year"></param>
+        /// <param name="town"></param>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult GetBar(int year,string town)
         {
-            var RichCount = 0;
+            var line= DB.LowLines.Where(x => x.Id == 1).SingleOrDefault().Line;
+            var villege = DB.Towns
+                 .Where(x => x.Title == town)
+                 .SingleOrDefault();
             var perso = DB.Familys
-                .Where(x => x.TownId == DB.Towns.Where(y=>y.Title==town).SingleOrDefault().Id)
+                .Where(x => x.TownId == villege.Id)
                 .ToList();
             var rich = new List<Rich>();
             var poor = new List<Poor>();
-            var richcount = new List<RichCount>();
             foreach(var x in perso)
             {
                 var situation = DB.FamilySituations
                 .Where(z=>z.FamilyId==x.Id)
                 .SingleOrDefault();
-                var membercount = DB.FamilyMembers.Where(i => i.FamilyId == x.Id).Count() + 1;
+                var membercount = DB.FamilyMembers.Where(i => i.FamilyId == x.Id).Count() + DB.Familys.Where(i=>i.Id==x.Id).Count();
                 if (situation != null)
                 {
-                    if ((situation.YearAnnualPerCapitaIncome * 12) / membercount > 2800)
+                    if ((situation.YearAnnualPerCapitaIncome) > line)
                     {
-                        richcount.Add(new RichCount
-                        {
-                            Count = RichCount + 1,
-                        });
+                        
                         rich.Add(new Rich
                         {
                             Id = x.Id,
-                            Income = (situation.YearAnnualPerCapitaIncome * 12) / membercount,
+                            Income = (situation.YearAnnualPerCapitaIncome),
                         });
                     }
                     else
@@ -63,7 +77,7 @@ namespace YIAN.Controllers
                         poor.Add(new Poor
                         {
                             Id = x.Id,
-                            Income = (situation.YearAnnualPerCapitaIncome * 12) / membercount,
+                            Income = (situation.YearAnnualPerCapitaIncome),
                         });
                     }
                 }
@@ -72,11 +86,26 @@ namespace YIAN.Controllers
                     return RedirectToAction("Error", "Home");
                 }
             }
-            ViewBag.Rich = rich;
-            ViewBag.Poor = poor;
-            ViewBag.RichCount = RichCount;
-            ViewBag.Test1 = 999;
-            ViewBag.Test2 = 800;
+            ViewBag.Town = villege;
+            double totalrichincome = 0;
+            double totalpoorincome = 0;
+            int RCount = 0;
+            int PCount = 0;
+            foreach(var x in rich)
+            {
+                totalrichincome = totalrichincome + x.Income;
+                RCount++;
+
+            };
+            foreach(var x in poor)
+            {
+                totalpoorincome = totalpoorincome + x.Income;
+                PCount++;
+            }
+            ViewBag.Poor = totalpoorincome / PCount;
+            ViewBag.Rich = totalrichincome / RCount;
+            ViewBag.RichCount = RCount + 1000;
+            ViewBag.LowLine = line;
             return View();
         }
     }
