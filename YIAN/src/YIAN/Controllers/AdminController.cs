@@ -81,6 +81,42 @@ namespace YIAN.Controllers
                 DB.SaveChanges();
                 return Content("success");
             }
+        }
+        #endregion
+        #region 低保线管理
+        /// <summary>
+        /// 低保线显示
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult LowLine()
+        {
+            var line = DB.LowLines.ToList();
+            return View(line);
+        }
+        /// <summary>
+        /// 低保线修改
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="line"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult EditLowLine(int id, LowLine line)
+        {
+            var oldline = DB.LowLines
+                .Where(x => x.Id == id)
+                .SingleOrDefault();
+            if (oldline == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+            else
+            {
+                oldline.Line = line.Line;
+                oldline.Time = line.Time;
+                DB.SaveChanges();
+                return Content("success");
+            }
         } 
         #endregion
         /// <summary>
@@ -184,7 +220,7 @@ namespace YIAN.Controllers
         public IActionResult CreateSituation(int id,FamilySituation situation)
         {
             var oldsituation = DB.FamilySituations
-                .Where(x => x.Id == id)
+                .Where(x => x.FamilyId == id)
                 .SingleOrDefault();
             if (oldsituation!=null)
             {
@@ -194,14 +230,17 @@ namespace YIAN.Controllers
                 }
                 else
                 {
-                    return Content("error");
+                    return RedirectToAction("Error","Home");
                 }
             }
             else
             {
+                var PCount = DB.FamilyMembers.Where(x => x.FamilyId == id).Count() + DB.Familys.Where(x => x.Id == id).Count();
                 DB.FamilySituations.Add(situation);
                 situation.FamilyId = id;
                 situation.CreateTime = DateTime.Now;
+                situation.YearTotalIncome = (situation.FarmingIncome + situation.BreedingIncome + situation.OthersIncome + situation.TipsIncome) * 12;
+                situation.YearAnnualPerCapitaIncome = situation.YearTotalIncome / PCount;
                 DB.SaveChanges();
                 return Content("success");
             }
@@ -213,7 +252,9 @@ namespace YIAN.Controllers
                 .Where(x => x.FamilyId == id)
                 .OrderByDescending(x=>x.Id)
                 .ToList();
-            ViewBag.FamilyHost = DB.Familys.Where(x => x.Id == id).SingleOrDefault();
+            ViewBag.FamilyHost = DB.Familys
+                .Where(x => x.Id == id)
+                .SingleOrDefault();
             return View(familymember);
         }
         [HttpGet]
@@ -226,11 +267,57 @@ namespace YIAN.Controllers
             ViewBag.FamilyCount = DB.Familys.Where(x => x.Id == id).Count() + DB.FamilyMembers.Where(x => x.FamilyId == id).Count();
             return View(host);
         }
+        /// <summary>
+        /// 创建家庭成员
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="Name"></param>
+        /// <param name="Age"></param>
+        /// <param name="Sex"></param>
+        /// <param name="Address"></param>
+        /// <param name="PhoneNumber"></param>
+        /// <param name="CardNo"></param>
+        /// <param name="IsDisability"></param>
+        /// <param name="RelationShip"></param>
+        /// <param name="Education"></param>
+        /// <param name="IsOnShool"></param>
+        /// <param name="Ability"></param>
+        /// <param name="IsHealth"></param>
+        /// <param name="Work"></param>
+        /// <param name="IsLow"></param>
+        /// <param name="IsNewFarm"></param>
+        /// <param name="IsOldInurance"></param>
+        /// <param name="IsWorkInsurance"></param>
+        /// <param name="Skills"></param>
+        /// <returns></returns>
         [HttpPost]
-        public IActionResult CreateFamilyMember(int id,FamilyMember member)
+        public IActionResult CreateFamilyMember(int id,string Name,int Age,string Sex,string Address,string PhoneNumber,
+            string CardNo,string IsDisability,string RelationShip,string Education,string IsOnSchool,int Ability,string IsHealth,
+            string Work,string IsLow,string IsNewFarm,string IsOldInurance,string IsWorkInsurance,string Skills)
         {
+            var member = new FamilyMember
+            {
+                Name = Name,
+                Age = Age,
+                Sex = Sex,
+                Address = Address,
+                PhoneNumber = PhoneNumber,
+                CardNo = CardNo,
+                IsDisability = IsDisability,
+                RelationShip = RelationShip,
+                Education = Education,
+                IsOnSchool = IsOnSchool,
+                Ability = Ability,
+                IsHealth = IsHealth,
+                Work = Work,
+                IsLow = IsLow,
+                IsNewFarm = IsNewFarm,
+                IsOldInsurance = IsOldInurance,
+                IsWorkInsurance = IsWorkInsurance,
+                Skills = Skills,
+                FamilyId=id,
+            };
             DB.FamilyMembers.Add(member);
-            member.FamilyId = id;
             DB.SaveChanges();
             return RedirectToAction("HostDetails", "Admin");
         }
