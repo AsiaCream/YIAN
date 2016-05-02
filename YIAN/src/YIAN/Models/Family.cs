@@ -12,11 +12,11 @@ namespace YIAN.Models
         //户主
         public int Id { get; set; }
         public int PoorNo { get; set; }//贫困户编号
-        public int PhoneNumber { get; set; }//联系电话
+        public string PhoneNumber { get; set; }//联系电话
         public string Name { get; set; }//姓名
         public int Age { get; set; }//年龄
         public string Sex { get; set; }//性别
-        public string Address { get; set; }
+        public string Address { get; set; }//家庭住址
         [MaxLength(18)]
         public string CardNo { get; set; }//身份证
         public string IsDisability { get; set; }//是否残疾

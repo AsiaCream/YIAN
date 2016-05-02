@@ -15,7 +15,7 @@ namespace YIAN.Models
         public int Age { get; set; }//年龄
         public string Sex { get; set; }//性别
         public string Address { get; set; }//地址
-        public int PhoneNumber { get; set; }//联系电话
+        public string PhoneNumber { get; set; }//联系电话
         [MaxLength(18)]
         public string CardNo { get; set; }//身份证号
         public string IsDisability { get; set; }//是否残疾
