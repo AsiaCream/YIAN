@@ -1,62 +1,65 @@
 ﻿@{ 
     Layout = null;
 }
+<link href="~/styles/bootstrap.css" rel="stylesheet" />
     <div class="row">
         <div class="col-md-12">
+            <h3>@ViewBag.Town.Title</h3>
             <canvas id="newchart"></canvas>
         </div>
     </div>
-<script src="~/scripts/jquery-2.1.1.js"></script>
 <script src="~/scripts/Chart.js"></script>
 <script type="text/javascript">
-    var newBarChartData = {
-        labels: ["一月", "二月", "三月", "四月", "五月", "六月", "七月","八月","九月","十月","十一月","十二月"],
+    var barChartData = {
+        labels: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
         datasets: [
             {
                 label: '脱贫人口',
                 backgroundColor: "rgba(0,51,255,0.8)",
-                data: [685, 690, 67, 86, 3, 45, 469, 788, 584, 651, 327, 589],
+                data: [@ViewBag.RichCount,988,980, 970, 978, 986, 990, 988, 979, 985, 968, 986],
             }, {
-            label: '贫困人口平均收入',
-            backgroundColor: "rgba(204,0,0,0.7)",
-            data: [685, 690, 67, 86, 3, 45, 469, 788, 584, 651, 327, 589],
-        },
+                label: '贫困人口平均收入',
+                backgroundColor: "rgba(204,0,0,0.7)",
+                data: [@ViewBag.Poor, 2689, 2666, 2678, 2745, 2666, 2698, 2548, 2389, 2759, 2698, 2354],
+            },
         {
             label: '脱贫人口平均收入',
             backgroundColor: "rgba(0,255,51,0.7)",
-            data: [685, 690, 67, 86, 3, 45, 469, 788, 584, 651, 327, 589],
-        }]
+            data: [@ViewBag.Rich, 3265, 4589, 3569, 3058, 3784, 2968, 3658, 3489, 3678, 3700, 3836]
+        }, {
+            type: 'line',
+            label: '低保线',
+            backgroundColor: "rgba(0,0,0,0)",
+            data: [@ViewBag.LowLine, @ViewBag.LowLine, @ViewBag.LowLine, @ViewBag.LowLine, @ViewBag.LowLine, @ViewBag.LowLine, @ViewBag.LowLine, @ViewBag.LowLine, @ViewBag.LowLine, @ViewBag.LowLine, @ViewBag.LowLine, @ViewBag.LowLine],
+            borderColor: 'red',
+            borderWidth: 1
+        }
+        ]
 
     };
-    window.onload = function () {
-        var wc = document.getElementById("newchart").getContext("2d");
-        window.myBar = new Chart(wc, {
-            type: 'bar',
-            data: newBarChartData,
-            options: {
-                // Elements options apply to all of the options unless overridden in a dataset
-                // In this case, we are setting the border of each bar to be 2px wide and green
-                elements: {
-                    rectangle: {
-                        borderWidth: 1,
-                        borderColor: 'rgb(255, 255, 255)',
-                        borderSkipped: 'bottom'
-                    }
-                },
-                responsive: true,
-                legend: {
-                    position: 'top',
-                },
-                title: {
-                    display: true,
-                    text: '数据分析'
+    var wx = document.getElementById("newchart").getContext("2d");
+    window.myBar = new Chart(wx, {
+        type: 'bar',
+        data: barChartData,
+        options: {
+            // Elements options apply to all of the options unless overridden in a dataset
+            // In this case, we are setting the border of each bar to be 2px wide and green
+            elements: {
+                rectangle: {
+                    borderWidth: 1,
+                    borderColor: 'rgb(255, 255, 255)',
+                    borderSkipped: 'bottom'
                 }
+            },
+            responsive: true,
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: '柱状图表'
             }
-        });
-
-    };
-
-
-
+        }
+    });
 
 </script>

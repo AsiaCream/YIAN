@@ -13,6 +13,7 @@ namespace YIAN.Models
         public DbSet<FamilyMember> FamilyMembers { get; set; }
         public DbSet<FamilySituation> FamilySituations { get; set; }
         public DbSet<Town> Towns { get; set; }
+        public DbSet<LowLine> LowLines { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -32,6 +33,10 @@ namespace YIAN.Models
                 e.HasIndex(x => x.Id);
             });
             builder.Entity<FamilySituation>(e =>
+            {
+                e.HasIndex(x => x.Id);
+            });
+            builder.Entity<LowLine>(e =>
             {
                 e.HasIndex(x => x.Id);
             });

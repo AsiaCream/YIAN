@@ -10,7 +10,6 @@
                 <option>2020</option>
                 </select>
             <select id="town">
-                <option>全镇</option>
                 @foreach(Town x in ViewBag.Town)
                 {
                     <option>@x.Title</option>
@@ -40,12 +39,20 @@
             label: '贫困人口平均收入',
             backgroundColor: "rgba(204,0,0,0.7)",
             data: [2654, 2689, 67, 86, 3, 45, 469, 788, 584, 651, 327, 589],
-        }, 
+            },
         {
             label: '脱贫人口平均收入',
             backgroundColor: "rgba(0,255,51,0.7)",
             data: [3546, 3265, 83, 94, 36, 46, 46,577,784,674,649,384]
-        }]
+        }, {
+            type: 'line',
+            label: '低保线',
+            backgroundColor: "rgba(0,0,0,0)",
+            data: [2800, 2800, 2800, 2800, 2800, 2800, 2800, 2800, 2800, 2800, 2800, 2800],
+            borderColor: 'red',
+            borderWidth: 1
+        }
+        ]
 
     };
     window.onload = function () {
@@ -69,7 +76,7 @@
                 },
                 title: {
                     display: true,
-                    text: '柱状图表'
+                    text: '全镇数据分析'
                 }
             }
         });

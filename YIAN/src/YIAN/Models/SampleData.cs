@@ -42,6 +42,8 @@ namespace YIAN.Models
 
                 var town1= DB.Towns.Add(new Town { Title = "长安村", CreateTime = DateTime.Now });
                 var town2= DB.Towns.Add(new Town { Title = "平安村", CreateTime = DateTime.Now });
+
+                var lowline = DB.LowLines.Add(new LowLine { Line = 2800, Time = DateTime.Now });
                 
             }
             DB.SaveChanges();
