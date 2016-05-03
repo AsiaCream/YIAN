@@ -217,10 +217,14 @@ namespace YIAN.Controllers
         /// <param name="situation">家庭情况对象</param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult CreateSituation(int id,FamilySituation situation)
+        public IActionResult CreateSituation(int id,int FourTurbines, int AgriculturalMachinery, double ArableLand, double HousingArea,string BuildingStructure,int Cow,
+            int Horse,int Sheep,int Chicken,int Duck,int Goose,int Pig,int OthersAnimal,int Corn, double SoyBeans, double Potato, double Sunflower, double Sorghum, double Grains,
+            double Rice, double Vegetables, double MixedBeans, double OthersArea, double FarmingIncome, double BreedingIncome, double OthersIncome, double TipsIncome, string PoorReason,
+            string SupportMeasures)
         {
             var oldsituation = DB.FamilySituations
                 .Where(x => x.FamilyId == id)
+                .Where(x=>x.CreateTime.Month==DateTime.Now.Month)
                 .SingleOrDefault();
             if (oldsituation!=null)
             {
@@ -230,12 +234,83 @@ namespace YIAN.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Error","Home");
+                    var PCount = DB.FamilyMembers.Where(x => x.FamilyId == id).Count() + DB.Familys.Where(x => x.Id == id).Count();
+                    var situation = new FamilySituation
+                    {
+                        FourTurbines=FourTurbines,
+                        ArableLand=ArableLand,
+                        AgriculturalMachinery= AgriculturalMachinery,
+                        HousingArea= HousingArea,
+                        BuildingStructure= BuildingStructure,
+                        Cow=Cow,
+                        Horse=Horse,
+                        Sheep=Sheep,
+                        Chicken=Chicken,
+                        Duck=Duck,
+                        Goose=Goose,
+                        Pig=Pig,
+                        OthersAnimal=OthersAnimal,
+                        Corn=Corn,
+                        SoyBeans=SoyBeans,
+                        Potato=Potato,
+                        Sunflower=Sunflower,
+                        Sorghum=Sorghum,
+                        Grains=Grains,
+                        Rice=Rice,
+                        Vegetables=Vegetables,
+                        MixedBeans=MixedBeans,
+                        OthersArea = OthersArea,
+                        FarmingIncome =FarmingIncome,
+                        BreedingIncome=BreedingIncome,
+                        OthersIncome=OthersIncome,
+                        TipsIncome=TipsIncome,
+                        PoorReason=PoorReason,
+                        SupportMeasures=SupportMeasures,
+                    };
+                    DB.FamilySituations.Add(situation);
+                    situation.FamilyId = id;
+                    situation.CreateTime = DateTime.Now;
+                    situation.YearTotalIncome = (situation.FarmingIncome + situation.BreedingIncome + situation.OthersIncome + situation.TipsIncome) * 12;
+                    situation.YearAnnualPerCapitaIncome = situation.YearTotalIncome / PCount;
+                    DB.SaveChanges();
+                    return Content("success");
                 }
             }
             else
             {
                 var PCount = DB.FamilyMembers.Where(x => x.FamilyId == id).Count() + DB.Familys.Where(x => x.Id == id).Count();
+                var situation = new FamilySituation
+                {
+                    FourTurbines = FourTurbines,
+                    ArableLand = ArableLand,
+                    AgriculturalMachinery = AgriculturalMachinery,
+                    HousingArea = HousingArea,
+                    BuildingStructure = BuildingStructure,
+                    Cow = Cow,
+                    Horse = Horse,
+                    Sheep = Sheep,
+                    Chicken = Chicken,
+                    Duck = Duck,
+                    Goose = Goose,
+                    Pig = Pig,
+                    OthersAnimal = OthersAnimal,
+                    Corn = Corn,
+                    SoyBeans = SoyBeans,
+                    Potato = Potato,
+                    Sunflower = Sunflower,
+                    Sorghum = Sorghum,
+                    Grains = Grains,
+                    Rice = Rice,
+                    Vegetables = Vegetables,
+                    MixedBeans = MixedBeans,
+                    OthersArea = OthersArea,
+                    FarmingIncome = FarmingIncome,
+                    BreedingIncome = BreedingIncome,
+                    OthersIncome = OthersIncome,
+                    TipsIncome = TipsIncome,
+                    PoorReason = PoorReason,
+                    SupportMeasures = SupportMeasures,
+                };
                 DB.FamilySituations.Add(situation);
                 situation.FamilyId = id;
                 situation.CreateTime = DateTime.Now;

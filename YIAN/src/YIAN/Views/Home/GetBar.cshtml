@@ -20,12 +20,14 @@
             }, {
                 label: '贫困人口平均收入',
                 backgroundColor: "rgba(204,0,0,0.7)",
-                data: [@ViewBag.Poor, 2689, 2666, 2678, 2745, 2666, 2698, 2548, 2389, 2759, 2698, 2354],
+                @*data: [@ViewBag.Poor, 2689, 2666, 2678, 2745, 2666, 2698, 2548, 2389, 2759, 2698, 2354],*@
+                data:[@foreach (Poor x in ViewBag.Poor) { @x.Income <text>,</text>}],
             },
         {
             label: '脱贫人口平均收入',
             backgroundColor: "rgba(0,255,51,0.7)",
-            data: [@ViewBag.Rich, 3265, 4589, 3569, 3058, 3784, 2968, 3658, 3489, 3678, 3700, 3836]
+            //data: [888, 3265, 4589, 3569, 3058, 3784, 2968, 3658, 3489, 3678, 3700, 3836]
+            data:[@foreach (Rich x in ViewBag.Rich) { @x.Income <text>,</text>}],
         }, {
             type: 'line',
             label: '低保线',
