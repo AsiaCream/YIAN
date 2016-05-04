@@ -12,7 +12,7 @@
                     <tr>
                         <th>编号ID</th>
                         <th>低保线</th>
-                        <th>添加时间</th>
+                        <th>修改时间</th>
                         <th>操作</th>
                     </tr>
                 </thead>
@@ -46,7 +46,7 @@
                 </h4>
             </div>
             <div class="modal-body">
-                <form id="LowLineEdit" asp-action="EditLowLine" asp-controller="Admin">
+                <form id="lowLineEdit" asp-action="EditLowLine" asp-controller="Admin">
                     <input type="hidden" name="id" id="lowLineid" />
                     <input type="text" name="Line" id="editLine" placeholder="请填写低保线" class="form-control" />
                 </form>
@@ -72,12 +72,12 @@
                 var line = $("#editLine").val();
                 
                 if (line == "") {
-                    alert("请填写村镇名称");
+                    alert("请填写低保线");
                 }
                 else {
-                    alert(line);
                     $("#lowLineid").val(id);
-                    $("#LowLineEdit").submit();
+                    alert($("#lowLineid").val());
+                    $("#lowLineEdit").submit();
                 }
             });
         }

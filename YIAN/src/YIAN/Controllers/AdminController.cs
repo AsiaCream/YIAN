@@ -98,10 +98,10 @@ namespace YIAN.Controllers
         /// 低保线修改
         /// </summary>
         /// <param name="id"></param>
-        /// <param name="line"></param>
+        /// <param name="lowline"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult EditLowLine(int id, LowLine line)
+        public IActionResult EditLowLine(int id, LowLine lowline)
         {
             var oldline = DB.LowLines
                 .Where(x => x.Id == id)
@@ -112,7 +112,7 @@ namespace YIAN.Controllers
             }
             else
             {
-                oldline.Line = line.Line;
+                oldline.Line = lowline.Line;
                 oldline.Time = DateTime.Now;
                 DB.SaveChanges();
                 return RedirectToAction("LowLine", "Admin");
