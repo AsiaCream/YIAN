@@ -113,9 +113,9 @@ namespace YIAN.Controllers
             else
             {
                 oldline.Line = line.Line;
-                oldline.Time = line.Time;
+                oldline.Time = DateTime.Now;
                 DB.SaveChanges();
-                return Content("success");
+                return RedirectToAction("LowLine", "Admin");
             }
         } 
         #endregion

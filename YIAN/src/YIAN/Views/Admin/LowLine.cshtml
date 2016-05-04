@@ -1,0 +1,84 @@
+﻿@model IEnumerable<LowLine>
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>低保线管理</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>编号ID</th>
+                        <th>低保线</th>
+                        <th>添加时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var x in Model)
+                    {
+                        <tr id="tr-@x.Id">
+                            <td>@x.Id</td>
+                            <td id="td-@x.Id">@x.Line</td>
+                            <td>@x.Time</td>
+                            <td><a href="javascript:edit(@x.Id)" class="btn btn-primary">编辑</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="LowLineEditModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    修改低保线
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form id="LowLineEdit" asp-action="EditLowLine" asp-controller="Admin">
+                    <input type="hidden" name="id" id="lowLineid" />
+                    <input type="text" name="Line" id="editLine" placeholder="请填写低保线" class="form-control" />
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">
+                    关闭
+                </button>
+                <button type="button" id="sendEdit" class="btn btn-primary">
+                    修改
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<script src="~/scripts/jquery-2.1.1.js"></script>
+<script type="text/javascript">
+        function edit(id) {
+            $("#LowLineEditModal").find("input[name='Line']").val($("#td-" + id).html());
+            $("#LowLineEditModal").modal("show");
+            $("#sendEdit").click(function () {
+                var line = $("#editLine").val();
+                
+                if (line == "") {
+                    alert("请填写村镇名称");
+                }
+                else {
+                    alert(line);
+                    $("#lowLineid").val(id);
+                    $("#LowLineEdit").submit();
+                }
+            });
+        }
+</script>
