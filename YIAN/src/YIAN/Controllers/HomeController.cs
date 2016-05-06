@@ -479,7 +479,6 @@ namespace YIAN.Controllers
             ViewBag.PoorDec = num / PoorDec.Count();
             num = 0;
             #endregion
-
             ViewBag.Town = villege;
             ViewBag.LowLine = line;
             return View();
