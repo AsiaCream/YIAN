@@ -35,9 +35,24 @@ namespace YIAN.Controllers
             await signInManager.SignOutAsync();
             return RedirectToAction("Login", "Account");
         }
+        [Authorize(Roles =("超级管理员"))]
+        [HttpGet]
+        public async Task<IActionResult> CreateAdmin()
+        {
+            var users = (await userManager.GetUsersInRoleAsync("管理员"))
+                .OrderBy(x => x.Id)
+                .ToList();
+            var admin = (await userManager.GetUsersInRoleAsync("超级管理员"))
+                .OrderBy(x => x.Id)
+                .ToList();
+            ViewBag.Admin = admin;
+            ViewBag.AdminCount = admin.Count();
+            ViewBag.UserCount = users.Count();
+            return View(users);
+        }
         [Authorize(Roles = ("超级管理员"))]
         [HttpPost]
-        public async Task<IActionResult> CreateAdmin(string username, string password,string name)
+        public async Task<IActionResult> CreateAdmin(string username, string password,string name,string position)
         {
             var admin = new User
             {
@@ -47,9 +62,18 @@ namespace YIAN.Controllers
             var result = await userManager.CreateAsync(admin, password);
             if (result.Succeeded)
             {
-                await userManager.AddToRoleAsync(admin, "管理员");
-                DB.SaveChanges();
-                return Content("success");
+                if (position == "是")
+                {
+                    await userManager.AddToRoleAsync(admin, "超级管理员");
+                    DB.SaveChanges();
+                    return RedirectToAction("CreateAdmin","Account");
+                }
+                else
+                {
+                    await userManager.AddToRoleAsync(admin, "管理员");
+                    DB.SaveChanges();
+                    return RedirectToAction("CreateAdmin", "Account");
+                }
             }
             else
             {
