@@ -119,39 +119,6 @@ namespace YIAN.Controllers
             }
         }
         #endregion
-        #region 管理员管理
-        /// <summary>
-        /// 创建管理员页面
-        /// </summary>
-        /// <returns></returns>
-        public IActionResult CreateAdmin()
-        {
-            return View();
-        }
-        /// <summary>
-        /// 执行创建管理员方法
-        /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <returns></returns>
-        public async Task<IActionResult> CreateAdmin(string username, string password)
-        {
-            var user = new User
-            {
-                UserName = username
-            };
-            var result = await userManager.CreateAsync(user, password);
-            if (result.Succeeded)
-            {
-                await userManager.AddToRoleAsync(user, "管理员");
-                return Content("success");
-            }
-            else
-            {
-                return Content("error");
-            }
-        } 
-        #endregion
         /// <summary>
         /// 创建户主视图
         /// </summary>
@@ -222,6 +189,23 @@ namespace YIAN.Controllers
             else
             {
                 return RedirectToAction("Error", "Home");
+            }
+            
+        }
+        //编辑户主信息
+        [HttpGet]
+        public IActionResult EditFamily(int id)
+        {
+            var oldfamily = DB.Familys
+                .Where(x => x.Id == id)
+                .SingleOrDefault();
+            if (oldfamily == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+            else
+            {
+                return View(oldfamily);
             }
             
         }

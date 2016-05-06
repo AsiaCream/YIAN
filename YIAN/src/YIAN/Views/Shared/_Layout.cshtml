@@ -91,9 +91,6 @@
                                     <a asp-action="HostDetails" asp-controller="Admin"><i class="fa fa-file-text"></i> 查看所有户主</a>
                                 </li>
                                 <li>
-                                    <a href="#"><i class="fa fa-edit"></i> 修改信息</a>
-                                </li>
-                                <li>
                                     <a href="#"><i class="fa fa-search"></i> 信息查询</a>
                                 </li>
                                 <li>
@@ -109,13 +106,13 @@
                             <a href="#" ><i class="fa fa-wrench"></i> 系统设置<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a asp-action="LowLine" asp-controller="Admin"><i class="fa fa-lightbulb-o"></i> 低保线</a>
+                                    <a asp-action="LowLine" asp-controller="Admin"><i class="fa fa-lightbulb-o"></i> 低保线设置</a>
                                 </li>
                                 <li>
                                     <a asp-action="Town" asp-controller="Admin"><i class="fa fa-bank"></i> 乡镇管理</a>
                                 </li>
                                 <li>
-                                    <a asp-action="Admin" asp-controller="Account"><i class="fa fa-users"></i> 管理员管理</a>
+                                    <a asp-action="CreateAdmin" asp-controller="Account"><i class="fa fa-users"></i> 管理员管理</a>
                                 </li>
                                 <li>
                                     <a href="javascript:$('.logout').submit()"><i class="fa fa-power-off"></i> 退出登陆</a>
@@ -154,9 +151,7 @@
 
 <!-- Morris Charts JavaScript -->
 <script src="~/scripts/raphael.js"></script>
-<script src="~/scripts/morris.js"></script>
-<script src="~/scripts/morris-data.js"></script>
 
 <!-- Custom Theme JavaScript -->
 <script src="~/scripts/sb-admin-2.js"></script>
-<script src="~/scripts/Chart.js"></script>
+<script src="~/scripts/highcharts.js"></script>

@@ -1,0 +1,179 @@
+﻿@model Family
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>编辑户主信息</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="EditFamily" asp-controller="Admin" asp-route-id="@Model.Id" method="post" id="editfamily">
+                <label>
+                    贫困户编号：
+                </label>
+                <input type="text" class="form-control" name="PoorNo" placeholder="贫困户编号" value="@Model.PoorNo" /><br />
+                <label>
+                    联系电话：
+                </label>
+                <input type="text" class="form-control" name="PhoneNumber" placeholder="联系电话" value="@Model.PhoneNumber" /><br />
+                <label>
+                    户主姓名：
+                </label>
+                <input type="text" class="form-control" name="Name" placeholder="户主姓名" value="@Model.Name" /><br />
+                <label>
+                    年龄：
+                </label>
+                <input type="text" class="form-control" name="Age" placeholder="年龄" value="@Model.Age"/><br />
+                <label>
+                    性别：
+                </label>
+                <select name="Sex" class="form-control">
+                    <option>@Model.Sex</option>
+                @*@foreach(var x in ViewBag.Sex)
+                {
+                    <option>@x.Sex</option>
+
+                }*@
+                </select><br />
+                <label>
+                    地址：
+                </label>
+                <input type="text" class="form-control" name="Address" placeholder="地址" value="@Model.Address" /><br />
+                <label>
+                    身份证号：
+                </label>
+                <input type="text" class="form-control" name="CardNo" placeholder="身份证号" value="@Model.CardNo" /><br />
+                <label>
+                    属否残疾：
+                </label>
+                <select name="IsDisability" class="form-control">
+                    <option>@Model.IsDisability</option>
+                @*@foreach (var x in ViewBag.IsDisability)
+                {
+                    <option>@x.IsDiSability</option>
+                }*@
+                </select><br />
+                <label>
+                    与户主关系：
+                </label>
+                <select name="RelationShip" class="form-control">
+                    <option>户主</option>
+                </select><br />
+                <label>
+                    教育程度：
+                </label>
+                <select name="Education" class="form-control">
+                    <option>@Model.Education</option>
+                @*@foreach (var x in ViewBag.Education)
+                {
+                    <option>@x.Education</option>
+                }*@
+                </select><br />
+                <label>
+                    在校生情况：
+                </label>
+                <select name="IsOnSchool" class="form-control">
+                    <option>@Model.IsOnSchool</option>
+                @*@foreach (var x in ViewBag.IsOnSchool)
+                {
+                    <option>@x.IsOnSchool</option>
+
+                }*@
+                    
+                </select><br />
+                <label>
+                    劳动能力：
+                </label>
+                <select name="Ability" class="form-control">
+                    <option>@Model.Ability</option>
+                    @*@foreach (var x in ViewBag.Ability)
+                    {
+                        <option>@x.Ability</option>
+                    }*@
+                </select><br />
+                <label>
+                    身体状况：
+                </label>
+                <select name="IsHealth" class="form-control">
+                    <option>@Model.IsHealth</option>
+                @*@foreach (var x in ViewBag.IsHealth)
+                {
+                    <option>@x.IsHealth</option>
+                }*@
+                </select><br />
+                <label>
+                    务工情况：
+                </label>
+                <select name="Work" class="form-control">
+                    <option>@Model.Work</option>
+                @*@foreach (var x in ViewBag.Work)
+                {
+                    <option>@x.Work</option>
+                }*@
+                </select><br />
+                <label>
+                    是否低（五）保：
+                </label>
+                <select name="IsLow" class="form-control">
+                    <option>@Model.IsLow</option>
+                    @*@foreach (var x in ViewBag.IsLow)
+                    {
+                        <option>@x.IsLow</option>
+                    }*@
+                </select><br />
+                <label>
+                    是否参加新农合：
+                </label>
+                <select name="IsNewFarm" class="form-control">
+                    <option>@Model.IsNewFarm</option>
+                    @*@foreach (var x in ViewBag.IsNewFarm)
+                    {
+                        <option>@x.IsNewFarm</option>
+
+                    }*@
+                </select><br />
+                <label>
+                    是否参加养老保险：
+                </label>
+                <select name="IsOldInsurance" class="form-control">
+                    <option>@Model.IsOldInsurance</option>
+                    @*@foreach (var x in ViewBag.IsOldInsurance)
+                    {
+                        <option>@x.IsOldInsurance</option>
+
+                    }*@
+                </select><br />
+                <label>
+                    是否务工保险：
+                </label>
+                <select name="IsWorkInsurance" class="form-control">
+                    <option>@Model.IsWorkInsurance</option>
+                    @*@foreach (var x in ViewBag.IsWorkInsurance)
+                    {
+                        <option>@x.IsWorkInsurance</option>
+
+                    }*@
+                </select><br />
+                <label>
+                    是否一技之长：
+                </label>
+                <select name="Skills" class="form-control">
+                    <option>@Model.Skills</option>
+                    @*@foreach (var x in ViewBag.Skills)
+                    {
+                        <option>@x.Skills</option>
+                    }*@
+                </select><br />
+                <label>
+                    对接人：
+                </label>
+                <input type="text" name="Helper" class="form-control" value="@Model.Helper" /><br />
+                <label>
+                    方法：
+                </label>
+                <input type="text" name="Measures" class="form-control" value="@Model.Measures" /><br />
+            </form>
+            <button type="button" id="send" class="btn btn-success form-control">更新</button><br />
+        </div>
+    </div>
+</div>

@@ -23,6 +23,7 @@
                         <th>是否参加养老保险</th>
                         <th>是否务工保险</th>
                         <th>是否一技之长</th>
+                        <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,6 +46,7 @@
                         <td>@ViewBag.FamilyHost.IsOldInsurance</td>
                         <td>@ViewBag.FamilyHost.IsWorkInsurance</td>
                         <td>@ViewBag.FamilyHost.Skills</td>
+                        <td><a asp-action="EditFamily" asp-controller="Admin" asp-route-id="@ViewBag.FamilyHost.Id" class="btn btn-primary fa fa-edit">修改</a></td>
                     </tr>
                     @foreach(var x in Model)
                     {
@@ -67,6 +69,7 @@
                             <td>@x.IsOldInsurance</td>
                             <td>@x.IsWorkInsurance</td>
                             <td>@x.Skills</td>
+                            <td><a asp-action="EditFamilyMember" asp-controller="Admin" asp-route-id="@x.Id" class="btn btn-primary fa fa-edit">修改</a></td>
                         </tr>
                     }
                 </tbody>
