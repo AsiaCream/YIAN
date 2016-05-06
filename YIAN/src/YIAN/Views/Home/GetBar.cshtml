@@ -46,10 +46,10 @@
                     pointPadding: 0.2,
                     borderWidth: 0
                 },
-                line: {
-                    Width:9
+                series: {
+                    pointWidth:30
 
-                }
+                },
             },
             series: [{
                 name: '脱贫人口数量',
@@ -70,7 +70,6 @@
                 name: '脱贫人均收入',
                 color:'green',
                 data: [@ViewBag.RichJan,@ViewBag.RichFeb, @ViewBag.RichMar, @ViewBag.RichApr, @ViewBag.RichMay, @ViewBag.RichJun, @ViewBag.RichJul,@ViewBag.RichAug, @ViewBag.RichSep, @ViewBag.RichOct, @ViewBag.RichNov, @ViewBag.RichDec],
-                lineWidth:5,
                 tooltip:{
                     valueSuffix:'元',
                 
