@@ -34,7 +34,435 @@ namespace YIAN.Controllers
         {
             var town = DB.Towns.OrderBy(x => x.Id).ToList();
             ViewBag.Town = town;
-            ViewBag.LowLine = DB.LowLines.SingleOrDefault(x => x.Id == 1);
+            var line = DB.LowLines.SingleOrDefault(x => x.Id == 1).Line;
+            ViewBag.LowLine = line;
+
+            var perso = DB.Familys
+                .OrderByDescending(x => x.Id)
+                .ToList();
+            var rich = new List<Rich>();
+            var poor = new List<Poor>();
+            foreach (var x in perso)
+            {
+                var situation = DB.FamilySituations
+                .Where(z => z.CreateTime.Year == DateTime.Now.Year)
+                .Where(z => z.FamilyId == x.Id)
+                .ToList();
+                var membercount = DB.FamilyMembers.Where(i => i.FamilyId == x.Id).Count() + DB.Familys.Where(i => i.Id == x.Id).Count();
+                if (situation.Count() != 0)
+                {
+                    #region 垃圾循环法
+                    foreach (var i in situation)
+                    {
+                        if (i.YearAnnualPerCapitaIncome > line && i.CreateTime.Month == 1)
+                        {
+                            rich.Add(new Rich
+                            {
+                                Id = i.Id,
+                                Month = 1,
+                                Income = i.YearAnnualPerCapitaIncome,
+                            });
+                        }
+                        if (i.YearAnnualPerCapitaIncome < line && i.CreateTime.Month == 1)
+                        {
+                            poor.Add(new Poor
+                            {
+                                Id = i.Id,
+                                Month = 1,
+                                Income = i.YearAnnualPerCapitaIncome,
+                            });
+                        }
+                        if (i.YearAnnualPerCapitaIncome > line && i.CreateTime.Month == 2)
+                        {
+                            rich.Add(new Rich
+                            {
+                                Id = i.Id,
+                                Month = 2,
+                                Income = i.YearAnnualPerCapitaIncome,
+                            });
+                        }
+                        if (i.YearAnnualPerCapitaIncome < line && i.CreateTime.Month == 2)
+                        {
+                            poor.Add(new Poor
+                            {
+                                Id = i.Id,
+                                Month = 2,
+                                Income = i.YearAnnualPerCapitaIncome,
+                            });
+                        }
+                        if (i.YearAnnualPerCapitaIncome > line && i.CreateTime.Month == 3)
+                        {
+                            rich.Add(new Rich
+                            {
+                                Id = i.Id,
+                                Month = 3,
+                                Income = i.YearAnnualPerCapitaIncome,
+                            });
+                        }
+                        if (i.YearAnnualPerCapitaIncome < line && i.CreateTime.Month == 3)
+                        {
+                            poor.Add(new Poor
+                            {
+                                Id = i.Id,
+                                Month = 3,
+                                Income = i.YearAnnualPerCapitaIncome,
+                            });
+                        }
+                        if (i.YearAnnualPerCapitaIncome > line && i.CreateTime.Month == 4)
+                        {
+                            rich.Add(new Rich
+                            {
+                                Id = i.Id,
+                                Month = 4,
+                                Income = i.YearAnnualPerCapitaIncome,
+                            });
+                        }
+                        if (i.YearAnnualPerCapitaIncome < line && i.CreateTime.Month == 4)
+                        {
+                            poor.Add(new Poor
+                            {
+                                Id = i.Id,
+                                Month = 4,
+                                Income = i.YearAnnualPerCapitaIncome,
+                            });
+                        }
+                        if (i.YearAnnualPerCapitaIncome > line && i.CreateTime.Month == 5)
+                        {
+                            rich.Add(new Rich
+                            {
+                                Id = i.Id,
+                                Month = 5,
+                                Income = i.YearAnnualPerCapitaIncome,
+                            });
+                        }
+                        if (i.YearAnnualPerCapitaIncome < line && i.CreateTime.Month == 5)
+                        {
+                            poor.Add(new Poor
+                            {
+                                Id = i.Id,
+                                Month = 5,
+                                Income = i.YearAnnualPerCapitaIncome,
+                            });
+                        }
+                        if (i.YearAnnualPerCapitaIncome > line && i.CreateTime.Month == 6)
+                        {
+                            rich.Add(new Rich
+                            {
+                                Id = i.Id,
+                                Month = 6,
+                                Income = i.YearAnnualPerCapitaIncome,
+                            });
+                        }
+                        if (i.YearAnnualPerCapitaIncome < line && i.CreateTime.Month == 6)
+                        {
+                            poor.Add(new Poor
+                            {
+                                Id = i.Id,
+                                Month = 6,
+                                Income = i.YearAnnualPerCapitaIncome,
+                            });
+                        }
+                        if (i.YearAnnualPerCapitaIncome > line && i.CreateTime.Month == 7)
+                        {
+                            rich.Add(new Rich
+                            {
+                                Id = i.Id,
+                                Month = 7,
+                                Income = i.YearAnnualPerCapitaIncome,
+                            });
+                        }
+                        if (i.YearAnnualPerCapitaIncome < line && i.CreateTime.Month == 7)
+                        {
+                            poor.Add(new Poor
+                            {
+                                Id = i.Id,
+                                Month = 7,
+                                Income = i.YearAnnualPerCapitaIncome,
+                            });
+                        }
+                        if (i.YearAnnualPerCapitaIncome > line && i.CreateTime.Month == 8)
+                        {
+                            rich.Add(new Rich
+                            {
+                                Id = i.Id,
+                                Month = 8,
+                                Income = i.YearAnnualPerCapitaIncome,
+                            });
+                        }
+                        if (i.YearAnnualPerCapitaIncome < line && i.CreateTime.Month == 8)
+                        {
+                            poor.Add(new Poor
+                            {
+                                Id = i.Id,
+                                Month = 8,
+                                Income = i.YearAnnualPerCapitaIncome,
+                            });
+                        }
+                        if (i.YearAnnualPerCapitaIncome > line && i.CreateTime.Month == 9)
+                        {
+                            rich.Add(new Rich
+                            {
+                                Id = i.Id,
+                                Month = 9,
+                                Income = i.YearAnnualPerCapitaIncome,
+                            });
+                        }
+                        if (i.YearAnnualPerCapitaIncome < line && i.CreateTime.Month == 9)
+                        {
+                            poor.Add(new Poor
+                            {
+                                Id = i.Id,
+                                Month = 9,
+                                Income = i.YearAnnualPerCapitaIncome,
+                            });
+                        }
+                        if (i.YearAnnualPerCapitaIncome > line && i.CreateTime.Month == 10)
+                        {
+                            rich.Add(new Rich
+                            {
+                                Id = i.Id,
+                                Month = 10,
+                                Income = i.YearAnnualPerCapitaIncome,
+                            });
+                        }
+                        if (i.YearAnnualPerCapitaIncome < line && i.CreateTime.Month == 10)
+                        {
+                            poor.Add(new Poor
+                            {
+                                Id = i.Id,
+                                Month = 10,
+                                Income = i.YearAnnualPerCapitaIncome,
+                            });
+                        }
+                        if (i.YearAnnualPerCapitaIncome > line && i.CreateTime.Month == 11)
+                        {
+                            rich.Add(new Rich
+                            {
+                                Id = i.Id,
+                                Month = 11,
+                                Income = i.YearAnnualPerCapitaIncome,
+                            });
+                        }
+                        if (i.YearAnnualPerCapitaIncome < line && i.CreateTime.Month == 11)
+                        {
+                            poor.Add(new Poor
+                            {
+                                Id = i.Id,
+                                Month = 11,
+                                Income = i.YearAnnualPerCapitaIncome,
+                            });
+                        }
+                        if (i.YearAnnualPerCapitaIncome > line && i.CreateTime.Month == 12)
+                        {
+                            rich.Add(new Rich
+                            {
+                                Id = i.Id,
+                                Month = 12,
+                                Income = i.YearAnnualPerCapitaIncome,
+                            });
+                        }
+                        if (i.YearAnnualPerCapitaIncome < line && i.CreateTime.Month == 12)
+                        {
+                            poor.Add(new Poor
+                            {
+                                Id = i.Id,
+                                Month = 12,
+                                Income = i.YearAnnualPerCapitaIncome,
+                            });
+                        }
+                    }
+                    #endregion
+                }
+                else
+                {
+                    return RedirectToAction("Error", "Home");
+                }
+            }
+            #region Rich
+            var RichJan = rich.Where(x => x.Month == 1).ToList();
+            double num = 0;
+            foreach (var x in RichJan)
+            {
+                num = x.Income + num;
+            }
+            ViewBag.AllRichJan = Math.Round(num / RichJan.Count(), 2);
+            ViewBag.AllRichJanCount = RichJan.Count();
+            num = 0;
+            var RichFeb = rich.Where(x => x.Month == 2).ToList();
+            foreach (var x in RichFeb)
+            {
+                num = x.Income + num;
+            }
+            ViewBag.AllRichFeb = Math.Round(num / RichFeb.Count(), 2);
+            ViewBag.AllRichFebCount = RichFeb.Count();
+            num = 0;
+            var RichMar = rich.Where(x => x.Month == 3).ToList();
+            foreach (var x in RichMar)
+            {
+                num = x.Income + num;
+            }
+            ViewBag.AllRichMar = Math.Round(num / RichMar.Count(), 2);
+            ViewBag.AllRichMarCount = RichMar.Count();
+            num = 0;
+            var RichApr = rich.Where(x => x.Month == 4).ToList();
+            foreach (var x in RichApr)
+            {
+                num = x.Income + num;
+            }
+            ViewBag.AllRichApr = Math.Round(num / RichApr.Count(), 2);
+            ViewBag.AllRichAprCount = RichApr.Count();
+            num = 0;
+            var RichMay = rich.Where(x => x.Month == 5).ToList();
+            foreach (var x in RichMay)
+            {
+                num = x.Income + num;
+            }
+            ViewBag.AllRichMay = Math.Round(num / RichMay.Count(), 2);
+            ViewBag.AllRichMayCount = RichMay.Count();
+            num = 0;
+            var RichJun = rich.Where(x => x.Month == 6).ToList();
+            foreach (var x in RichJun)
+            {
+                num = x.Income + num;
+            }
+            ViewBag.AllRichJun = Math.Round(num / RichJun.Count(), 2);
+            ViewBag.AllRichJunCount = RichJun.Count();
+            num = 0;
+            var RichJul = rich.Where(x => x.Month == 7).ToList();
+            foreach (var x in RichJul)
+            {
+                num = x.Income + num;
+            }
+            ViewBag.AllRichJul = Math.Round(num / RichJul.Count(), 2);
+            ViewBag.AllRichJulCount = RichJul.Count();
+            num = 0;
+            var RichAug = rich.Where(x => x.Month == 8).ToList();
+            foreach (var x in RichAug)
+            {
+                num = x.Income + num;
+            }
+            ViewBag.AllRichAug = Math.Round(num / RichAug.Count(), 2);
+            ViewBag.AllRichAugCount = RichAug.Count();
+            num = 0;
+            var RichSep = rich.Where(x => x.Month == 9).ToList();
+            foreach (var x in RichSep)
+            {
+                num = x.Income + num;
+            }
+            ViewBag.AllRichSep = Math.Round(num / RichSep.Count(), 2);
+            ViewBag.AllRichSepCount = RichSep.Count();
+            num = 0;
+            var RichOct = rich.Where(x => x.Month == 10).ToList();
+            foreach (var x in RichOct)
+            {
+                num = x.Income + num;
+            }
+            ViewBag.AllRichOct = Math.Round(num / RichOct.Count(), 2);
+            ViewBag.AllRichOctCount = RichOct.Count();
+            num = 0;
+            var RichNov = rich.Where(x => x.Month == 11).ToList();
+            foreach (var x in RichNov)
+            {
+                num = x.Income + num;
+            }
+            ViewBag.AllRichNov = Math.Round(num / RichNov.Count(), 2);
+            ViewBag.AllRichNovCount = RichNov.Count();
+            num = 0;
+            var RichDec = rich.Where(x => x.Month == 12).ToList();
+            foreach (var x in RichDec)
+            {
+                num = x.Income + num;
+            }
+            ViewBag.AllRichDec = Math.Round(num / RichDec.Count(), 2);
+            ViewBag.AllRichDecCount = RichDec.Count();
+            num = 0;
+            #endregion
+            #region Poor
+            var PoorJan = poor.Where(x => x.Month == 1).ToList();
+            foreach (var x in PoorJan)
+            {
+                num = x.Income + num;
+            }
+            ViewBag.AllPoorJan = Math.Round(num / PoorJan.Count(), 2);
+            num = 0;
+            var PoorFeb = poor.Where(x => x.Month == 2).ToList();
+            foreach (var x in PoorFeb)
+            {
+                num = x.Income + num;
+            }
+            ViewBag.AllPoorFeb = Math.Round(num / PoorFeb.Count(), 2);
+            num = 0;
+            var PoorMar = poor.Where(x => x.Month == 3).ToList();
+            foreach (var x in PoorMar)
+            {
+                num = x.Income + num;
+            }
+            ViewBag.AllPoorMar = Math.Round(num / PoorMar.Count(), 2);
+            num = 0;
+            var PoorApr = poor.Where(x => x.Month == 4).ToList();
+            foreach (var x in PoorApr)
+            {
+                num = x.Income + num;
+            }
+            ViewBag.AllPoorApr = Math.Round(num / PoorApr.Count(), 2);
+            num = 0;
+            var PoorMay = poor.Where(x => x.Month == 5).ToList();
+            foreach (var x in PoorMay)
+            {
+                num = x.Income + num;
+            }
+            ViewBag.AllPoorMay = Math.Round(num / PoorMay.Count(), 2);
+            num = 0;
+            var PoorJun = poor.Where(x => x.Month == 6).ToList();
+            foreach (var x in PoorJun)
+            {
+                num = x.Income + num;
+            }
+            ViewBag.AllPoorJun = Math.Round(num / PoorJun.Count(), 2);
+            num = 0;
+            var PoorJul = poor.Where(x => x.Month == 7).ToList();
+            foreach (var x in PoorJul)
+            {
+                num = x.Income + num;
+            }
+            ViewBag.AllPoorJul = Math.Round(num / PoorJul.Count(), 2);
+            num = 0;
+            var PoorAug = poor.Where(x => x.Month == 8).ToList();
+            foreach (var x in PoorAug)
+            {
+                num = x.Income + num;
+            }
+            ViewBag.AllPoorAug = Math.Round(num / PoorAug.Count(), 2);
+            num = 0;
+            var PoorSep = poor.Where(x => x.Month == 9).ToList();
+            foreach (var x in PoorSep)
+            {
+                num = x.Income + num;
+            }
+            ViewBag.AllPoorSep = Math.Round(num / PoorSep.Count(), 2);
+            num = 0;
+            var PoorOct = poor.Where(x => x.Month == 10).ToList();
+            foreach (var x in PoorOct)
+            {
+                num = x.Income + num;
+            }
+            ViewBag.AllPoorOct = Math.Round(num / PoorOct.Count(), 2);
+            num = 0;
+            var PoorNov = poor.Where(x => x.Month == 11).ToList();
+            foreach (var x in PoorNov)
+            {
+                num = x.Income + num;
+            }
+            ViewBag.AllPoorNov = Math.Round(num / PoorNov.Count(),2);
+            num = 0;
+            var PoorDec = poor.Where(x => x.Month == 12).ToList();
+            foreach (var x in PoorDec)
+            {
+                num = x.Income + num;
+            }
+            ViewBag.AllPoorDec = Math.Round(num / PoorDec.Count(), 2);
+            num = 0;
+            #endregion
             return View();
         }
         /// <summary>
@@ -301,7 +729,7 @@ namespace YIAN.Controllers
             {
                 num = x.Income + num;
             }
-            ViewBag.RichJan = num / RichJan.Count();
+            ViewBag.RichJan = Math.Round(num / RichJan.Count(), 2);
             ViewBag.RichJanCount = RichJan.Count();
             num = 0;
             var RichFeb = rich.Where(x => x.Month == 2).ToList();
@@ -309,7 +737,7 @@ namespace YIAN.Controllers
             {
                 num = x.Income + num;
             }
-            ViewBag.RichFeb = num / RichFeb.Count();
+            ViewBag.RichFeb = Math.Round(num / RichFeb.Count(), 2);
             ViewBag.RichFebCount = RichFeb.Count();
             num = 0;
             var RichMar = rich.Where(x => x.Month == 3).ToList();
@@ -317,7 +745,7 @@ namespace YIAN.Controllers
             {
                 num = x.Income + num;
             }
-            ViewBag.RichMar = num / RichMar.Count();
+            ViewBag.RichMar = Math.Round(num / RichMar.Count(), 2);
             ViewBag.RichMarCount = RichMar.Count();
             num = 0;
             var RichApr = rich.Where(x => x.Month == 4).ToList();
@@ -325,7 +753,7 @@ namespace YIAN.Controllers
             {
                 num = x.Income + num;
             }
-            ViewBag.RichApr = num / RichApr.Count();
+            ViewBag.RichApr = Math.Round(num / RichApr.Count(), 2);
             ViewBag.RichAprCount = RichApr.Count();
             num = 0;
             var RichMay = rich.Where(x => x.Month == 5).ToList();
@@ -333,7 +761,7 @@ namespace YIAN.Controllers
             {
                 num = x.Income + num;
             }
-            ViewBag.RichMay = num / RichMay.Count();
+            ViewBag.RichMay = Math.Round(num / RichMay.Count(), 2);
             ViewBag.RichMayCount = RichMay.Count();
             num = 0;
             var RichJun = rich.Where(x => x.Month == 6).ToList();
@@ -341,7 +769,7 @@ namespace YIAN.Controllers
             {
                 num = x.Income + num;
             }
-            ViewBag.RichJun = num / RichJun.Count();
+            ViewBag.RichJun = Math.Round(num / RichJun.Count(), 2);
             ViewBag.RichJunCount = RichJun.Count();
             num = 0;
             var RichJul = rich.Where(x => x.Month == 7).ToList();
@@ -349,7 +777,7 @@ namespace YIAN.Controllers
             {
                 num = x.Income + num;
             }
-            ViewBag.RichJul = num / RichJul.Count();
+            ViewBag.RichJul = Math.Round(num / RichJul.Count(), 2);
             ViewBag.RichJulCount = RichJul.Count();
             num = 0;
             var RichAug = rich.Where(x => x.Month == 8).ToList();
@@ -357,7 +785,7 @@ namespace YIAN.Controllers
             {
                 num = x.Income + num;
             }
-            ViewBag.RichAug = num / RichAug.Count();
+            ViewBag.RichAug = Math.Round(num / RichAug.Count(), 2);
             ViewBag.RichAugCount = RichAug.Count();
             num = 0;
             var RichSep = rich.Where(x => x.Month == 9).ToList();
@@ -365,7 +793,7 @@ namespace YIAN.Controllers
             {
                 num = x.Income + num;
             }
-            ViewBag.RichSep = num / RichSep.Count();
+            ViewBag.RichSep = Math.Round(num / RichSep.Count(), 2);
             ViewBag.RichSepCount = RichSep.Count();
             num = 0;
             var RichOct = rich.Where(x => x.Month == 10).ToList();
@@ -373,7 +801,7 @@ namespace YIAN.Controllers
             {
                 num = x.Income + num;
             }
-            ViewBag.RichOct = num / RichOct.Count();
+            ViewBag.RichOct = Math.Round(num / RichOct.Count(), 2);
             ViewBag.RichOctCount = RichOct.Count();
             num = 0;
             var RichNov = rich.Where(x => x.Month == 11).ToList();
@@ -381,7 +809,7 @@ namespace YIAN.Controllers
             {
                 num = x.Income + num;
             }
-            ViewBag.RichNov = num / RichNov.Count();
+            ViewBag.RichNov = Math.Round(num / RichNov.Count(), 2);
             ViewBag.RichNovCount = RichNov.Count();
             num = 0;
             var RichDec = rich.Where(x => x.Month == 12).ToList();
@@ -389,7 +817,7 @@ namespace YIAN.Controllers
             {
                 num = x.Income + num;
             }
-            ViewBag.RichDec = num / RichDec.Count();
+            ViewBag.RichDec = Math.Round(num / RichDec.Count(), 2);
             ViewBag.RichDecCount = RichDec.Count();
             num = 0;
             #endregion
@@ -399,84 +827,84 @@ namespace YIAN.Controllers
             {
                 num = x.Income + num;
             }
-            ViewBag.PoorJan = num / PoorJan.Count();
+            ViewBag.PoorJan = Math.Round(num / PoorJan.Count(), 2);
             num = 0;
             var PoorFeb = poor.Where(x => x.Month == 2).ToList();
             foreach (var x in PoorFeb)
             {
                 num = x.Income + num;
             }
-            ViewBag.PoorFeb = num / PoorFeb.Count();
+            ViewBag.PoorFeb = Math.Round(num / PoorFeb.Count(), 2);
             num = 0;
             var PoorMar = poor.Where(x => x.Month == 3).ToList();
             foreach (var x in PoorMar)
             {
                 num = x.Income + num;
             }
-            ViewBag.PoorMar = num / PoorMar.Count();
+            ViewBag.PoorMar = Math.Round(num / PoorMar.Count(), 2);
             num = 0;
             var PoorApr = poor.Where(x => x.Month == 4).ToList();
             foreach (var x in PoorApr)
             {
                 num = x.Income + num;
             }
-            ViewBag.PoorApr = num / PoorApr.Count();
+            ViewBag.PoorApr = Math.Round(num / PoorApr.Count(), 2);
             num = 0;
             var PoorMay = poor.Where(x => x.Month == 5).ToList();
             foreach (var x in PoorMay)
             {
                 num = x.Income + num;
             }
-            ViewBag.PoorMay = num / PoorMay.Count();
+            ViewBag.PoorMay = Math.Round(num / PoorMay.Count(), 2);
             num = 0;
             var PoorJun = poor.Where(x => x.Month == 6).ToList();
             foreach (var x in PoorJun)
             {
                 num = x.Income + num;
             }
-            ViewBag.PoorJun = num / PoorJun.Count();
+            ViewBag.PoorJun = Math.Round(num / PoorJun.Count(), 2);
             num = 0;
             var PoorJul = poor.Where(x => x.Month == 7).ToList();
             foreach (var x in PoorJul)
             {
                 num = x.Income + num;
             }
-            ViewBag.PoorJul = num / PoorJul.Count();
+            ViewBag.PoorJul = Math.Round(num / PoorJul.Count(), 2);
             num = 0;
             var PoorAug = poor.Where(x => x.Month == 8).ToList();
             foreach (var x in PoorAug)
             {
                 num = x.Income + num;
             }
-            ViewBag.PoorAug = num / PoorAug.Count();
+            ViewBag.PoorAug = Math.Round(num / PoorAug.Count(), 2);
             num = 0;
             var PoorSep = poor.Where(x => x.Month == 9).ToList();
             foreach (var x in PoorSep)
             {
                 num = x.Income + num;
             }
-            ViewBag.PoorSep = num / PoorSep.Count();
+            ViewBag.PoorSep = Math.Round(num / PoorSep.Count(), 2);
             num = 0;
             var PoorOct = poor.Where(x => x.Month == 10).ToList();
             foreach (var x in PoorOct)
             {
                 num = x.Income + num;
             }
-            ViewBag.PoorOct = num / PoorOct.Count();
+            ViewBag.PoorOct = Math.Round(num / PoorOct.Count(), 2);
             num = 0;
             var PoorNov = poor.Where(x => x.Month == 11).ToList();
             foreach (var x in PoorNov)
             {
                 num = x.Income + num;
             }
-            ViewBag.PoorNov = num / PoorNov.Count();
+            ViewBag.PoorNov = Math.Round(num / PoorNov.Count(), 2);
             num = 0;
             var PoorDec = poor.Where(x => x.Month == 12).ToList();
             foreach (var x in PoorDec)
             {
                 num = x.Income + num;
             }
-            ViewBag.PoorDec = num / PoorDec.Count();
+            ViewBag.PoorDec = Math.Round(num / PoorDec.Count(), 2);
             num = 0;
             #endregion
             ViewBag.Town = villege;
@@ -521,7 +949,7 @@ namespace YIAN.Controllers
                             {
                                 Id = DB.Familys.Where(j => j.Id == i.Family.Id).SingleOrDefault().Id,
                                 Month = month,
-                                Income = i.YearAnnualPerCapitaIncome,
+                                Income = Math.Round(i.YearAnnualPerCapitaIncome,2),
                                 Host = DB.Familys.Where(j => j.Id == i.Family.Id).SingleOrDefault().Name,
                                 Town = DB.Towns.Where(j => j.Id == townid).SingleOrDefault().Title,
                             });
@@ -574,7 +1002,7 @@ namespace YIAN.Controllers
                             {
                                 Id = DB.Familys.Where(j => j.Id == i.Family.Id).SingleOrDefault().Id,
                                 Month = month,
-                                Income = i.YearAnnualPerCapitaIncome,
+                                Income = Math.Round(i.YearAnnualPerCapitaIncome, 2),
                                 Host = DB.Familys.Where(j => j.Id == i.Family.Id).SingleOrDefault().Name,
                                 Town = DB.Towns.Where(j => j.Id == townid).SingleOrDefault().Title,
                                 Reason=i.PoorReason,
