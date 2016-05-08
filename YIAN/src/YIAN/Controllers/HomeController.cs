@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using YIAN.Models;
 using YIAN.ViewModels;
-
+using Microsoft.Data.Entity;
 
 namespace YIAN.Controllers
 {
@@ -481,7 +481,129 @@ namespace YIAN.Controllers
             #endregion
             ViewBag.Town = villege;
             ViewBag.LowLine = line;
+            ViewBag.Year = year;
             return View();
+        }
+        /// <summary>
+        /// 数据查询具体用户列表显示
+        /// </summary>
+        /// <param name="townid">村镇ID</param>
+        /// <param name="year">查询年份</param>
+        /// <param name="month">查询月份</param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult GetBarRich(int townid,int year,int month)
+        {
+            var line = DB.LowLines
+                .Where(x => x.Id == 1)
+                .SingleOrDefault()
+                .Line;
+            var perso = DB.Familys
+                .Where(x => x.TownId == townid)
+                .ToList();
+            var rich = new List<Rich>();
+            foreach (var x in perso)
+            {
+                var situation = DB.FamilySituations
+                .Include(z=>z.Family)
+                .Where(z => z.CreateTime.Year == year)
+                .Where(z => z.FamilyId == x.Id)
+                .ToList();
+                var membercount = DB.FamilyMembers.Where(i => i.FamilyId == x.Id).Count() + DB.Familys.Where(i => i.Id == x.Id).Count();
+                if (situation.Count() != 0)
+                {
+                    #region 垃圾循环法
+                    foreach (var i in situation)
+                    {
+                        if (i.YearAnnualPerCapitaIncome > line && i.CreateTime.Month == month)
+                        {
+                            rich.Add(new Rich
+                            {
+                                Id = DB.Familys.Where(j => j.Id == i.Family.Id).SingleOrDefault().Id,
+                                Month = month,
+                                Income = i.YearAnnualPerCapitaIncome,
+                                Host = DB.Familys.Where(j => j.Id == i.Family.Id).SingleOrDefault().Name,
+                                Town = DB.Towns.Where(j => j.Id == townid).SingleOrDefault().Title,
+                            });
+                        }
+                    }
+                    #endregion
+                }
+                else
+                {
+                    return RedirectToAction("Error", "Home");
+                }
+            }
+            
+            return View(rich);
+        }
+        /// <summary>
+        /// 具体脱贫用户
+        /// </summary>
+        /// <param name="townid"></param>
+        /// <param name="year"></param>
+        /// <param name="month"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult GetBarPoor(int townid,int year,int month)
+        {
+            var line = DB.LowLines
+                .Where(x => x.Id == 1)
+                .SingleOrDefault()
+                .Line;
+            var perso = DB.Familys
+                .Where(x => x.TownId == townid)
+                .ToList();
+            var poor = new List<Poor>();
+            foreach (var x in perso)
+            {
+                var situation = DB.FamilySituations
+                .Include(z => z.Family)
+                .Where(z => z.CreateTime.Year == year)
+                .Where(z => z.FamilyId == x.Id)
+                .ToList();
+                var membercount = DB.FamilyMembers.Where(i => i.FamilyId == x.Id).Count() + DB.Familys.Where(i => i.Id == x.Id).Count();
+                if (situation.Count() != 0)
+                {
+                    #region 垃圾循环法
+                    foreach (var i in situation)
+                    {
+                        if (i.YearAnnualPerCapitaIncome < line && i.CreateTime.Month == month)
+                        {
+                            poor.Add(new Poor
+                            {
+                                Id = DB.Familys.Where(j => j.Id == i.Family.Id).SingleOrDefault().Id,
+                                Month = month,
+                                Income = i.YearAnnualPerCapitaIncome,
+                                Host = DB.Familys.Where(j => j.Id == i.Family.Id).SingleOrDefault().Name,
+                                Town = DB.Towns.Where(j => j.Id == townid).SingleOrDefault().Title,
+                                Reason=i.PoorReason,
+                            });
+                        }
+                    }
+                    #endregion
+                }
+                else
+                {
+                    return RedirectToAction("Error", "Home");
+                }
+            }
+
+            return View(poor);
+        }
+        /// <summary>
+        /// 用户详细家庭情况列表
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult SituationDetails(int id)
+        {
+            var situation = DB.FamilySituations
+                .Where(x => x.FamilyId == id)
+                .OrderBy(x=>x.CreateTime)
+                .ToList();
+            return View(situation);
         }
         /// <summary>
         /// 数据统计页面
