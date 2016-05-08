@@ -40,24 +40,15 @@
             title: {
                 text: '全镇分析图'
             },
+            credits:{
+                enabled:false,
+
+            },
             subtitle: {
                 text: 'www.YIAN.com'
             },
             xAxis: {
-                categories: [
-                    'Jan',
-                    'Feb',
-                    'Mar',
-                    'Apr',
-                    'May',
-                    'Jun',
-                    'Jul',
-                    'Aug',
-                    'Sep',
-                    'Oct',
-                    'Nov',
-                    'Dec'
-                ],
+                categories: ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],
                 crosshair: true,
                 color: ['#2fe3fe', '#5985ff', '#00fff0'],
             },
@@ -66,12 +57,14 @@
                 title: {
                     text: '收入 (元)'
                 },
+                plotLines: [{
+                    color: 'red',            //线的颜色，定义为红色
+                    dashStyle: 'ShortDashDotDot',//标示线的样式，默认是solid（实线），这里定义为长虚线
+                    value: @ViewBag.LowLine,                //定义在那个值上显示标示线，这里是在x轴上刻度为3的值处垂直化一条线
+                    width: 2                //标示线的宽度，2px
+                }],
             },
             tooltip: {
-                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y:.1f} 元</b></td></tr>',
-                footerFormat: '</table>',
                 shared: true,
                 useHTML: true
             },
@@ -88,37 +81,30 @@
             series: [{
                 name: '脱贫人口',
                 type:'line',
-                data: [69, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 58.9, 54.4],
-                events: {
-                    click: function () {
-                        alert("11111");
+                color:'green',
+                data: [@ViewBag.AllRichJanCount+1000,@ViewBag.AllRichFebCount,@ViewBag.AllRichMarCount,@ViewBag.AllRichAprCount,@ViewBag.AllRichMayCount,@ViewBag.AllRichJunCount,@ViewBag.AllRichJulCount,@ViewBag.AllRichAugCount,@ViewBag.AllRichSepCount,@ViewBag.AllRichOctCount,@ViewBag.AllRichNovCount,@ViewBag.AllRichDecCount],
+                //data: [2500,4564,2582,2688,2356,5986,2586,3458,3689,3658,2589,2582],
+                tooltip: {
+                    valueSuffix: '人'
 
-                    }
-
-                }
+                },
 
             }, {
                 name: '脱贫人均收入',
-                data: [59, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3, 51.2],
-                events: {
-                    click: function () {
-                        alert("11111");
+                data: [@ViewBag.AllRichJan,@ViewBag.AllRichFeb,@ViewBag.AllRichMar,@ViewBag.AllRichApr,@ViewBag.AllRichMay,@ViewBag.AllRichJun,@ViewBag.AllRichJul,@ViewBag.AllRichAug,@ViewBag.AllRichSep,@ViewBag.AllRichOct,@ViewBag.AllRichNov,@ViewBag.AllRichDec],
+                //data: [2500,4564,2582,2688,2356,5986,2586,3458,3689,3658,2589,2582],
+                tooltip: {
+                    valueSuffix: '元'
 
-                    }
-
-                }
-
+                },
             }, {
                 name: '贫困人均收入',
-                data: [59, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8, 51.1],
-                events: {
-                    click: function () {
-                        alert("11111");
+                data: [@ViewBag.AllPoorJan,@ViewBag.AllPoorFeb,@ViewBag.AllPoorMar,@ViewBag.AllPoorApr,@ViewBag.AllPoorMay,@ViewBag.AllPoorJun,@ViewBag.AllPoorJul,@ViewBag.AllPoorAug,@ViewBag.AllPoorSep,@ViewBag.AllPoorOct,@ViewBag.AllPoorNov,@ViewBag.AllPoorDec],
+                //data: [2500,4564,2582,2688,2356,5986,2586,3458,3689,3658,2589,2582],
+                tooltip: {
+                    valueSuffix: '元'
 
-                    }
-
-                }
-
+                },
             }]
         });
     });
