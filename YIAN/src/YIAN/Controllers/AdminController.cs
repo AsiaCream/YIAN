@@ -287,8 +287,8 @@ namespace YIAN.Controllers
                     DB.FamilySituations.Add(situation);
                     situation.FamilyId = id;
                     situation.CreateTime = DateTime.Now;
-                    situation.YearTotalIncome = (situation.FarmingIncome + situation.BreedingIncome + situation.OthersIncome + situation.TipsIncome) * 12;
-                    situation.YearAnnualPerCapitaIncome = situation.YearTotalIncome / PCount;
+                    situation.YearTotalIncome = Math.Round((situation.FarmingIncome + situation.BreedingIncome + situation.OthersIncome + situation.TipsIncome) * 12, 2);
+                    situation.YearAnnualPerCapitaIncome = Math.Round(situation.YearTotalIncome / PCount, 2);
                     DB.SaveChanges();
                     return RedirectToAction("CreateSituation","Admin");
                 }
