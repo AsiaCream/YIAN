@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Poor>
+@{
+    Layout = null;
+}
+<table class="table">
+    <tbody>
+        @foreach (var x in Model)
+        {
+            <tr>
+                <td>@x.Id</td>
+                <td>@x.Town</td>
+                <td><a asp-action="SituationDetails" asp-controller="Home" asp-route-id="@x.Id" target="_blank">@x.Host</a></td>
+                <td>@x.Reason</td>
+                <td>@x.Income</td>
+            </tr>
+
+        }
+    </tbody>
+</table>
