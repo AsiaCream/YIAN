@@ -290,7 +290,7 @@ namespace YIAN.Controllers
                     situation.YearTotalIncome = (situation.FarmingIncome + situation.BreedingIncome + situation.OthersIncome + situation.TipsIncome) * 12;
                     situation.YearAnnualPerCapitaIncome = situation.YearTotalIncome / PCount;
                     DB.SaveChanges();
-                    return Content("success");
+                    return RedirectToAction("CreateSituation","Admin");
                 }
             }
             else

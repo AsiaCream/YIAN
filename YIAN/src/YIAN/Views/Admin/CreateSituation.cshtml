@@ -7,7 +7,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <form asp-action="CreateSituation" asp-controller="Admin" asp-route-id="@Model.Id">
+            <form id="situationForm" asp-action="CreateSituation" asp-controller="Admin" asp-route-id="@Model.Id">
                 <table class="table">
                     <caption>生产资料状况</caption>
                     <thead>
@@ -126,7 +126,7 @@
                         </tr>
                     </thead>
                 </table>
-                <input type="submit" value="提交" class="btn btn-success form-control"/>
+                <input type="button" id="send" class="btn btn-success form-control" />
             </form>
         </div>
     </div>
@@ -138,3 +138,10 @@
 
 
 </div>
+<script src="~/scripts/jquery-2.1.1.js"></script>
+<script type="text/javascript">
+    $("#send").click(function () {
+        $("#situationForm").submit();
+
+    });
+</script>
