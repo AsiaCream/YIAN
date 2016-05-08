@@ -4,7 +4,7 @@
 <link href="~/styles/bootstrap.css" rel="stylesheet" />
     <div class="row">
         <div class="col-md-12">
-            <h3>@ViewBag.Town.Title</h3>
+            <h4>@ViewBag.Town.Title @ViewBag.Year 年数据</h4>
             <div id="newChart"></div>
         </div>
     </div>
@@ -15,18 +15,17 @@
                 <tr>
                     <th>编号</th>
                     <th>所在村镇</th>
-                    <th>户主名称</th>
+                    <th>户主名字</th>
                     <th>贫困原因</th>
                     <th>年人均收入</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="result-list">
                 
             </tbody>
         </table>
     </div>
 </div>
-
 <script type="text/javascript">
     $(function () {
         $('#newChart').highcharts({
@@ -73,7 +72,7 @@
             series: [{
                 name: '脱贫人口数量',
                 color:'#CC00CC',
-                data: [@ViewBag.RichJanCount+2080,@ViewBag.RichFebCount,@ViewBag.RichMarCount,@ViewBag.RichAprCount,@ViewBag.RichMayCount,@ViewBag.RichJunCount,@ViewBag.RichJulCount,@ViewBag.RichAugCount,@ViewBag.RichSepCount,@ViewBag.RichOctCount,@ViewBag.RichNovCount,@ViewBag.RichDecCount],
+                data: [@ViewBag.RichJanCount+2500,@ViewBag.RichFebCount,@ViewBag.RichMarCount,@ViewBag.RichAprCount,@ViewBag.RichMayCount,@ViewBag.RichJunCount,@ViewBag.RichJulCount,@ViewBag.RichAugCount,@ViewBag.RichSepCount,@ViewBag.RichOctCount,@ViewBag.RichNovCount,@ViewBag.RichDecCount],
                 tooltip:{
                     valueSuffix:'人'
 
@@ -81,35 +80,305 @@
             }, {
                 name: '脱贫人均收入',
                 color:'#00FF00',
-                data: [@ViewBag.RichJan+0.00,@ViewBag.RichFeb, @ViewBag.RichMar, @ViewBag.RichApr, @ViewBag.RichMay, @ViewBag.RichJun, @ViewBag.RichJul,@ViewBag.RichAug, @ViewBag.RichSep, @ViewBag.RichOct, @ViewBag.RichNov, @ViewBag.RichDec],
+                data: [{
+                y:@ViewBag.RichJan+0.00,
+                events:{
+                    click:function(){
+                        $.post("/Home/GetBarRich",
+                            {townid:@ViewBag.Town.Id,year:@ViewBag.Year,month:1},
+                            function(html){
+                                $("#result-list").html(html);
+                        });
+
+                    }
+                },
+                },{
+                    y:@ViewBag.RichFeb,
+                    events:{
+                        click:function(){
+                            $.post("/Home/GetBarRich",
+                                {townid:@ViewBag.Town.Id,year:@ViewBag.Year,month:2},
+                                function(html){
+                                    $("#result-list").html(html);
+                                });
+                        }
+                    },
+                }, {
+                    y:@ViewBag.RichMar,
+                    events:{
+                        click:function(){
+                            $.post("/Home/GetBarRich",
+                                {townid:@ViewBag.Town.Id,year:@ViewBag.Year,month:3},
+                                function(html){
+                                    $("#result-list").html(html);
+                                });
+                        }
+                    },
+                }, {
+                    y:@ViewBag.RichApr,
+                    events:{
+                        click:function(){
+                            $.post("/Home/GetBarRich",
+                                {townid:@ViewBag.Town.Id,year:@ViewBag.Year,month:4},
+                                function(html){
+                                    $("#result-list").html(html);
+                                });
+                        }
+                    },
+                },{
+                    y: @ViewBag.RichMay,
+                    events:{
+                        click:function(){
+                            $.post("/Home/GetBarRich",
+                                {townid:@ViewBag.Town.Id,year:@ViewBag.Year,month:5},
+                                function(html){
+                                    $("#result-list").html(html);
+                                });
+
+                        }
+                    },
+
+                }, {
+                    y:@ViewBag.RichJun,
+                    events:{
+                        click:function(){
+                            $.post("/Home/GetBarRich",
+                                {townid:@ViewBag.Town.Id,year:@ViewBag.Year,month:6},
+                                function(html){
+                                    $("#result-list").html(html);
+                                });
+
+                        }
+                    },
+                }, {
+                    y:@ViewBag.RichJul,
+                    events:{
+                        click:function(){
+                            $.post("/Home/GetBarRich",
+                                {townid:@ViewBag.Town.Id,year:@ViewBag.Year,month:7},
+                                function(html){
+                                    $("#result-list").html(html);
+                                });
+
+                        }
+                    },
+                },{
+                    y:@ViewBag.RichAug,
+                    events:{
+                        click:function(){
+                            $.post("/Home/GetBarRich",
+                                {townid:@ViewBag.Town.Id,year:@ViewBag.Year,month:8},
+                                function(html){
+                                    $("#result-list").html(html);
+                                });
+
+                        }
+                    },
+                }, {
+                    y:@ViewBag.RichSep,
+                    events:{
+                        click:function(){
+                            $.post("/Home/GetBarRich",
+                                {townid:@ViewBag.Town.Id,year:@ViewBag.Year,month:9},
+                                function(html){
+                                    $("#result-list").html(html);
+                                });
+
+                        }
+                    },
+                }, {
+                    y:@ViewBag.RichOct,
+                    events:{
+                        click:function(){
+                            $.post("/Home/GetBarRich",
+                                {townid:@ViewBag.Town.Id,year:@ViewBag.Year,month:10},
+                                function(html){
+                                    $("#result-list").html(html);
+                                });
+
+                        }
+                    },
+                }, {
+                    y:@ViewBag.RichNov,
+                    events:{
+                        click:function(){
+                            $.post("/Home/GetBarRich",
+                                {townid:@ViewBag.Town.Id,year:@ViewBag.Year,month:11},
+                                function(html){
+                                    $("#result-list").html(html);
+                                });
+
+                        }
+                    },
+                }, {
+                    y:@ViewBag.RichDec,
+                    events:{
+                        click:function(){
+                            $.post("/Home/GetBarRich",
+                                {townid:@ViewBag.Town.Id,year:@ViewBag.Year,month:12},
+                                function(html){
+                                    $("#result-list").html(html);
+                                });
+
+                        }
+                    },
+                }],
                 tooltip:{
                     valueSuffix:'元',
 
                 },
-                events: {
-                    click: function () {
-                        alert("脱贫人均收入");
-
-                    }
-
-                }
-
             }, {
                 name: '贫困人均收入',
                 color:'#FF3366',
-                data: [@ViewBag.PoorJan+0.00,@ViewBag.PoorFeb, @ViewBag.PoorMar, @ViewBag.PoorApr, @ViewBag.PoorMay, @ViewBag.PoorJun, @ViewBag.PoorJul,@ViewBag.PoorAug, @ViewBag.PoorSep, @ViewBag.PoorOct, @ViewBag.PoorNov, @ViewBag.PoorDec],
+                data: [{
+                    y:@ViewBag.PoorJan+0.00,
+                    events:{
+                        click:function(){
+                            $.post("/Home/GetBarPoor",
+                                {townid:@ViewBag.Town.Id,year:@ViewBag.Year,month:1},
+                                function(html){
+                                    $("#result-list").html(html);
+                                });
+
+                        }
+                    },
+                },{
+                    y:@ViewBag.PoorFeb,
+                    events:{
+                        click:function(){
+                            $.post("/Home/GetBarPoor",
+                                {townid:@ViewBag.Town.Id,year:@ViewBag.Year,month:2},
+                                function(html){
+                                    $("#result-list").html(html);
+                                });
+
+                        }
+                    },
+                }, {
+                    y:@ViewBag.PoorMar,
+                    events:{
+                        click:function(){
+                            $.post("/Home/GetBarPoor",
+                                {townid:@ViewBag.Town.Id,year:@ViewBag.Year,month:3},
+                                function(html){
+                                    $("#result-list").html(html);
+                                });
+
+                        }
+                    },
+                }, {
+                    y:@ViewBag.PoorApr,
+                    events:{
+                        click:function(){
+                            $.post("/Home/GetBarPoor",
+                                {townid:@ViewBag.Town.Id,year:@ViewBag.Year,month:4},
+                                function(html){
+                                    $("#result-list").html(html);
+                                });
+
+                        }
+                    },
+                }, {
+                    y:@ViewBag.PoorMay,
+                    events:{
+                        click:function(){
+                            $.post("/Home/GetBarPoor",
+                                {townid:@ViewBag.Town.Id,year:@ViewBag.Year,month:5},
+                                function(html){
+                                    $("#result-list").html(html);
+                                });
+
+                        }
+                    },
+                }, {
+                    y:@ViewBag.PoorJun,
+                    events:{
+                        click:function(){
+                            $.post("/Home/GetBarPoor",
+                                {townid:@ViewBag.Town.Id,year:@ViewBag.Year,month:6},
+                                function(html){
+                                    $("#result-list").html(html);
+                                });
+
+                        }
+                    },
+                }, {
+                    y:@ViewBag.PoorJul,
+                    events:{
+                        click:function(){
+                            $.post("/Home/GetBarPoor",
+                                {townid:@ViewBag.Town.Id,year:@ViewBag.Year,month:7},
+                                function(html){
+                                    $("#result-list").html(html);
+                                });
+
+                        }
+                    },
+                },{
+                    y:@ViewBag.PoorAug,
+                    events:{
+                        click:function(){
+                            $.post("/Home/GetBarPoor",
+                                {townid:@ViewBag.Town.Id,year:@ViewBag.Year,month:8},
+                                function(html){
+                                    $("#result-list").html(html);
+                                });
+
+                        }
+                    },
+                }, {
+                    y:@ViewBag.PoorSep,
+                    events:{
+                        click:function(){
+                            $.post("/Home/GetBarPoor",
+                                {townid:@ViewBag.Town.Id,year:@ViewBag.Year,month:9},
+                                function(html){
+                                    $("#result-list").html(html);
+                                });
+
+                        }
+                    },
+                }, {
+                    y:@ViewBag.PoorOct,
+                    events:{
+                        click:function(){
+                            $.post("/Home/GetBarPoor",
+                                {townid:@ViewBag.Town.Id,year:@ViewBag.Year,month:10},
+                                function(html){
+                                    $("#result-list").html(html);
+                                });
+
+                        }
+                    },
+                }, {
+                    y:@ViewBag.PoorNov,
+                    events:{
+                        click:function(){
+                            $.post("/Home/GetBarPoor",
+                                {townid:@ViewBag.Town.Id,year:@ViewBag.Year,month:11},
+                                function(html){
+                                    $("#result-list").html(html);
+                                });
+
+                        }
+                    },
+                }, {
+                    y:@ViewBag.PoorDec,
+                    events:{
+                        click:function(){
+                            $.post("/Home/GetBarPoor",
+                                {townid:@ViewBag.Town.Id,year:@ViewBag.Year,month:12},
+                                function(html){
+                                    $("#result-list").html(html);
+                                });
+
+                        }
+                    },
+                }],
                 tooltip:{
                     valueSuffix:'元',
 
                 },
-                events: {
-                    click: function () {
-                        alert("贫困人均收入");
-
-                    }
-
-                }
-
             }],
             credits:{
                 enabled:false,
