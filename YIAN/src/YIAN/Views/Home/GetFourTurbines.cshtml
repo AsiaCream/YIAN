@@ -1,0 +1,134 @@
+﻿@{
+    Layout = null;
+}
+<h3>全镇农用四轮机<span>&nbsp;<i class="fa fa-anchor">@ViewBag.Time</i></span></h3>
+<table class="table">
+    @foreach(var x in ViewBag.Ret)
+    {
+        <tr>
+            <td>@x.Id</td>
+            <td>@x.Type</td>
+            <td>@x.Town</td>
+            <td>@x.Time</td>
+            <td>@x.Count</td>
+        </tr>
+    }
+</table>
+<div class="col-md-8">
+    <div id="fourturbines"></div>
+</div>
+<div class="col-md-4">
+    <h4>统计数据</h4>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>长安村</th>
+                <td>@ViewBag.One</td>
+            </tr>
+            <tr>
+                <th>精进村</th>
+                <td>@ViewBag.Two</td>
+            </tr>
+            <tr>
+                <th>东风村</th>
+                <td>@ViewBag.Three</td>
+            </tr>
+            <tr>
+                <th>民利村</th>
+                <td>@ViewBag.Four</td>
+            </tr>
+            <tr>
+                <th>龙泉村</th>
+                <td>@ViewBag.Five</td>
+            </tr>
+            <tr>
+                <th>福德村</th>
+                <td>@ViewBag.Six</td>
+            </tr>
+            <tr>
+                <th>和乐村</th>
+                <td>@ViewBag.Seven</td>
+            </tr>
+            <tr>
+                <th>德宝村</th>
+                <td>@ViewBag.Eight</td>
+            </tr>
+            <tr>
+                <th>祥顺村</th>
+                <td>@ViewBag.Nine</td>
+            </tr>
+            <tr>
+                <th>诚顺村</th>
+                <td>@ViewBag.Ten</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript">
+    $('#fourturbines').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: '扇形统计图'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        credits: {
+            enabled: false,
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
+            }
+        },
+        series: [{
+            name: 'Brands',
+            colorByPoint: true,
+            data: [{
+                name: '长安村',
+                y: @ViewBag.One,
+                color:'red',
+            }, {
+                name: '精进村',
+                y: @ViewBag.Two,
+            }, {
+                name: '东风村',
+                y: @ViewBag.Three,
+            }, {
+                name: '民利村',
+                y: @ViewBag.Four,
+            }, {
+                name: '龙泉村',
+                y: @ViewBag.Five,
+            }, {
+                name: '福德村',
+                y: @ViewBag.Six,
+            }, {
+                name: '和乐村',
+                y: @ViewBag.Seven,
+            }, {
+                name: '德宝村',
+                y: @ViewBag.Eight,
+            }, {
+                name: '祥顺村',
+                y: @ViewBag.Nine,
+            }, {
+                name: '诚顺村',
+                y: @ViewBag.Ten,
+            }, ]
+        }]
+    });
+</script>

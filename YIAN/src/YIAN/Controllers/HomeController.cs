@@ -38,7 +38,7 @@ namespace YIAN.Controllers
             ViewBag.LowLine = line;
 
             var perso = DB.Familys
-                .OrderByDescending(x => x.Id)
+                .OrderByDescending(x => x.TownId)
                 .ToList();
             var rich = new List<Rich>();
             var poor = new List<Poor>();
@@ -49,8 +49,7 @@ namespace YIAN.Controllers
                 .Where(z => z.FamilyId == x.Id)
                 .ToList();
                 var membercount = DB.FamilyMembers.Where(i => i.FamilyId == x.Id).Count() + DB.Familys.Where(i => i.Id == x.Id).Count();
-                if (situation.Count() != 0)
-                {
+                
                     #region 垃圾循环法
                     foreach (var i in situation)
                     {
@@ -272,11 +271,8 @@ namespace YIAN.Controllers
                         }
                     }
                     #endregion
-                }
-                else
-                {
-                    return RedirectToAction("Error", "Home");
-                }
+                
+                
             }
             #region Rich
             var RichJan = rich.Where(x => x.Month == 1).ToList();
@@ -493,8 +489,6 @@ namespace YIAN.Controllers
                 .Where(z => z.FamilyId == x.Id)
                 .ToList();
                 var membercount = DB.FamilyMembers.Where(i => i.FamilyId == x.Id).Count() + DB.Familys.Where(i => i.Id == x.Id).Count();
-                if (situation.Count() != 0)
-                {
                     #region 垃圾循环法
                     foreach (var i in situation)
                     {
@@ -716,11 +710,6 @@ namespace YIAN.Controllers
                         }
                     } 
                     #endregion
-                }
-                else
-                {
-                    return RedirectToAction("Error", "Home");
-                }
             }
             #region Rich
             var RichJan = rich.Where(x => x.Month == 1).ToList();
@@ -1040,6 +1029,152 @@ namespace YIAN.Controllers
         [HttpGet]
         public IActionResult Statistics()
         {
+            return View();
+        }
+        /// <summary>
+        /// 农用四轮机扇形图
+        /// </summary>
+        /// <param name="selectyear"></param>
+        /// <param name="selectmonth"></param>
+        /// <param name="startyear"></param>
+        /// <param name="startmonth"></param>
+        /// <param name="endyear"></param>
+        /// <param name="endmonth"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetFourTurbines(int selectyear,int selectmonth)
+        {
+            //先找村镇
+            var town = DB.Towns
+                .OrderBy(x => x.Id)
+                .ToList();
+            var ret = new List<SituationPie>();
+            foreach (var x in town)
+            {
+                var person = DB.Familys
+                .Where(y => y.TownId == x.Id)
+                .OrderBy(y => y.TownId)
+                .ToList();
+                foreach(var y in person)
+                {
+                    var fourturbines = DB.FamilySituations
+                        .Include(z=>z.Family)
+                        .Where(z => z.FamilyId == y.Id)
+                        .OrderBy(z => z.Family.TownId)
+                        .ToList();
+                        foreach (var z in fourturbines)
+                        {
+                            if (z.CreateTime.Year == selectyear && z.CreateTime.Month == selectmonth)
+                            {
+                                
+                                ret.Add(new SituationPie
+                                {
+                                    Id = z.Id,
+                                    Type = "农用四轮机",
+                                    Time = selectyear + "/" + selectmonth,
+                                    Town = DB.Towns.Where(i => i.Id == z.Family.TownId).SingleOrDefault().Title,
+                                    Count=z.FourTurbines,
+                                });
+                            }
+                        }
+                        
+                    
+                }
+            }
+            ViewBag.Ret = ret;
+            ViewBag.Time = selectyear + "/" + selectmonth;
+            var number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "长安村")
+                {
+                    number = x.Count+number;
+                }
+            }
+            ViewBag.One = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "精进村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Two = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "东风村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Three = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "民利村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Four = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "龙泉村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Five = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "福德村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Six = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "和乐村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Seven = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "德宝村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Eight = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "祥顺村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Nine = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "诚顺村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Ten = number;
+            number = 0;
+
             return View();
         }
     }
