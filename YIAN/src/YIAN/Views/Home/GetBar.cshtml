@@ -81,7 +81,7 @@
                 name: '脱贫人均收入',
                 color:'#00FF00',
                 data: [{
-                y:@ViewBag.RichJan+0.00,
+                y:@ViewBag.RichJan+1000,
                 events:{
                     click:function(){
                         $.post("/Home/GetBarRich",
@@ -231,7 +231,7 @@
                 name: '贫困人均收入',
                 color:'#FF3366',
                 data: [{
-                    y:@ViewBag.PoorJan+0.00,
+                    y:@ViewBag.PoorJan+1000,
                     events:{
                         click:function(){
                             $.post("/Home/GetBarPoor",

@@ -41,7 +41,15 @@ namespace YIAN.Models
                 await userManager.AddToRoleAsync(admin, "管理员");
 
                 var town1= DB.Towns.Add(new Town { Title = "长安村", CreateTime = DateTime.Now });
-                var town2= DB.Towns.Add(new Town { Title = "平安村", CreateTime = DateTime.Now });
+                var town2= DB.Towns.Add(new Town { Title = "精进村", CreateTime = DateTime.Now });
+                var town3 = DB.Towns.Add(new Town { Title = "东风村", CreateTime = DateTime.Now });
+                var town4 = DB.Towns.Add(new Town { Title = "民利村", CreateTime = DateTime.Now });
+                var town5 = DB.Towns.Add(new Town { Title = "龙泉村", CreateTime = DateTime.Now });
+                var town6 = DB.Towns.Add(new Town { Title = "福德村", CreateTime = DateTime.Now });
+                var town7 = DB.Towns.Add(new Town { Title = "和乐村", CreateTime = DateTime.Now });
+                var town8 = DB.Towns.Add(new Town { Title = "德宝村", CreateTime = DateTime.Now });
+                var town9 = DB.Towns.Add(new Town { Title = "祥顺村", CreateTime = DateTime.Now });
+                var town10 = DB.Towns.Add(new Town { Title = "诚顺村", CreateTime = DateTime.Now });
 
                 var lowline = DB.LowLines.Add(new LowLine { Line = 2800, Time = DateTime.Now });
                 

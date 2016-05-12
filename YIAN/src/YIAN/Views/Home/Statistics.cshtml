@@ -10,7 +10,7 @@
                 时间选择：
             </label>
             <input type="radio" name="type" checked="checked"/>
-            <select>
+            <select name="selectyear" id="selectyear" class="time">
                 <option>2016</option>
                 <option>2017</option>
                 <option>2018</option>
@@ -21,7 +21,7 @@
                 <option>2023</option>
                 <option>2024</option>
             </select>
-            <select>
+            <select name="selectmonth" id="selectmonth" class="time">
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -35,14 +35,14 @@
                 <option>11</option>
                 <option>12</option>
             </select>
-            <label>
+            @*<label>
                 时间选择：
             </label>
             <input type="radio" name="type" />
             <label>
                 开始时间：
             </label>
-            <select>
+            <select name="startyear" id="startyear" class="time">
                 <option>2016</option>
                 <option>2017</option>
                 <option>2018</option>
@@ -53,7 +53,7 @@
                 <option>2023</option>
                 <option>2024</option>
             </select>
-            <select>
+            <select name="startmonth" id="startmonth" class="time">
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -70,7 +70,7 @@
             <label>
                 结束时间：
             </label>
-            <select>
+            <select name="endyear" id="endyear" class="time">
                 <option>2016</option>
                 <option>2017</option>
                 <option>2018</option>
@@ -81,7 +81,7 @@
                 <option>2023</option>
                 <option>2024</option>
             </select>
-            <select>
+            <select name="endmonth" id="endmonth" class="time">
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -94,13 +94,13 @@
                 <option>10</option>
                 <option>11</option>
                 <option>12</option>
-            </select>
+            </select>*@
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <h4>全镇数据统计</h4>
-            <a href="#" class="btn btn-primary">农用四轮机</a>
+            <a href="javascript:getFourTurbines()" class="btn btn-primary">农用四轮机</a>
             <a href="#" class="btn btn-primary">农机具</a>
             <a href="#" class="btn btn-primary">耕地面积</a>
             <a href="#" class="btn btn-primary">住房面积</a>
@@ -131,6 +131,18 @@
     </div>
     <hr />
     <div class="row">
+        <div class="col-md-12">
+            <select name="town" class="btn" style="border:2px solid rgb(51,122,183);">
+                <option>长安村</option>
+                <option>嘉兴镇</option>
+            </select>
+            <button class="btn btn-primary">养殖统计</button>
+            <button class="btn btn-primary">种植统计</button>
+            <button class="btn btn-primary">收入统计</button>
+            <button class="btn btn-primary">农机统计</button>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-8">
             <div id="pieChart"></div>
         </div>
@@ -140,16 +152,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>编号</th>
-                        <th>村名称</th>
-                        <th>户主名称</th>
-                        <th>贫困原因</th>
-                    </tr>
-                </thead>
-            </table>
+            <div id="getresult"></div>
         </div>
     </div>
 </div>
@@ -189,27 +192,56 @@ $(function () {
             name: 'Brands',
             colorByPoint: true,
             data: [{
-                name: 'Microsoft Internet Explorer',
-                y: 56.33
+                name: 'Internet Explorer',
+                y: 10,
             }, {
                 name: 'Chrome',
-                y: 24.03,
-                sliced: true,
-                selected: true
+                y: 20,
             }, {
                 name: 'Firefox',
-                y: 10.38
+                y: 30,
             }, {
                 name: 'Safari',
-                y: 8.77
+                y: 40,
             }, {
                 name: 'Opera',
-                y: 9.1
+                y: 50,
             }, {
-                name: 'Proprietary or Undetectable',
-                y: 9.2
+                name: 'Others',
+                y: 100,
             }]
         }]
     });
 });
+var selectyear = $("#selectyear").val();
+var selectmonth = $("#selectmonth").val();
+//var startyear = $("#startyear").val();
+//var startmonth = $("#startmonth").val();
+//var endyear = $("#endyear").val();
+//var endmonth = $("#endmonth").val();
+$("#selectyear").change(function () {
+    selectyear = $(this).val();
+});
+$("#selectmonth").change(function () {
+    selectmonth = $(this).val();
+});
+//$("#startyear").change(function () {
+//    startyear = $(this).val();
+//});
+//$("#startmonth").change(function () {
+//    startmonth = $(this).val();
+//});
+//$("#endyear").change(function () {
+//    endyear = $(this).val();
+//});
+//$("#endmonth").change(function () {
+//    endmonth = $(this).val();
+//});
+
+function getFourTurbines() {
+    $.get("/Home/GetFourTurbines", {selectyear:selectyear,selectmonth:selectmonth},function (html) {
+        $("#getresult").html(html);
+    });
+
+}
 </script>
