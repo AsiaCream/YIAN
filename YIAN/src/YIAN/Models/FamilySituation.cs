@@ -34,10 +34,11 @@ namespace YIAN.Models
         public double Rice { get; set; }//水稻
         public double Vegetables { get; set; }//瓜菜
         public double MixedBeans { get; set; }//杂豆
-        public double OthersArea { get; set; }//其它地
+        public double OthersArea { get; set; }//其它农作物
 
         public double YearTotalIncome { get; set; }//年总收入
         public double YearAnnualPerCapitaIncome { get; set; }//年人均收入
+
         public double FarmingIncome { get; set; }//种植业收入
         public double BreedingIncome { get; set; }//养殖业收入
         public double OthersIncome { get; set; }//其它收入

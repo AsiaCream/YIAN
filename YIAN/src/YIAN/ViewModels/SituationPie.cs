@@ -12,5 +12,7 @@ namespace YIAN.ViewModels
         public string Time { get; set; }
         public string Town { get; set; }
         public int Count { get; set; }
+        public double Area { get; set; }
+        public string Structure { get; set; }
     }
 }

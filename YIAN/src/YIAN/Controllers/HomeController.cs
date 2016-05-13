@@ -1083,7 +1083,7 @@ namespace YIAN.Controllers
             }
             ViewBag.Ret = ret;
             ViewBag.Time = selectyear + "/" + selectmonth;
-            var number = 0;
+            double? number = 0;
             foreach (var x in ret)
             {
                 if (x.Town == "长安村")
@@ -1177,5 +1177,3572 @@ namespace YIAN.Controllers
 
             return View();
         }
+        /// <summary>
+        /// 农机具扇形图
+        /// </summary>
+        /// <param name="selectyear"></param>
+        /// <param name="selectmonth"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetAgriculturalMachinery(int selectyear,int selectmonth)
+        {
+            var town = DB.Towns
+                .OrderBy(x => x.Id)
+                .ToList();
+            var ret = new List<SituationPie>();
+            foreach(var x in town)
+            {
+                var person = DB.Familys
+                    .Where(y => y.TownId == x.Id)
+                    .OrderBy(y => y.TownId)
+                    .ToList();
+                foreach(var y in person)
+                {
+                    var agriculturalMachinery = DB.FamilySituations
+                        .Include(z=>z.Family)
+                        .Where(z => z.FamilyId == y.Id)
+                        .OrderBy(z => z.Family.TownId)
+                        .ToList();
+                    foreach(var z in agriculturalMachinery)
+                    {
+                        if(z.CreateTime.Year == selectyear && z.CreateTime.Month == selectmonth)
+                        {
+                            ret.Add(new SituationPie
+                            {
+                                Id = z.Id,
+                                Type = "农机具",
+                                Time = selectyear+"/"+selectmonth,
+                                Town = DB.Towns.Where(i=>i.Id == z.Family.TownId).SingleOrDefault().Title,
+                                Count = z.AgriculturalMachinery,
+                            });
+                        }
+                    }
+                }
+            }
+            ViewBag.Ret = ret;
+            ViewBag.Time = selectyear + "/" + selectmonth;
+            var number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "长安村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.One = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "精进村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Two = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "东风村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Three = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "民利村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Four = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "龙泉村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Five = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "福德村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Six = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "和乐村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Seven = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "德宝村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Eight = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "祥顺村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Nine = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "诚顺村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Ten = number;
+            number = 0;
+            return View();
+        }
+        /// <summary>
+        /// 耕地面积扇形图
+        /// </summary>
+        /// <param name="selectyear"></param>
+        /// <param name="selectmonth"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetArableLand(int selectyear, int selectmonth)
+        {
+            var town = DB.Towns
+                .OrderBy(x => x.Id)
+                .ToList();
+            var ret = new List<SituationPie>();
+            foreach (var x in town)
+            {
+                var person = DB.Familys
+                    .Where(y => y.TownId == x.Id)
+                    .OrderBy(y => y.TownId)
+                    .ToList();
+                foreach (var y in person)
+                {
+                    var arableLand = DB.FamilySituations
+                        .Include(z => z.Family)
+                        .Where(z => z.FamilyId == y.Id)
+                        .OrderBy(z => z.Family.TownId)
+                        .ToList();
+                    foreach (var z in arableLand)
+                    {
+                        if (z.CreateTime.Year == selectyear && z.CreateTime.Month == selectmonth)
+                        {
+                            ret.Add(new SituationPie
+                            {
+                                Id = z.Id,
+                                Type = "耕地面积",
+                                Time = selectyear + "/" + selectmonth,
+                                Town = DB.Towns.Where(i => i.Id == z.Family.TownId).SingleOrDefault().Title,
+                                Area = z.ArableLand,
+                            });
+                        }
+                    }
+                }
+            }
+            ViewBag.Ret = ret;
+            ViewBag.Time = selectyear + "/" + selectmonth;
+            Double number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "长安村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.One = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "精进村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Two = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "东风村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Three = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "民利村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Four = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "龙泉村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Five = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "福德村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Six = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "和乐村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Seven = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "德宝村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Eight = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "祥顺村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Nine = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "诚顺村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Ten = number;
+            number = 0;
+            return View();
+        }
+        /// <summary>
+        /// 住房面积扇形图
+        /// </summary>
+        /// <param name="selectyear"></param>
+        /// <param name="selectmonth"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetHousingArea(int selectyear, int selectmonth)
+        {
+            var town = DB.Towns
+                .OrderBy(x => x.Id)
+                .ToList();
+            var ret = new List<SituationPie>();
+            foreach (var x in town)
+            {
+                var person = DB.Familys
+                    .Where(y => y.TownId == x.Id)
+                    .OrderBy(y => y.TownId)
+                    .ToList();
+                foreach (var y in person)
+                {
+                    var housingArea = DB.FamilySituations
+                        .Include(z => z.Family)
+                        .Where(z => z.FamilyId == y.Id)
+                        .OrderBy(z => z.Family.TownId)
+                        .ToList();
+                    foreach (var z in housingArea)
+                    {
+                        if (z.CreateTime.Year == selectyear && z.CreateTime.Month == selectmonth)
+                        {
+                            ret.Add(new SituationPie
+                            {
+                                Id = z.Id,
+                                Type = "耕地面积",
+                                Time = selectyear + "/" + selectmonth,
+                                Town = DB.Towns.Where(i => i.Id == z.Family.TownId).SingleOrDefault().Title,
+                                Area = z.HousingArea,
+                            });
+                        }
+                    }
+                }
+            }
+            ViewBag.Ret = ret;
+            ViewBag.Time = selectyear + "/" + selectmonth;
+            Double number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "长安村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.One = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "精进村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Two = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "东风村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Three = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "民利村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Four = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "龙泉村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Five = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "福德村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Six = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "和乐村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Seven = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "德宝村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Eight = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "祥顺村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Nine = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "诚顺村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Ten = number;
+            number = 0;
+            return View();
+        }
+        /// <summary>
+        /// 房屋结构扇形图
+        /// </summary>
+        /// <param name="selectyear"></param>
+        /// <param name="selectmonth"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetBuildingStructure(int selectyear, int selectmonth)
+        {
+            var town = DB.Towns
+                .OrderBy(x => x.Id)
+                .ToList();
+            var ret = new List<SituationPie>();
+            foreach (var x in town)
+            {
+                var person = DB.Familys
+                    .Where(y => y.TownId == x.Id)
+                    .OrderBy(y => y.TownId)
+                    .ToList();
+                foreach (var y in person)
+                {
+                    var buildingStructure = DB.FamilySituations
+                        .Include(z => z.Family)
+                        .Where(z => z.FamilyId == y.Id)
+                        .OrderBy(z => z.Family.TownId)
+                        .ToList();
+                    foreach (var z in buildingStructure)
+                    {
+                        if (z.CreateTime.Year == selectyear && z.CreateTime.Month == selectmonth)
+                        {
+                            ret.Add(new SituationPie
+                            {
+                                Id = z.Id,
+                                Type = "房屋结构",
+                                Time = selectyear + "/" + selectmonth,
+                                Town = DB.Towns.Where(i => i.Id == z.Family.TownId).SingleOrDefault().Title,
+                                Structure = z.BuildingStructure,
+                            });
+                        }
+                    }
+                }
+            }
+            ViewBag.Ret = ret;
+            ViewBag.Time = selectyear + "/" + selectmonth;
+            var number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "长安村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.One = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "精进村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Two = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "东风村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Three = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "民利村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Four = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "龙泉村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Five = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "福德村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Six = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "和乐村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Seven = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "德宝村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Eight = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "祥顺村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Nine = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "诚顺村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Ten = number;
+            number = 0;
+            return View();
+        }
+
+
+        /// <summary>
+        /// 全镇：牛
+        /// </summary>
+        /// <param name="selectyear"></param>
+        /// <param name="selectmonth"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetCow(int selectyear,int selectmonth)
+        {
+            var town = DB.Towns
+                .OrderBy(x => x.Id)
+                .ToList();
+            var ret = new List<SituationPie>();
+            foreach(var x in town)
+            {
+                var person = DB.Familys
+                    .Where(y => y.TownId == x.Id)
+                    .OrderBy(y => y.TownId)
+                    .ToList();
+                foreach(var y in person)
+                {
+                    var cow = DB.FamilySituations
+                        .Include(z => z.Family)
+                        .Where(z => z.FamilyId == y.Id)
+                        .OrderBy(z => z.Family.TownId)
+                        .ToList();
+                    foreach(var z in cow)
+                    {
+                        if(z.CreateTime.Year == selectyear && z.CreateTime.Month == selectmonth)
+                        {
+                            ret.Add(new SituationPie
+                            {
+                                Id = z.Id,
+                                Type = "牛",
+                                Time = selectyear + "/" + selectmonth,
+                                Town = DB.Towns.Where(i => i.Id == z.Family.TownId).SingleOrDefault().Title,
+                                Count = z.Cow,
+                            });
+                        }
+                    }
+                }
+            }
+            ViewBag.Time = selectyear + "/" + selectmonth;
+            ViewBag.Ret = ret;
+            var number = 0;
+            foreach(var x in ret)
+            {
+                if(x.Town == "长安村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.One = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "精进村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Two = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "东风村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Three = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "民利村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Four = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "龙泉村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Five = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "福德村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Six = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "和乐村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Seven = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "德宝村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Eight = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "祥顺村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Nine = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "诚顺村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Ten = number;
+            number = 0;
+            return View();
+        }
+        /// <summary>
+        /// 全镇：马
+        /// </summary>
+        /// <param name="selectyear"></param>
+        /// <param name="selectmonth"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetHorse(int selectyear, int selectmonth)
+        {
+            var town = DB.Towns
+                .OrderBy(x => x.Id)
+                .ToList();
+            var ret = new List<SituationPie>();
+            foreach (var x in town)
+            {
+                var person = DB.Familys
+                    .Where(y => y.TownId == x.Id)
+                    .OrderBy(y => y.TownId)
+                    .ToList();
+                foreach (var y in person)
+                {
+                    var horse = DB.FamilySituations
+                        .Include(z => z.Family)
+                        .Where(z => z.FamilyId == y.Id)
+                        .OrderBy(z => z.Family.TownId)
+                        .ToList();
+                    foreach (var z in horse)
+                    {
+                        if (z.CreateTime.Year == selectyear && z.CreateTime.Month == selectmonth)
+                        {
+                            ret.Add(new SituationPie
+                            {
+                                Id = z.Id,
+                                Type = "马",
+                                Time = selectyear + "/" + selectmonth,
+                                Town = DB.Towns.Where(i => i.Id == z.Family.TownId).SingleOrDefault().Title,
+                                Count = z.Horse,
+                            });
+                        }
+                    }
+                }
+            }
+            ViewBag.Time = selectyear + "/" + selectmonth;
+            ViewBag.Ret = ret;
+            var number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "长安村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.One = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "精进村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Two = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "东风村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Three = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "民利村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Four = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "龙泉村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Five = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "福德村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Six = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "和乐村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Seven = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "德宝村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Eight = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "祥顺村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Nine = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "诚顺村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Ten = number;
+            number = 0;
+            return View();
+        }
+        /// <summary>
+        /// 全镇：羊
+        /// </summary>
+        /// <param name="selectyear"></param>
+        /// <param name="selectmonth"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetSheep(int selectyear, int selectmonth)
+        {
+            var town = DB.Towns
+                .OrderBy(x => x.Id)
+                .ToList();
+            var ret = new List<SituationPie>();
+            foreach (var x in town)
+            {
+                var person = DB.Familys
+                    .Where(y => y.TownId == x.Id)
+                    .OrderBy(y => y.TownId)
+                    .ToList();
+                foreach (var y in person)
+                {
+                    var sheep = DB.FamilySituations
+                        .Include(z => z.Family)
+                        .Where(z => z.FamilyId == y.Id)
+                        .OrderBy(z => z.Family.TownId)
+                        .ToList();
+                    foreach (var z in sheep)
+                    {
+                        if (z.CreateTime.Year == selectyear && z.CreateTime.Month == selectmonth)
+                        {
+                            ret.Add(new SituationPie
+                            {
+                                Id = z.Id,
+                                Type = "羊",
+                                Time = selectyear + "/" + selectmonth,
+                                Town = DB.Towns.Where(i => i.Id == z.Family.TownId).SingleOrDefault().Title,
+                                Count = z.Sheep,
+                            });
+                        }
+                    }
+                }
+            }
+            ViewBag.Time = selectyear + "/" + selectmonth;
+            ViewBag.Ret = ret;
+            var number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "长安村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.One = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "精进村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Two = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "东风村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Three = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "民利村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Four = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "龙泉村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Five = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "福德村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Six = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "和乐村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Seven = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "德宝村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Eight = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "祥顺村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Nine = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "诚顺村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Ten = number;
+            number = 0;
+            return View();
+        }
+        /// <summary>
+        /// 全镇：鸡
+        /// </summary>
+        /// <param name="selectyear"></param>
+        /// <param name="selectmonth"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetChicken(int selectyear, int selectmonth)
+        {
+            var town = DB.Towns
+                .OrderBy(x => x.Id)
+                .ToList();
+            var ret = new List<SituationPie>();
+            foreach (var x in town)
+            {
+                var person = DB.Familys
+                    .Where(y => y.TownId == x.Id)
+                    .OrderBy(y => y.TownId)
+                    .ToList();
+                foreach (var y in person)
+                {
+                    var chicken = DB.FamilySituations
+                        .Include(z => z.Family)
+                        .Where(z => z.FamilyId == y.Id)
+                        .OrderBy(z => z.Family.TownId)
+                        .ToList();
+                    foreach (var z in chicken)
+                    {
+                        if (z.CreateTime.Year == selectyear && z.CreateTime.Month == selectmonth)
+                        {
+                            ret.Add(new SituationPie
+                            {
+                                Id = z.Id,
+                                Type = "鸡",
+                                Time = selectyear + "/" + selectmonth,
+                                Town = DB.Towns.Where(i => i.Id == z.Family.TownId).SingleOrDefault().Title,
+                                Count = z.Chicken,
+                            });
+                        }
+                    }
+                }
+            }
+            ViewBag.Time = selectyear + "/" + selectmonth;
+            ViewBag.Ret = ret;
+            var number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "长安村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.One = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "精进村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Two = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "东风村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Three = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "民利村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Four = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "龙泉村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Five = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "福德村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Six = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "和乐村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Seven = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "德宝村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Eight = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "祥顺村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Nine = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "诚顺村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Ten = number;
+            number = 0;
+            return View();
+        }
+        /// <summary>
+        /// 全镇：鸭
+        /// </summary>
+        /// <param name="selectyear"></param>
+        /// <param name="selectmonth"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetDuck(int selectyear, int selectmonth)
+        {
+            var town = DB.Towns
+                .OrderBy(x => x.Id)
+                .ToList();
+            var ret = new List<SituationPie>();
+            foreach (var x in town)
+            {
+                var person = DB.Familys
+                    .Where(y => y.TownId == x.Id)
+                    .OrderBy(y => y.TownId)
+                    .ToList();
+                foreach (var y in person)
+                {
+                    var duck = DB.FamilySituations
+                        .Include(z => z.Family)
+                        .Where(z => z.FamilyId == y.Id)
+                        .OrderBy(z => z.Family.TownId)
+                        .ToList();
+                    foreach (var z in duck)
+                    {
+                        if (z.CreateTime.Year == selectyear && z.CreateTime.Month == selectmonth)
+                        {
+                            ret.Add(new SituationPie
+                            {
+                                Id = z.Id,
+                                Type = "鸭",
+                                Time = selectyear + "/" + selectmonth,
+                                Town = DB.Towns.Where(i => i.Id == z.Family.TownId).SingleOrDefault().Title,
+                                Count = z.Duck,
+                            });
+                        }
+                    }
+                }
+            }
+            ViewBag.Time = selectyear + "/" + selectmonth;
+            ViewBag.Ret = ret;
+            var number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "长安村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.One = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "精进村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Two = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "东风村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Three = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "民利村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Four = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "龙泉村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Five = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "福德村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Six = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "和乐村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Seven = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "德宝村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Eight = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "祥顺村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Nine = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "诚顺村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Ten = number;
+            number = 0;
+            return View();
+        }
+        /// <summary>
+        /// 全镇：鹅
+        /// </summary>
+        /// <param name="selectyear"></param>
+        /// <param name="selectmonth"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetGoose(int selectyear, int selectmonth)
+        {
+            var town = DB.Towns
+                .OrderBy(x => x.Id)
+                .ToList();
+            var ret = new List<SituationPie>();
+            foreach (var x in town)
+            {
+                var person = DB.Familys
+                    .Where(y => y.TownId == x.Id)
+                    .OrderBy(y => y.TownId)
+                    .ToList();
+                foreach (var y in person)
+                {
+                    var goose = DB.FamilySituations
+                        .Include(z => z.Family)
+                        .Where(z => z.FamilyId == y.Id)
+                        .OrderBy(z => z.Family.TownId)
+                        .ToList();
+                    foreach (var z in goose)
+                    {
+                        if (z.CreateTime.Year == selectyear && z.CreateTime.Month == selectmonth)
+                        {
+                            ret.Add(new SituationPie
+                            {
+                                Id = z.Id,
+                                Type = "鹅",
+                                Time = selectyear + "/" + selectmonth,
+                                Town = DB.Towns.Where(i => i.Id == z.Family.TownId).SingleOrDefault().Title,
+                                Count = z.Goose,
+                            });
+                        }
+                    }
+                }
+            }
+            ViewBag.Time = selectyear + "/" + selectmonth;
+            ViewBag.Ret = ret;
+            var number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "长安村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.One = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "精进村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Two = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "东风村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Three = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "民利村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Four = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "龙泉村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Five = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "福德村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Six = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "和乐村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Seven = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "德宝村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Eight = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "祥顺村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Nine = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "诚顺村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Ten = number;
+            number = 0;
+            return View();
+        }
+        /// <summary>
+        /// 全镇：猪
+        /// </summary>
+        /// <param name="selectyear"></param>
+        /// <param name="selectmonth"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetPig(int selectyear, int selectmonth)
+        {
+            var town = DB.Towns
+                .OrderBy(x => x.Id)
+                .ToList();
+            var ret = new List<SituationPie>();
+            foreach (var x in town)
+            {
+                var person = DB.Familys
+                    .Where(y => y.TownId == x.Id)
+                    .OrderBy(y => y.TownId)
+                    .ToList();
+                foreach (var y in person)
+                {
+                    var pig = DB.FamilySituations
+                        .Include(z => z.Family)
+                        .Where(z => z.FamilyId == y.Id)
+                        .OrderBy(z => z.Family.TownId)
+                        .ToList();
+                    foreach (var z in pig)
+                    {
+                        if (z.CreateTime.Year == selectyear && z.CreateTime.Month == selectmonth)
+                        {
+                            ret.Add(new SituationPie
+                            {
+                                Id = z.Id,
+                                Type = "猪",
+                                Time = selectyear + "/" + selectmonth,
+                                Town = DB.Towns.Where(i => i.Id == z.Family.TownId).SingleOrDefault().Title,
+                                Count = z.Pig,
+                            });
+                        }
+                    }
+                }
+            }
+            ViewBag.Time = selectyear + "/" + selectmonth;
+            ViewBag.Ret = ret;
+            var number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "长安村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.One = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "精进村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Two = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "东风村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Three = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "民利村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Four = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "龙泉村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Five = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "福德村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Six = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "和乐村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Seven = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "德宝村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Eight = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "祥顺村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Nine = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "诚顺村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Ten = number;
+            number = 0;
+            return View();
+        }
+        /// <summary>
+        /// 全镇：其它牲口
+        /// </summary>
+        /// <param name="selectyear"></param>
+        /// <param name="selectmonth"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetOthersAnimal(int selectyear, int selectmonth)
+        {
+            var town = DB.Towns
+                .OrderBy(x => x.Id)
+                .ToList();
+            var ret = new List<SituationPie>();
+            foreach (var x in town)
+            {
+                var person = DB.Familys
+                    .Where(y => y.TownId == x.Id)
+                    .OrderBy(y => y.TownId)
+                    .ToList();
+                foreach (var y in person)
+                {
+                    var othersAnimal = DB.FamilySituations
+                        .Include(z => z.Family)
+                        .Where(z => z.FamilyId == y.Id)
+                        .OrderBy(z => z.Family.TownId)
+                        .ToList();
+                    foreach (var z in othersAnimal)
+                    {
+                        if (z.CreateTime.Year == selectyear && z.CreateTime.Month == selectmonth)
+                        {
+                            ret.Add(new SituationPie
+                            {
+                                Id = z.Id,
+                                Type = "其它牲口",
+                                Time = selectyear + "/" + selectmonth,
+                                Town = DB.Towns.Where(i => i.Id == z.Family.TownId).SingleOrDefault().Title,
+                                Count = z.OthersAnimal,
+                            });
+                        }
+                    }
+                }
+            }
+            ViewBag.Time = selectyear + "/" + selectmonth;
+            ViewBag.Ret = ret;
+            var number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "长安村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.One = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "精进村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Two = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "东风村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Three = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "民利村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Four = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "龙泉村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Five = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "福德村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Six = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "和乐村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Seven = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "德宝村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Eight = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "祥顺村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Nine = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "诚顺村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Ten = number;
+            number = 0;
+            return View();
+        }
+        /// <summary>
+        /// 全镇：玉米
+        /// </summary>
+        /// <param name="selectyear"></param>
+        /// <param name="selectmonth"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetCorn(int selectyear, int selectmonth)
+        {
+            var town = DB.Towns
+                .OrderBy(x => x.Id)
+                .ToList();
+            var ret = new List<SituationPie>();
+            foreach (var x in town)
+            {
+                var person = DB.Familys
+                    .Where(y => y.TownId == x.Id)
+                    .OrderBy(y => y.TownId)
+                    .ToList();
+                foreach (var y in person)
+                {
+                    var corn = DB.FamilySituations
+                        .Include(z => z.Family)
+                        .Where(z => z.FamilyId == y.Id)
+                        .OrderBy(z => z.Family.TownId)
+                        .ToList();
+                    foreach (var z in corn)
+                    {
+                        if (z.CreateTime.Year == selectyear && z.CreateTime.Month == selectmonth)
+                        {
+                            ret.Add(new SituationPie
+                            {
+                                Id = z.Id,
+                                Type = "玉米",
+                                Time = selectyear + "/" + selectmonth,
+                                Town = DB.Towns.Where(i => i.Id == z.Family.TownId).SingleOrDefault().Title,
+                                Count = z.Corn,
+                            });
+                        }
+                    }
+                }
+            }
+            ViewBag.Time = selectyear + "/" + selectmonth;
+            ViewBag.Ret = ret;
+            var number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "长安村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.One = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "精进村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Two = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "东风村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Three = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "民利村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Four = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "龙泉村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Five = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "福德村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Six = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "和乐村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Seven = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "德宝村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Eight = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "祥顺村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Nine = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "诚顺村")
+                {
+                    number += x.Count;
+                }
+            }
+            ViewBag.Ten = number;
+            number = 0;
+            return View();
+        }
+
+        /// <summary>
+        /// 大豆
+        /// </summary>
+        /// <param name="selectyear"></param>
+        /// <param name="selectmonth"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetSoyBeans(int selectyear, int selectmonth)
+        {
+            var town = DB.Towns
+                .OrderBy(x => x.Id)
+                .ToList();
+            var ret = new List<SituationPie>();
+            foreach (var x in town)
+            {
+                var person = DB.Familys
+                    .Where(y => y.TownId == x.Id)
+                    .OrderBy(y => y.TownId)
+                    .ToList();
+                foreach (var y in person)
+                {
+                    var soyBeans = DB.FamilySituations
+                        .Include(z => z.Family)
+                        .Where(z => z.FamilyId == y.Id)
+                        .OrderBy(z => z.Family.TownId)
+                        .ToList();
+                    foreach (var z in soyBeans)
+                    {
+                        if (z.CreateTime.Year == selectyear && z.CreateTime.Month == selectmonth)
+                        {
+                            ret.Add(new SituationPie
+                            {
+                                Id = z.Id,
+                                Type = "大豆",
+                                Time = selectyear + "/" + selectmonth,
+                                Town = DB.Towns.Where(i => i.Id == z.Family.TownId).SingleOrDefault().Title,
+                                Area = z.SoyBeans,
+                            });
+                        }
+                    }
+                }
+            }
+            ViewBag.Ret = ret;
+            ViewBag.Time = selectyear + "/" + selectmonth;
+            Double number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "长安村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.One = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "精进村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Two = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "东风村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Three = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "民利村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Four = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "龙泉村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Five = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "福德村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Six = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "和乐村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Seven = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "德宝村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Eight = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "祥顺村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Nine = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "诚顺村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Ten = number;
+            number = 0;
+            return View();
+        }
+
+        /// <summary>
+        /// 马铃薯扇形图
+        /// </summary>
+        /// <param name="selectyear"></param>
+        /// <param name="selectmonth"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetPotato(int selectyear, int selectmonth)
+        {
+            var town = DB.Towns
+                .OrderBy(x => x.Id)
+                .ToList();
+            var ret = new List<SituationPie>();
+            foreach (var x in town)
+            {
+                var person = DB.Familys
+                    .Where(y => y.TownId == x.Id)
+                    .OrderBy(y => y.TownId)
+                    .ToList();
+                foreach (var y in person)
+                {
+                    var potato = DB.FamilySituations
+                        .Include(z => z.Family)
+                        .Where(z => z.FamilyId == y.Id)
+                        .OrderBy(z => z.Family.TownId)
+                        .ToList();
+                    foreach (var z in potato)
+                    {
+                        if (z.CreateTime.Year == selectyear && z.CreateTime.Month == selectmonth)
+                        {
+                            ret.Add(new SituationPie
+                            {
+                                Id = z.Id,
+                                Type = "马铃薯",
+                                Time = selectyear + "/" + selectmonth,
+                                Town = DB.Towns.Where(i => i.Id == z.Family.TownId).SingleOrDefault().Title,
+                                Area = z.Potato,
+                            });
+                        }
+                    }
+                }
+            }
+            ViewBag.Ret = ret;
+            ViewBag.Time = selectyear + "/" + selectmonth;
+            Double number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "长安村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.One = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "精进村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Two = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "东风村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Three = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "民利村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Four = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "龙泉村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Five = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "福德村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Six = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "和乐村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Seven = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "德宝村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Eight = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "祥顺村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Nine = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "诚顺村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Ten = number;
+            number = 0;
+            return View();
+        }
+        /// <summary>
+        /// 葵花扇形图
+        /// </summary>
+        /// <param name="selectyear"></param>
+        /// <param name="selectmonth"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetSunflower(int selectyear, int selectmonth)
+        {
+            var town = DB.Towns
+                .OrderBy(x => x.Id)
+                .ToList();
+            var ret = new List<SituationPie>();
+            foreach (var x in town)
+            {
+                var person = DB.Familys
+                    .Where(y => y.TownId == x.Id)
+                    .OrderBy(y => y.TownId)
+                    .ToList();
+                foreach (var y in person)
+                {
+                    var sunflower = DB.FamilySituations
+                        .Include(z => z.Family)
+                        .Where(z => z.FamilyId == y.Id)
+                        .OrderBy(z => z.Family.TownId)
+                        .ToList();
+                    foreach (var z in sunflower)
+                    {
+                        if (z.CreateTime.Year == selectyear && z.CreateTime.Month == selectmonth)
+                        {
+                            ret.Add(new SituationPie
+                            {
+                                Id = z.Id,
+                                Type = "葵花",
+                                Time = selectyear + "/" + selectmonth,
+                                Town = DB.Towns.Where(i => i.Id == z.Family.TownId).SingleOrDefault().Title,
+                                Area = z.Sunflower,
+                            });
+                        }
+                    }
+                }
+            }
+            ViewBag.Ret = ret;
+            ViewBag.Time = selectyear + "/" + selectmonth;
+            Double number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "长安村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.One = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "精进村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Two = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "东风村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Three = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "民利村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Four = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "龙泉村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Five = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "福德村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Six = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "和乐村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Seven = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "德宝村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Eight = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "祥顺村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Nine = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "诚顺村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Ten = number;
+            number = 0;
+            return View();
+        }
+        /// <summary>
+        /// 高粱扇形图
+        /// </summary>
+        /// <param name="selectyear"></param>
+        /// <param name="selectmonth"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetSorghum(int selectyear, int selectmonth)
+        {
+            var town = DB.Towns
+                .OrderBy(x => x.Id)
+                .ToList();
+            var ret = new List<SituationPie>();
+            foreach (var x in town)
+            {
+                var person = DB.Familys
+                    .Where(y => y.TownId == x.Id)
+                    .OrderBy(y => y.TownId)
+                    .ToList();
+                foreach (var y in person)
+                {
+                    var sorghum = DB.FamilySituations
+                        .Include(z => z.Family)
+                        .Where(z => z.FamilyId == y.Id)
+                        .OrderBy(z => z.Family.TownId)
+                        .ToList();
+                    foreach (var z in sorghum)
+                    {
+                        if (z.CreateTime.Year == selectyear && z.CreateTime.Month == selectmonth)
+                        {
+                            ret.Add(new SituationPie
+                            {
+                                Id = z.Id,
+                                Type = "高粱",
+                                Time = selectyear + "/" + selectmonth,
+                                Town = DB.Towns.Where(i => i.Id == z.Family.TownId).SingleOrDefault().Title,
+                                Area = z.Sorghum,
+                            });
+                        }
+                    }
+                }
+            }
+            ViewBag.Ret = ret;
+            ViewBag.Time = selectyear + "/" + selectmonth;
+            Double number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "长安村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.One = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "精进村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Two = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "东风村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Three = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "民利村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Four = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "龙泉村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Five = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "福德村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Six = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "和乐村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Seven = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "德宝村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Eight = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "祥顺村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Nine = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "诚顺村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Ten = number;
+            number = 0;
+            return View();
+        }
+        /// <summary>
+        /// 杂粮扇形图
+        /// </summary>
+        /// <param name="selectyear"></param>
+        /// <param name="selectmonth"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetGrains(int selectyear, int selectmonth)
+        {
+            var town = DB.Towns
+                .OrderBy(x => x.Id)
+                .ToList();
+            var ret = new List<SituationPie>();
+            foreach (var x in town)
+            {
+                var person = DB.Familys
+                    .Where(y => y.TownId == x.Id)
+                    .OrderBy(y => y.TownId)
+                    .ToList();
+                foreach (var y in person)
+                {
+                    var grains = DB.FamilySituations
+                        .Include(z => z.Family)
+                        .Where(z => z.FamilyId == y.Id)
+                        .OrderBy(z => z.Family.TownId)
+                        .ToList();
+                    foreach (var z in grains)
+                    {
+                        if (z.CreateTime.Year == selectyear && z.CreateTime.Month == selectmonth)
+                        {
+                            ret.Add(new SituationPie
+                            {
+                                Id = z.Id,
+                                Type = "杂粮",
+                                Time = selectyear + "/" + selectmonth,
+                                Town = DB.Towns.Where(i => i.Id == z.Family.TownId).SingleOrDefault().Title,
+                                Area = z.Grains,
+                            });
+                        }
+                    }
+                }
+            }
+            ViewBag.Ret = ret;
+            ViewBag.Time = selectyear + "/" + selectmonth;
+            Double number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "长安村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.One = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "精进村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Two = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "东风村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Three = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "民利村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Four = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "龙泉村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Five = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "福德村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Six = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "和乐村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Seven = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "德宝村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Eight = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "祥顺村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Nine = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "诚顺村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Ten = number;
+            number = 0;
+            return View();
+        }
+        /// <summary>
+        /// 水稻扇形图
+        /// </summary>
+        /// <param name="selectyear"></param>
+        /// <param name="selectmonth"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetRice(int selectyear, int selectmonth)
+        {
+            var town = DB.Towns
+                .OrderBy(x => x.Id)
+                .ToList();
+            var ret = new List<SituationPie>();
+            foreach (var x in town)
+            {
+                var person = DB.Familys
+                    .Where(y => y.TownId == x.Id)
+                    .OrderBy(y => y.TownId)
+                    .ToList();
+                foreach (var y in person)
+                {
+                    var rice = DB.FamilySituations
+                        .Include(z => z.Family)
+                        .Where(z => z.FamilyId == y.Id)
+                        .OrderBy(z => z.Family.TownId)
+                        .ToList();
+                    foreach (var z in rice)
+                    {
+                        if (z.CreateTime.Year == selectyear && z.CreateTime.Month == selectmonth)
+                        {
+                            ret.Add(new SituationPie
+                            {
+                                Id = z.Id,
+                                Type = "水稻",
+                                Time = selectyear + "/" + selectmonth,
+                                Town = DB.Towns.Where(i => i.Id == z.Family.TownId).SingleOrDefault().Title,
+                                Area = z.Rice,
+                            });
+                        }
+                    }
+                }
+            }
+            ViewBag.Ret = ret;
+            ViewBag.Time = selectyear + "/" + selectmonth;
+            Double number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "长安村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.One = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "精进村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Two = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "东风村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Three = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "民利村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Four = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "龙泉村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Five = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "福德村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Six = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "和乐村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Seven = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "德宝村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Eight = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "祥顺村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Nine = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "诚顺村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Ten = number;
+            number = 0;
+            return View();
+        }
+        /// <summary>
+        /// 瓜菜扇形图
+        /// </summary>
+        /// <param name="selectyear"></param>
+        /// <param name="selectmonth"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetVegetables(int selectyear, int selectmonth)
+        {
+            var town = DB.Towns
+                .OrderBy(x => x.Id)
+                .ToList();
+            var ret = new List<SituationPie>();
+            foreach (var x in town)
+            {
+                var person = DB.Familys
+                    .Where(y => y.TownId == x.Id)
+                    .OrderBy(y => y.TownId)
+                    .ToList();
+                foreach (var y in person)
+                {
+                    var vegetables = DB.FamilySituations
+                        .Include(z => z.Family)
+                        .Where(z => z.FamilyId == y.Id)
+                        .OrderBy(z => z.Family.TownId)
+                        .ToList();
+                    foreach (var z in vegetables)
+                    {
+                        if (z.CreateTime.Year == selectyear && z.CreateTime.Month == selectmonth)
+                        {
+                            ret.Add(new SituationPie
+                            {
+                                Id = z.Id,
+                                Type = "瓜菜",
+                                Time = selectyear + "/" + selectmonth,
+                                Town = DB.Towns.Where(i => i.Id == z.Family.TownId).SingleOrDefault().Title,
+                                Area = z.Vegetables,
+                            });
+                        }
+                    }
+                }
+            }
+            ViewBag.Ret = ret;
+            ViewBag.Time = selectyear + "/" + selectmonth;
+            Double number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "长安村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.One = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "精进村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Two = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "东风村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Three = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "民利村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Four = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "龙泉村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Five = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "福德村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Six = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "和乐村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Seven = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "德宝村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Eight = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "祥顺村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Nine = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "诚顺村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Ten = number;
+            number = 0;
+            return View();
+        }
+        /// <summary>
+        /// 杂豆扇形图
+        /// </summary>
+        /// <param name="selectyear"></param>
+        /// <param name="selectmonth"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetMixedBeans(int selectyear, int selectmonth)
+        {
+            var town = DB.Towns
+                .OrderBy(x => x.Id)
+                .ToList();
+            var ret = new List<SituationPie>();
+            foreach (var x in town)
+            {
+                var person = DB.Familys
+                    .Where(y => y.TownId == x.Id)
+                    .OrderBy(y => y.TownId)
+                    .ToList();
+                foreach (var y in person)
+                {
+                    var mixedBeans = DB.FamilySituations
+                        .Include(z => z.Family)
+                        .Where(z => z.FamilyId == y.Id)
+                        .OrderBy(z => z.Family.TownId)
+                        .ToList();
+                    foreach (var z in mixedBeans)
+                    {
+                        if (z.CreateTime.Year == selectyear && z.CreateTime.Month == selectmonth)
+                        {
+                            ret.Add(new SituationPie
+                            {
+                                Id = z.Id,
+                                Type = "杂豆",
+                                Time = selectyear + "/" + selectmonth,
+                                Town = DB.Towns.Where(i => i.Id == z.Family.TownId).SingleOrDefault().Title,
+                                Area = z.MixedBeans,
+                            });
+                        }
+                    }
+                }
+            }
+            ViewBag.Ret = ret;
+            ViewBag.Time = selectyear + "/" + selectmonth;
+            Double number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "长安村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.One = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "精进村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Two = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "东风村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Three = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "民利村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Four = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "龙泉村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Five = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "福德村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Six = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "和乐村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Seven = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "德宝村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Eight = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "祥顺村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Nine = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "诚顺村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Ten = number;
+            number = 0;
+            return View();
+        }
+        /// <summary>
+        /// 其它农作物扇形图
+        /// </summary>
+        /// <param name="selectyear"></param>
+        /// <param name="selectmonth"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetOthersArea(int selectyear, int selectmonth)
+        {
+            var town = DB.Towns
+                .OrderBy(x => x.Id)
+                .ToList();
+            var ret = new List<SituationPie>();
+            foreach (var x in town)
+            {
+                var person = DB.Familys
+                    .Where(y => y.TownId == x.Id)
+                    .OrderBy(y => y.TownId)
+                    .ToList();
+                foreach (var y in person)
+                {
+                    var othersArea = DB.FamilySituations
+                        .Include(z => z.Family)
+                        .Where(z => z.FamilyId == y.Id)
+                        .OrderBy(z => z.Family.TownId)
+                        .ToList();
+                    foreach (var z in othersArea)
+                    {
+                        if (z.CreateTime.Year == selectyear && z.CreateTime.Month == selectmonth)
+                        {
+                            ret.Add(new SituationPie
+                            {
+                                Id = z.Id,
+                                Type = "其它农作物",
+                                Time = selectyear + "/" + selectmonth,
+                                Town = DB.Towns.Where(i => i.Id == z.Family.TownId).SingleOrDefault().Title,
+                                Area = z.OthersArea,
+                            });
+                        }
+                    }
+                }
+            }
+            ViewBag.Ret = ret;
+            ViewBag.Time = selectyear + "/" + selectmonth;
+            Double number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "长安村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.One = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "精进村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Two = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "东风村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Three = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "民利村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Four = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "龙泉村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Five = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "福德村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Six = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "和乐村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Seven = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "德宝村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Eight = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "祥顺村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Nine = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "诚顺村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Ten = number;
+            number = 0;
+            return View();
+        }
+        /// <summary>
+        /// 种植业收入扇形图
+        /// </summary>
+        /// <param name="selectyear"></param>
+        /// <param name="selectmonth"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetFarmingIncome(int selectyear, int selectmonth)
+        {
+            var town = DB.Towns
+                .OrderBy(x => x.Id)
+                .ToList();
+            var ret = new List<SituationPie>();
+            foreach (var x in town)
+            {
+                var person = DB.Familys
+                    .Where(y => y.TownId == x.Id)
+                    .OrderBy(y => y.TownId)
+                    .ToList();
+                foreach (var y in person)
+                {
+                    var farmingIncome = DB.FamilySituations
+                        .Include(z => z.Family)
+                        .Where(z => z.FamilyId == y.Id)
+                        .OrderBy(z => z.Family.TownId)
+                        .ToList();
+                    foreach (var z in farmingIncome)
+                    {
+                        if (z.CreateTime.Year == selectyear && z.CreateTime.Month == selectmonth)
+                        {
+                            ret.Add(new SituationPie
+                            {
+                                Id = z.Id,
+                                Type = "种植业收入",
+                                Time = selectyear + "/" + selectmonth,
+                                Town = DB.Towns.Where(i => i.Id == z.Family.TownId).SingleOrDefault().Title,
+                                Area = z.FarmingIncome,
+                            });
+                        }
+                    }
+                }
+            }
+            ViewBag.Ret = ret;
+            ViewBag.Time = selectyear + "/" + selectmonth;
+            Double number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "长安村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.One = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "精进村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Two = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "东风村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Three = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "民利村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Four = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "龙泉村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Five = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "福德村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Six = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "和乐村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Seven = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "德宝村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Eight = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "祥顺村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Nine = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "诚顺村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Ten = number;
+            number = 0;
+            return View();
+        }
+        /// <summary>
+        /// 养殖业收入扇形图
+        /// </summary>
+        /// <param name="selectyear"></param>
+        /// <param name="selectmonth"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetBreedingIncome(int selectyear, int selectmonth)
+        {
+            var town = DB.Towns
+                .OrderBy(x => x.Id)
+                .ToList();
+            var ret = new List<SituationPie>();
+            foreach (var x in town)
+            {
+                var person = DB.Familys
+                    .Where(y => y.TownId == x.Id)
+                    .OrderBy(y => y.TownId)
+                    .ToList();
+                foreach (var y in person)
+                {
+                    var breedingIncome = DB.FamilySituations
+                        .Include(z => z.Family)
+                        .Where(z => z.FamilyId == y.Id)
+                        .OrderBy(z => z.Family.TownId)
+                        .ToList();
+                    foreach (var z in breedingIncome)
+                    {
+                        if (z.CreateTime.Year == selectyear && z.CreateTime.Month == selectmonth)
+                        {
+                            ret.Add(new SituationPie
+                            {
+                                Id = z.Id,
+                                Type = "养殖业收入",
+                                Time = selectyear + "/" + selectmonth,
+                                Town = DB.Towns.Where(i => i.Id == z.Family.TownId).SingleOrDefault().Title,
+                                Area = z.BreedingIncome,
+                            });
+                        }
+                    }
+                }
+            }
+            ViewBag.Ret = ret;
+            ViewBag.Time = selectyear + "/" + selectmonth;
+            Double number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "长安村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.One = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "精进村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Two = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "东风村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Three = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "民利村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Four = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "龙泉村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Five = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "福德村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Six = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "和乐村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Seven = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "德宝村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Eight = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "祥顺村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Nine = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "诚顺村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Ten = number;
+            number = 0;
+            return View();
+        }
+        /// <summary>
+        /// 其它收入扇形图
+        /// </summary>
+        /// <param name="selectyear"></param>
+        /// <param name="selectmonth"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetOthersIncome(int selectyear, int selectmonth)
+        {
+            var town = DB.Towns
+                .OrderBy(x => x.Id)
+                .ToList();
+            var ret = new List<SituationPie>();
+            foreach (var x in town)
+            {
+                var person = DB.Familys
+                    .Where(y => y.TownId == x.Id)
+                    .OrderBy(y => y.TownId)
+                    .ToList();
+                foreach (var y in person)
+                {
+                    var othersIncome = DB.FamilySituations
+                        .Include(z => z.Family)
+                        .Where(z => z.FamilyId == y.Id)
+                        .OrderBy(z => z.Family.TownId)
+                        .ToList();
+                    foreach (var z in othersIncome)
+                    {
+                        if (z.CreateTime.Year == selectyear && z.CreateTime.Month == selectmonth)
+                        {
+                            ret.Add(new SituationPie
+                            {
+                                Id = z.Id,
+                                Type = "其它收入",
+                                Time = selectyear + "/" + selectmonth,
+                                Town = DB.Towns.Where(i => i.Id == z.Family.TownId).SingleOrDefault().Title,
+                                Area = z.OthersIncome,
+                            });
+                        }
+                    }
+                }
+            }
+            ViewBag.Ret = ret;
+            ViewBag.Time = selectyear + "/" + selectmonth;
+            Double number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "长安村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.One = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "精进村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Two = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "东风村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Three = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "民利村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Four = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "龙泉村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Five = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "福德村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Six = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "和乐村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Seven = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "德宝村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Eight = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "祥顺村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Nine = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "诚顺村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Ten = number;
+            number = 0;
+            return View();
+        }
+        /// <summary>
+        /// 补贴扇形图
+        /// </summary>
+        /// <param name="selectyear"></param>
+        /// <param name="selectmonth"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetTipsIncome(int selectyear, int selectmonth)
+        {
+            var town = DB.Towns
+                .OrderBy(x => x.Id)
+                .ToList();
+            var ret = new List<SituationPie>();
+            foreach (var x in town)
+            {
+                var person = DB.Familys
+                    .Where(y => y.TownId == x.Id)
+                    .OrderBy(y => y.TownId)
+                    .ToList();
+                foreach (var y in person)
+                {
+                    var tipsIncome = DB.FamilySituations
+                        .Include(z => z.Family)
+                        .Where(z => z.FamilyId == y.Id)
+                        .OrderBy(z => z.Family.TownId)
+                        .ToList();
+                    foreach (var z in tipsIncome)
+                    {
+                        if (z.CreateTime.Year == selectyear && z.CreateTime.Month == selectmonth)
+                        {
+                            ret.Add(new SituationPie
+                            {
+                                Id = z.Id,
+                                Type = "补贴",
+                                Time = selectyear + "/" + selectmonth,
+                                Town = DB.Towns.Where(i => i.Id == z.Family.TownId).SingleOrDefault().Title,
+                                Area = z.TipsIncome,
+                            });
+                        }
+                    }
+                }
+            }
+            ViewBag.Ret = ret;
+            ViewBag.Time = selectyear + "/" + selectmonth;
+            Double number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "长安村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.One = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "精进村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Two = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "东风村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Three = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "民利村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Four = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "龙泉村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Five = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "福德村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Six = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "和乐村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Seven = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "德宝村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Eight = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "祥顺村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Nine = number;
+            number = 0;
+            foreach (var x in ret)
+            {
+                if (x.Town == "诚顺村")
+                {
+                    number += x.Area;
+                }
+            }
+            ViewBag.Ten = number;
+            number = 0;
+            return View();
+        }
     }
+
 }

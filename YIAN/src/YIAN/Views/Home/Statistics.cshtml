@@ -101,32 +101,32 @@
         <div class="col-md-12">
             <h4>全镇数据统计</h4>
             <a href="javascript:getFourTurbines()" class="btn btn-primary">农用四轮机</a>
-            <a href="#" class="btn btn-primary">农机具</a>
-            <a href="#" class="btn btn-primary">耕地面积</a>
-            <a href="#" class="btn btn-primary">住房面积</a>
-            <a href="#" class="btn btn-primary">房屋结构</a>
-            <a href="#" class="btn btn-primary">牛</a>
-            <a href="#" class="btn btn-primary">马</a>
-            <a href="#" class="btn btn-primary">羊</a>
-            <a href="#" class="btn btn-primary">鸡</a>
-            <a href="#" class="btn btn-primary">鸭</a>
-            <a href="#" class="btn btn-primary">鹅</a>
-            <a href="#" class="btn btn-primary">猪</a>
-            <a href="#" class="btn btn-primary">其它</a>
-            <a href="#" class="btn btn-primary">玉米</a>
-            <a href="#" class="btn btn-primary">大豆</a>
-            <a href="#" class="btn btn-primary">马铃薯</a>
-            <a href="#" class="btn btn-primary">葵花</a>
-            <a href="#" class="btn btn-primary">高粱</a>
-            <a href="#" class="btn btn-primary">杂粮</a>
-            <a href="#" class="btn btn-primary">水稻</a>
-            <a href="#" class="btn btn-primary">瓜菜</a>
-            <a href="#" class="btn btn-primary">杂豆</a>
-            <a href="#" class="btn btn-primary">其它</a>
-            <a href="#" class="btn btn-primary">种植业收入</a>
-            <a href="#" class="btn btn-primary">养殖业收入</a>
-            <a href="#" class="btn btn-primary">其它收入</a>
-            <a href="#" class="btn btn-primary">各类补贴</a>
+            <a href="javascript:getAgriculturalMachinery()" class="btn btn-primary">农机具</a>
+            <a href="javascript:getArableLand()" class="btn btn-primary">耕地面积</a>
+            <a href="javascript:getHousingArea()" class="btn btn-primary">住房面积</a>
+            <a href="javascript:getBuildingStructure()" class="btn btn-primary">房屋结构</a>
+            <a href="javascript:getCow()" class="btn btn-primary">牛</a>
+            <a href="javascript:getHorse()" class="btn btn-primary">马</a>
+            <a href="javascript:getSheep()" class="btn btn-primary">羊</a>
+            <a href="javascript:getChicken()" class="btn btn-primary">鸡</a>
+            <a href="javascript:getDuck()" class="btn btn-primary">鸭</a>
+            <a href="javascript:getGoose()" class="btn btn-primary">鹅</a>
+            <a href="javascript:getPig()" class="btn btn-primary">猪</a>
+            <a href="javascript:getOthersAnimal()" class="btn btn-primary">其它牲口</a>
+            <a href="javascript:getCorn()" class="btn btn-primary">玉米</a>
+            <a href="javascript:getSoyBeans()" class="btn btn-primary">大豆</a>
+            <a href="javascript:getPotato()" class="btn btn-primary">马铃薯</a>
+            <a href="javascript:getSunflower()" class="btn btn-primary">葵花</a>
+            <a href="javascript:getSorghum()" class="btn btn-primary">高粱</a>
+            <a href="javascript:getGrains()" class="btn btn-primary">杂粮</a>
+            <a href="javascript:getRice()" class="btn btn-primary">水稻</a>
+            <a href="javascript:getVegetables()" class="btn btn-primary">瓜菜</a>
+            <a href="javascript:getMixedBeans()" class="btn btn-primary">杂豆</a>
+            <a href="javascript:getOthersArea()" class="btn btn-primary">其它农作物</a>
+            <a href="javascript:getFarmingIncome()" class="btn btn-primary">种植业收入</a>
+            <a href="javascript:getBreedingIncome()" class="btn btn-primary">养殖业收入</a>
+            <a href="javascript:getOthersIncome()" class="btn btn-primary">其它收入</a>
+            <a href="javascript:getTipsIncome()" class="btn btn-primary">各类补贴</a>
         </div>
     </div>
     <hr />
@@ -237,11 +237,144 @@ $("#selectmonth").change(function () {
 //$("#endmonth").change(function () {
 //    endmonth = $(this).val();
 //});
-
 function getFourTurbines() {
     $.get("/Home/GetFourTurbines", {selectyear:selectyear,selectmonth:selectmonth},function (html) {
         $("#getresult").html(html);
     });
+}
 
+function getAgriculturalMachinery() {
+    $.get("/Home/GetAgriculturalMachinery", { selectyear: selectyear, selectmonth: selectmonth }, function (html) {
+        $("#getresult").html(html);
+    });
+
+}
+function getArableLand() {
+    $.get("/Home/GetArableLand", { selectyear: selectyear, selectmonth: selectmonth }, function (html) {
+        $("#getresult").html(html);
+    });
+}
+function getHousingArea() {
+    $.get("/Home/GetHousingArea", { selectyear: selectyear, selectmonth: selectmonth }, function (html) {
+        $("#getresult").html(html);
+    });
+}
+function getBuildingStructure() {
+    $.get("/Home/GetBuildingStructure", { selectyear: selectyear, selectmonth: selectmonth }, function (html) {
+        $("#getresult").html(html);
+    });
+}
+
+function getCow() {
+    $.get("/Home/GetCow", { selectyear: selectyear, selectmonth: selectmonth }, function (html) {
+        $("#getresult").html(html);
+    });
+
+}
+function getHorse() {
+    $.get("/Home/GetHorse", { selectyear: selectyear, selectmonth: selectmonth }, function (html) {
+        $("#getresult").html(html);
+    });
+} 
+function getSheep() {
+    $.get("/Home/GetSheep", { selectyear: selectyear, selectmonth: selectmonth }, function (html) {
+        $("#getresult").html(html);
+    });
+}
+function getChicken() {
+    $.get("/Home/GetChicken", { selectyear: selectyear, selectmonth: selectmonth }, function (html) {
+        $("#getresult").html(html);
+    });
+}
+function getDuck() {
+    $.get("/Home/GetDuck", { selectyear: selectyear, selectmonth: selectmonth }, function (html) {
+        $("#getresult").html(html);
+    });
+}
+function getGoose() {
+    $.get("/Home/GetGoose", { selectyear: selectyear, selectmonth: selectmonth }, function (html) {
+        $("#getresult").html(html);
+    });
+}
+function getPig() {
+    $.get("/Home/GetPig", { selectyear: selectyear, selectmonth: selectmonth }, function (html) {
+        $("#getresult").html(html);
+    });
+}
+function getOthersAnimal() {
+    $.get("/Home/GetOthersAnimal", { selectyear: selectyear, selectmonth: selectmonth }, function (html) {
+        $("#getresult").html(html);
+    });
+}
+function getCorn() {
+    $.get("/Home/GetCorn", { selectyear: selectyear, selectmonth: selectmonth }, function (html) {
+        $("#getresult").html(html);
+    });
+}
+function getSoyBeans() {
+    $.get("/Home/GetSoyBeans", { selectyear: selectyear, selectmonth: selectmonth }, function (html) {
+        $("#getresult").html(html);
+    });
+}
+function getPotato() {
+    $.get("/Home/GetPotato", { selectyear: selectyear, selectmonth: selectmonth }, function (html) {
+        $("#getresult").html(html);
+    });
+}
+function getSunflower() {
+    $.get("/Home/GetSunflower", { selectyear: selectyear, selectmonth: selectmonth }, function (html) {
+        $("#getresult").html(html);
+    });
+}
+function getSorghum() {
+    $.get("/Home/GetSorghum", { selectyear: selectyear, selectmonth: selectmonth }, function (html) {
+        $("#getresult").html(html);
+    });
+}
+function getGrains() {
+    $.get("/Home/GetGrains", { selectyear: selectyear, selectmonth: selectmonth }, function (html) {
+        $("#getresult").html(html);
+    });
+}
+function getRice() {
+    $.get("/Home/GetRice", { selectyear: selectyear, selectmonth: selectmonth }, function (html) {
+        $("#getresult").html(html);
+    });
+}
+function getVegetables() {
+    $.get("/Home/GetVegetables", { selectyear: selectyear, selectmonth: selectmonth }, function (html) {
+        $("#getresult").html(html);
+    });
+}
+function getMixedBeans() {
+    $.get("/Home/GetMixedBeans", { selectyear: selectyear, selectmonth: selectmonth }, function (html) {
+        $("#getresult").html(html);
+    });
+}
+function getOthersArea() {
+    $.get("/Home/GetOthersArea", { selectyear: selectyear, selectmonth: selectmonth }, function (html) {
+        $("#getresult").html(html);
+    });
+}
+
+function getFarmingIncome() {
+    $.get("/Home/GetFarmingIncome", { selectyear: selectyear, selectmonth: selectmonth }, function (html) {
+        $("#getresult").html(html);
+    });
+}
+function getBreedingIncome() {
+    $.get("/Home/GetBreedingIncome", { selectyear: selectyear, selectmonth: selectmonth }, function (html) {
+        $("#getresult").html(html);
+    });
+}
+function getOthersIncome() {
+    $.get("/Home/GetOthersIncome", { selectyear: selectyear, selectmonth: selectmonth }, function (html) {
+        $("#getresult").html(html);
+    });
+}
+function getTipsIncome() {
+    $.get("/Home/GetTipsIncome", { selectyear: selectyear, selectmonth: selectmonth }, function (html) {
+        $("#getresult").html(html);
+    });
 }
 </script>

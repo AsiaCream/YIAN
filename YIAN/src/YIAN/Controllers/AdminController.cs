@@ -255,8 +255,8 @@ namespace YIAN.Controllers
                     var situation = new FamilySituation
                     {
                         FourTurbines=FourTurbines,
-                        ArableLand=ArableLand,
-                        AgriculturalMachinery= AgriculturalMachinery,
+                        ArableLand = ArableLand,
+                        AgriculturalMachinery = AgriculturalMachinery,
                         HousingArea= HousingArea,
                         BuildingStructure= BuildingStructure,
                         Cow=Cow,
@@ -334,7 +334,7 @@ namespace YIAN.Controllers
                 situation.YearTotalIncome = (situation.FarmingIncome + situation.BreedingIncome + situation.OthersIncome + situation.TipsIncome) * 12;
                 situation.YearAnnualPerCapitaIncome = situation.YearTotalIncome / PCount;
                 DB.SaveChanges();
-                return Content("success");
+                return RedirectToAction("HostDetails","Admin");
             }
         }
         [HttpGet]

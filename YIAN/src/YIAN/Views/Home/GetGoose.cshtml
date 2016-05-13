@@ -1,9 +1,9 @@
 ﻿@{
     Layout = null;
 }
-<h3>全镇：农用四轮机<span>&nbsp;<i class="fa fa-anchor">@ViewBag.Time</i></span></h3>
+<h3>全镇：鹅<span>&nbsp;<i class="fa fa-anchor">@ViewBag.Time</i></span></h3>
 <div class="col-md-8">
-    <div id="fourturbines"></div>
+    <div id="goose"></div>
 </div>
 <div class="col-md-4">
     <h4>统计数据</h4>
@@ -53,14 +53,14 @@
     </table>
 </div>
 <script type="text/javascript">
-    $('#fourturbines').highcharts({
+    $('#goose').highcharts({
         chart: {
             plotBackgroundColor: null,
             plotBorderWidth: null,
             plotShadow: false,
             type: 'pie'
         },
-        colors: ['#058DC7', '#50B732', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4','#f7a35c'],
+        colors: ['#058DC7', '#50B732', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'],
         title: {
             text: '扇形统计图'
         },
