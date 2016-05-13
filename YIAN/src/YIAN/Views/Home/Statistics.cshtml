@@ -1,4 +1,5 @@
-﻿<div id="page-wrapper">
+﻿@model IEnumerable<Town>
+<div id="page-wrapper">
     <div class="row">
         <div class="col-md-12">
             <h3>数据统计</h3>
@@ -132,9 +133,16 @@
     <hr />
     <div class="row">
         <div class="col-md-12">
+            <div id="getresult"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <select name="town" class="btn" style="border:2px solid rgb(51,122,183);">
-                <option>长安村</option>
-                <option>嘉兴镇</option>
+                @foreach(var x in Model)
+                {
+                    <option>@x.Title</option>
+                }
             </select>
             <button class="btn btn-primary">养殖统计</button>
             <button class="btn btn-primary">种植统计</button>
@@ -150,11 +158,7 @@
             <h4>统计数据</h4>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div id="getresult"></div>
-        </div>
-    </div>
+    
 </div>
 <script src="~/scripts/jquery-2.1.1.js"></script>
 <script type="text/javascript">
