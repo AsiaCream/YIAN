@@ -1625,6 +1625,7 @@ namespace YIAN.Controllers
                                 Time = selectyear + "/" + selectmonth,
                                 Town = DB.Towns.Where(i => i.Id == z.Family.TownId).SingleOrDefault().Title,
                                 Structure = z.BuildingStructure,
+                                Count = 1,
                             });
                         }
                     }
@@ -1633,96 +1634,231 @@ namespace YIAN.Controllers
             ViewBag.Ret = ret;
             ViewBag.Time = selectyear + "/" + selectmonth;
             var number = 0;
+            var number2 = 0;
+            var number3 = 0;
             foreach (var x in ret)
             {
                 if (x.Town == "长安村")
                 {
-                    number += x.Count;
+                    if(x.Structure == "砖混"){
+                        number += x.Count;
+                    }else if(x.Structure == "土木"){
+                        number2 += x.Count;
+                    }else{
+                        number3 += x.Count;
+                    }                    
                 }
             }
             ViewBag.One = number;
+            ViewBag.One2 = number2;
+            ViewBag.One3 = number3;
             number = 0;
+            number2 = 0;
+            number3 = 0;
             foreach (var x in ret)
             {
                 if (x.Town == "精进村")
                 {
-                    number += x.Count;
+                    if (x.Structure == "砖混")
+                    {
+                        number += x.Count;
+                    }
+                    else if (x.Structure == "土木")
+                    {
+                        number2 += x.Count;
+                    }
+                    else {
+                        number3 += x.Count;
+                    }
                 }
             }
             ViewBag.Two = number;
+            ViewBag.Two2 = number2;
+            ViewBag.Two3 = number3;
             number = 0;
+            number2 = 0;
+            number3 = 0;
             foreach (var x in ret)
             {
-                if (x.Town == "东风村")
+                if (x.Structure == "砖混")
                 {
                     number += x.Count;
                 }
+                else if (x.Structure == "土木")
+                {
+                    number2 += x.Count;
+                }
+                else {
+                    number3 += x.Count;
+                }
             }
             ViewBag.Three = number;
+            ViewBag.Three2 = number2;
+            ViewBag.Three3 = number3;
             number = 0;
+            number2 = 0;
+            number3 = 0;
             foreach (var x in ret)
             {
                 if (x.Town == "民利村")
                 {
-                    number += x.Count;
+                    if (x.Structure == "砖混")
+                    {
+                        number += x.Count;
+                    }
+                    else if (x.Structure == "土木")
+                    {
+                        number2 += x.Count;
+                    }
+                    else {
+                        number3 += x.Count;
+                    }
                 }
             }
             ViewBag.Four = number;
+            ViewBag.Four2 = number2;
+            ViewBag.Four3 = number3;
             number = 0;
+            number2 = 0;
+            number3 = 0;
             foreach (var x in ret)
             {
                 if (x.Town == "龙泉村")
                 {
-                    number += x.Count;
+                    if (x.Structure == "砖混")
+                    {
+                        number += x.Count;
+                    }
+                    else if (x.Structure == "土木")
+                    {
+                        number2 += x.Count;
+                    }
+                    else {
+                        number3 += x.Count;
+                    }
                 }
             }
             ViewBag.Five = number;
+            ViewBag.Five2 = number2;
+            ViewBag.Five3 = number3;
             number = 0;
+            number2 = 0;
+            number3 = 0;
             foreach (var x in ret)
             {
                 if (x.Town == "福德村")
                 {
-                    number += x.Count;
+                    if (x.Structure == "砖混")
+                    {
+                        number += x.Count;
+                    }
+                    else if (x.Structure == "土木")
+                    {
+                        number2 += x.Count;
+                    }
+                    else {
+                        number3 += x.Count;
+                    }
                 }
             }
             ViewBag.Six = number;
+            ViewBag.Six2 = number2;
+            ViewBag.Six3 = number3;
             number = 0;
+            number2 = 0;
+            number3 = 0;
             foreach (var x in ret)
             {
                 if (x.Town == "和乐村")
                 {
-                    number += x.Count;
+                    if (x.Structure == "砖混")
+                    {
+                        number += x.Count;
+                    }
+                    else if (x.Structure == "土木")
+                    {
+                        number2 += x.Count;
+                    }
+                    else {
+                        number3 += x.Count;
+                    }
                 }
             }
             ViewBag.Seven = number;
+            ViewBag.Seven2 = number2;
+            ViewBag.Seven3 = number3;
             number = 0;
+            number2 = 0;
+            number3 = 0;
             foreach (var x in ret)
             {
                 if (x.Town == "德宝村")
                 {
-                    number += x.Count;
+                    if (x.Structure == "砖混")
+                    {
+                        number += x.Count;
+                    }
+                    else if (x.Structure == "土木")
+                    {
+                        number2 += x.Count;
+                    }
+                    else {
+                        number3 += x.Count;
+                    }
                 }
             }
             ViewBag.Eight = number;
+            ViewBag.Eight2 = number2;
+            ViewBag.Eight3 = number3;
             number = 0;
+            number2 = 0;
+            number3 = 0;
             foreach (var x in ret)
             {
                 if (x.Town == "祥顺村")
                 {
-                    number += x.Count;
+                    if (x.Structure == "砖混")
+                    {
+                        number += x.Count;
+                    }
+                    else if (x.Structure == "土木")
+                    {
+                        number2 += x.Count;
+                    }
+                    else {
+                        number3 += x.Count;
+                    }
                 }
             }
             ViewBag.Nine = number;
+            ViewBag.Nine2 = number2;
+            ViewBag.Nine3 = number3;
             number = 0;
+            number2 = 0;
+            number3 = 0;
             foreach (var x in ret)
             {
                 if (x.Town == "诚顺村")
                 {
-                    number += x.Count;
+                    if (x.Structure == "砖混")
+                    {
+                        number += x.Count;
+                    }
+                    else if (x.Structure == "土木")
+                    {
+                        number2 += x.Count;
+                    }
+                    else {
+                        number3 += x.Count;
+                    }
                 }
             }
             ViewBag.Ten = number;
+            ViewBag.Ten2 = number2;
+            ViewBag.Ten3 = number3;
             number = 0;
+            number2 = 0;
+            number3 = 0;
             return View();
         }
 

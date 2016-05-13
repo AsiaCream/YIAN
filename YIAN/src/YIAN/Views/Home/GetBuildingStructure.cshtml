@@ -2,64 +2,80 @@
     Layout = null;
 }
 <h3>全镇：房屋结构<span>&nbsp;<i class="fa fa-anchor">@ViewBag.Time</i></span></h3>
-<table class="table">
-    @foreach (var x in ViewBag.Ret)
-    {
-        <tr>
-            <td>@x.Id</td>
-            <td>@x.Type</td>
-            <td>@x.Town</td>
-            <td>@x.Time</td>
-            <td>@x.</td>
-        </tr>
-    }
-</table>
 <div class="col-md-8">
     <div id="builder"></div>
 </div>
 <div class="col-md-4">
     <h4>统计数据</h4>
     <table class="table">
+        <thead>
+            <tr>
+                <th>村庄</th>
+                <th>砖混</th>
+                <th>土木</th>
+                <th>危房</th>
+            </tr>
+        </thead>
         <tbody>
             <tr>
                 <th>长安村</th>
                 <td>@ViewBag.One</td>
+                <td>@ViewBag.One2</td>
+                <td>@ViewBag.One3</td>
             </tr>
             <tr>
                 <th>精进村</th>
                 <td>@ViewBag.Two</td>
+                <td>@ViewBag.Two2</td>
+                <td>@ViewBag.Two3</td>
             </tr>
             <tr>
                 <th>东风村</th>
                 <td>@ViewBag.Three</td>
+                <td>@ViewBag.Three2</td>
+                <td>@ViewBag.Three3</td>
             </tr>
             <tr>
                 <th>民利村</th>
                 <td>@ViewBag.Four</td>
+                <td>@ViewBag.Four2</td>
+                <td>@ViewBag.Four3</td>
             </tr>
             <tr>
                 <th>龙泉村</th>
                 <td>@ViewBag.Five</td>
+                <td>@ViewBag.Five2</td>
+                <td>@ViewBag.Five3</td>
             </tr>
             <tr>
                 <th>福德村</th>
                 <td>@ViewBag.Six</td>
+                <td>@ViewBag.Six2</td>
+                <td>@ViewBag.Six3</td>
             </tr>
             <tr>
                 <th>和乐村</th>
                 <td>@ViewBag.Seven</td>
+                <td>@ViewBag.Seven2</td>
+                <td>@ViewBag.Seven3</td>
             </tr>
             <tr>
                 <th>德宝村</th>
                 <td>@ViewBag.Eight</td>
+                <td>@ViewBag.Eight2</td>
+                <td>@ViewBag.Eight3</td>
             </tr>
             <tr>
                 <th>祥顺村</th>
                 <td>@ViewBag.Nine</td>
+                <td>@ViewBag.Nine2</td>
+                <td>@ViewBag.Nine3</td>
             </tr>
             <tr>
                 <th>诚顺村</th>
                 <td>@ViewBag.Ten</td>
+                <td>@ViewBag.Ten2</td>
+                <td>@ViewBag.Ten3</td>
             </tr>
         </tbody>
     </table>
@@ -67,68 +83,94 @@
 <script type="text/javascript">
     $('#builder').highcharts({
         chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
+            type: 'column'
         },
-        colors: ['#058DC7', '#50B732', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'],
         title: {
-            text: '扇形统计图'
+            text: '房屋结构柱形图'
+        },
+        xAxis: {
+            categories: [
+                '长安村',
+                '精进村',
+                '东风村',
+                '民利村',
+                '龙泉村',
+                '福德村',
+                '和乐村',
+                '德宝村',
+                '祥顺村',
+                '诚顺村'
+            ],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '房屋数量（栋）'
+            }
         },
         tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-        credits: {
-            enabled: false,
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:5px;">{series.name}: </td>' +
+                '<td style="padding:5px;"><b>{point.y:.0f}栋</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
         },
         plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: true,
-                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                    style: {
-                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                    }
-                }
+            column: {
+                pointPadding: 0,
+                borderWidth: 0
             }
         },
         series: [{
-            name: 'Brands',
-            colorByPoint: true,
-            data: [{
-                name: '长安村',
-                y: @ViewBag.One,
-            }, {
-                name: '精进村',
-                y: @ViewBag.Two,
-            }, {
-                name: '东风村',
-                y: @ViewBag.Three,
-            }, {
-                name: '民利村',
-                y: @ViewBag.Four,
-            }, {
-                name: '龙泉村',
-                y: @ViewBag.Five,
-            }, {
-                name: '福德村',
-                y: @ViewBag.Six,
-            }, {
-                name: '和乐村',
-                y: @ViewBag.Seven,
-            }, {
-                name: '德宝村',
-                y: @ViewBag.Eight,
-            }, {
-                name: '祥顺村',
-                y: @ViewBag.Nine,
-            }, {
-                name: '诚顺村',
-                y: @ViewBag.Ten,
-            }, ]
+            name: '砖混',
+            data: [@ViewBag.One, @ViewBag.Two, @ViewBag.Three, @ViewBag.Four, @ViewBag.Five, @ViewBag.Six, @ViewBag.Seven, @ViewBag.Eight, @ViewBag.Nine, @ViewBag.Ten],
+            dataLabels: {
+                enabled: true,
+                rotation: -90,
+                color: '#FFFFFF',
+                align: 'right',
+                x: 4,
+                y: 10,
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif',
+                    textShadow: '0 0 3px black'
+                }
+            }
+        }, {
+            name: '土木',
+            data: [@ViewBag.One2, @ViewBag.Two2, @ViewBag.Three2, @ViewBag.Four2, @ViewBag.Five2, @ViewBag.Six2, @ViewBag.Seven2, @ViewBag.Eight2, @ViewBag.Nine2, @ViewBag.Ten2],
+            dataLabels: {
+                enabled: true,
+                rotation: -90,
+                color: '#FFFFFF',
+                align: 'right',
+                x: 4,
+                y: 10,
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif',
+                    textShadow: '0 0 3px black'
+                }
+            }
+        }, {
+            name: '危房',
+            data: [@ViewBag.One3, @ViewBag.Two3, @ViewBag.Three3, @ViewBag.Four3, @ViewBag.Five3, @ViewBag.Six3, @ViewBag.Seven3, @ViewBag.Eight3, @ViewBag.Nine3, @ViewBag.Ten3],
+            dataLabels: {
+                enabled: true,
+                rotation: -90,
+                color: '#FFFFFF',
+                align: 'right',
+                x: 4,
+                y: 10,
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif',
+                    textShadow: '0 0 3px black'
+                }
+            }
         }]
-    });
+   });
 </script>
