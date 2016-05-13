@@ -13,7 +13,14 @@ namespace YIAN.Controllers
     {
         public IActionResult Index()
         {
-            
+            ViewBag.Town = DB.Towns
+                .Count();
+            ViewBag.Count = DB.FamilyMembers
+                .Count() + DB.Familys.Count();
+            ViewBag.Line = DB.LowLines
+                .Where(x => x.Id == 1)
+                .SingleOrDefault()
+                .Line;
             return View();
         }
         /// <summary>
@@ -1029,7 +1036,10 @@ namespace YIAN.Controllers
         [HttpGet]
         public IActionResult Statistics()
         {
-            return View();
+            var town = DB.Towns
+                .OrderBy(x => x.Id)
+                .ToList();
+            return View(town);
         }
         /// <summary>
         /// 农用四轮机扇形图
