@@ -94,6 +94,7 @@ namespace YIAN.Controllers
             var result = await userManager.ChangePasswordAsync(UserCurrent, password, newpwd);
             if (result.Succeeded)
             {
+               await signInManager.SignOutAsync();
                 return Content("success");
             }
             else

@@ -9,13 +9,13 @@
                 <table class="table">
                     <tbody>
                         <tr>
-                            <td><input type="text" name="passowrd" id="password" class="form-control" placeholder="旧密码"/></td>
+                            <td><input type="password" name="passowrd" id="password" class="form-control" placeholder="旧密码"/></td>
                         </tr>
                         <tr>
-                            <td><input type="text" name="newpwd" id="newpwd" class="form-control" placeholder="新密码"/></td>
+                            <td><input type="password" name="newpwd" id="newpwd" class="form-control" placeholder="新密码"/></td>
                         </tr>
                         <tr>
-                            <td><input type="text" name="confirmpwd" id="confirmpwd" class="form-control" placeholder="确认密码"/></td>
+                            <td><input type="password" name="confirmpwd" id="confirmpwd" class="form-control" placeholder="确认密码"/></td>
                         </tr>
                         <tr>
                             <td><button id="send" class="btn btn-success form-control">确认修改</button></td>
@@ -25,3 +25,21 @@
         </div>
     </div>
 </div>
+<script src="~/scripts/jquery-2.1.1.min.js"></script>
+<script type="text/javascript">
+    $("#send").click(function () {
+        $.post("/Account/Modify", { password: $("#password").val(), newpwd: $("#newpwd").val() }, function (data) {
+            if (data == "success") {
+                alert("修改成功");
+                window.location.href = "/Account/Login";
+            }
+            else if (data == "error") {
+                alert("修改失败");
+            }
+            else {
+                alert("未知错误");
+            }
+        });
+
+    });
+</script>
