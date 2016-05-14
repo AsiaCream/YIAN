@@ -4889,6 +4889,206 @@ namespace YIAN.Controllers
             number = 0;
             return View();
         }
+
+        #region 统计
+        /// <summary>
+        /// 养殖统计
+        /// </summary>
+        /// <param name="selectyear"></param>
+        /// <param name="selectmonth"></param>
+        /// <param name="town"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetFarmingStatistics(int selectyear, int selectmonth, string town)
+        {
+            var people = DB.Familys
+                .Where(x => x.Town.Title == town)
+                .OrderBy(x => x.Id)
+                .ToList();
+            var CowNumber = 0;
+            var horseNumber = 0;
+            var sheepNumber = 0;
+            var chickenNumber = 0;
+            var duckNumber = 0;
+            var gooseNumber = 0;
+            var pigNumber = 0;
+            var otherAnimalNumber = 0;
+            foreach (var x in people)
+            {
+                var farming = DB.FamilySituations
+                    .Where(y => y.Family.Id == x.Id)
+                    .OrderBy(y=>y.FamilyId)
+                    .ToList();
+                foreach(var y in farming)
+                {
+                    if(y.CreateTime.Year == selectyear && y.CreateTime.Month == selectmonth)
+                    {
+                        CowNumber += y.Cow;
+                        horseNumber += y.Horse;
+                        sheepNumber += y.Sheep;
+                        chickenNumber += y.Chicken;
+                        duckNumber += y.Duck;
+                        gooseNumber += y.Goose;
+                        pigNumber += y.Pig;
+                        otherAnimalNumber += y.OthersAnimal;
+                    }
+                }
+            }
+            ViewBag.Title = town;
+            ViewBag.Time = selectyear + "/" + selectmonth;
+            ViewBag.cow = CowNumber;
+            ViewBag.horse = horseNumber;
+            ViewBag.Sheep = sheepNumber;
+            ViewBag.Chicken = chickenNumber;
+            ViewBag.Duck = duckNumber;
+            ViewBag.Goose = gooseNumber;
+            ViewBag.Pig = pigNumber;
+            ViewBag.OthersAnimal = otherAnimalNumber;
+            return View();
+        }
+        /// <summary>
+        /// 种植统计
+        /// </summary>
+        /// <param name="selectyear"></param>
+        /// <param name="selectmonth"></param>
+        /// <param name="town"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetBreedingStatistics(int selectyear, int selectmonth, string town)
+        {
+            var people = DB.Familys
+                .Where(x => x.Town.Title == town)
+                .OrderBy(x => x.Id)
+                .ToList();
+            var CornNumber = 0;
+            double SoyBeansNumber = 0;
+            double PotatoNumber = 0;
+            double SunflowerNumber = 0;
+            double SorghumNumber = 0;
+            double GrainsNumber = 0;
+            double RiceNumber = 0;
+            double VegetablesNumber = 0;
+            double MixedBeansNumber = 0;
+            double OthersAreaNumber = 0;
+            foreach (var x in people)
+            {
+                var farming = DB.FamilySituations
+                    .Where(y => y.Family.Id == x.Id)
+                    .OrderBy(y => y.FamilyId)
+                    .ToList();
+                foreach (var y in farming)
+                {
+                    if (y.CreateTime.Year == selectyear && y.CreateTime.Month == selectmonth)
+                    {
+                        CornNumber += y.Corn;
+                        SoyBeansNumber += y.SoyBeans;
+                        PotatoNumber += y.Potato;
+                        SunflowerNumber += y.Sunflower;
+                        SorghumNumber += y.Sorghum;
+                        GrainsNumber += y.Grains;
+                        RiceNumber += y.Rice;
+                        VegetablesNumber += y.Vegetables;
+                        MixedBeansNumber += y.MixedBeans;
+                        OthersAreaNumber += y.OthersArea;
+                    }
+                }
+            }
+            ViewBag.Title = town;
+            ViewBag.Time = selectyear + "/" + selectmonth;
+            ViewBag.Corn = CornNumber;
+            ViewBag.SoyBeans = SoyBeansNumber;
+            ViewBag.Potato = PotatoNumber;
+            ViewBag.Sunflower = SunflowerNumber;
+            ViewBag.Sorghum = SorghumNumber;
+            ViewBag.Grains = GrainsNumber;
+            ViewBag.Rice = RiceNumber;
+            ViewBag.Vegetables = VegetablesNumber;
+            ViewBag.MixedBeans = MixedBeansNumber;
+            ViewBag.OthersArea = OthersAreaNumber;
+            return View();
+        }
+        /// <summary>
+        /// 农机统计
+        /// </summary>
+        /// <param name="selectyear"></param>
+        /// <param name="selectmonth"></param>
+        /// <param name="town"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult getAgriculturalStatistics(int selectyear, int selectmonth, string town)
+        {
+            var people = DB.Familys
+                .Where(x => x.Town.Title == town)
+                .OrderBy(x => x.Id)
+                .ToList();
+            var FourTurbinesNumber = 0;
+            var AgriculturalMachineryNumber = 0;
+            foreach (var x in people)
+            {
+                var farming = DB.FamilySituations
+                    .Where(y => y.Family.Id == x.Id)
+                    .OrderBy(y => y.FamilyId)
+                    .ToList();
+                foreach (var y in farming)
+                {
+                    if (y.CreateTime.Year == selectyear && y.CreateTime.Month == selectmonth)
+                    {
+                        FourTurbinesNumber += y.FourTurbines;
+                        AgriculturalMachineryNumber += y.AgriculturalMachinery;
+                    }
+                }
+            }
+            ViewBag.Title = town;
+            ViewBag.Time = selectyear + "/" + selectmonth;
+            ViewBag.FourTurbines = FourTurbinesNumber;
+            ViewBag.AgriculturalMachinery = AgriculturalMachineryNumber;
+            return View();
+        }
+        /// <summary>
+        /// 收入统计
+        /// </summary>
+        /// <param name="selectyear"></param>
+        /// <param name="selectmonth"></param>
+        /// <param name="town"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult getOthersStatistics(int selectyear, int selectmonth, string town)
+        {
+            var people = DB.Familys
+                .Where(x => x.Town.Title == town)
+                .OrderBy(x => x.Id)
+                .ToList();
+            double FarmingIncomeNumber = 0;
+            double BreedingIncomeNumber = 0;
+            double OthersIncomeNumber = 0;
+            double TipsIncomeNumber = 0;
+            foreach (var x in people)
+            {
+                var farming = DB.FamilySituations
+                    .Where(y => y.Family.Id == x.Id)
+                    .OrderBy(y => y.FamilyId)
+                    .ToList();
+                foreach (var y in farming)
+                {
+                    if (y.CreateTime.Year == selectyear && y.CreateTime.Month == selectmonth)
+                    {
+                        FarmingIncomeNumber += y.FarmingIncome;
+                        BreedingIncomeNumber += y.BreedingIncome;
+                        OthersIncomeNumber += y.OthersIncome;
+                        TipsIncomeNumber += y.TipsIncome;
+                    }
+                }
+            }
+            ViewBag.Title = town;
+            ViewBag.Time = selectyear + "/" + selectmonth;
+            ViewBag.FarmingIncome = FarmingIncomeNumber;
+            ViewBag.BreedingIncome = BreedingIncomeNumber;
+            ViewBag.OthersIncome = OthersIncomeNumber;
+            ViewBag.TipsIncome = TipsIncomeNumber;
+            return View();
+        }
+        
+        #endregion
     }
 
 }

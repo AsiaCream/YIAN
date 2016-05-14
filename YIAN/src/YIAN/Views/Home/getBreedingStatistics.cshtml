@@ -1,65 +1,65 @@
-﻿@{
+﻿@{ 
     Layout = null;
 }
-<h3>全镇：杂粮<span>&nbsp;<i class="fa fa-anchor">@ViewBag.Time</i></span></h3>
+<h3>@ViewBag.Title：种植统计<span>&nbsp;<i class="fa fa-anchor">@ViewBag.Time</i></span></h3>
 <div class="col-md-8">
-    <div id="grains"></div>
+    <div id="breeding"></div>
 </div>
 <div class="col-md-4">
     <h4>统计数据</h4>
     <table class="table">
         <thead>
             <tr>
-                <th>村庄</th>
+                <th>种类</th>
                 <th>数量(单位：亩)</th>
-            </tr>
+            </tr>   
         </thead>
         <tbody>
             <tr>
-                <th>长安村</th>
-                <td>@ViewBag.One</td>
+                <th>玉米</th>
+                <td>@ViewBag.Corn</td>
             </tr>
             <tr>
-                <th>精进村</th>
-                <td>@ViewBag.Two</td>
+                <th>大豆</th>
+                <td>@ViewBag.SoyBeans</td>
             </tr>
             <tr>
-                <th>东风村</th>
-                <td>@ViewBag.Three</td>
+                <th>马铃薯</th>
+                <td>@ViewBag.Potato</td>
             </tr>
             <tr>
-                <th>民利村</th>
-                <td>@ViewBag.Four</td>
+                <th>葵花</th>
+                <td>@ViewBag.Sunflower</td>
             </tr>
             <tr>
-                <th>龙泉村</th>
-                <td>@ViewBag.Five</td>
+                <th>高粱</th>
+                <td>@ViewBag.Sorghum</td>
             </tr>
             <tr>
-                <th>福德村</th>
-                <td>@ViewBag.Six</td>
+                <th>杂粮</th>
+                <td>@ViewBag.Grains</td>
             </tr>
             <tr>
-                <th>和乐村</th>
-                <td>@ViewBag.Seven</td>
+                <th>水稻</th>
+                <td>@ViewBag.Rice</td>
             </tr>
             <tr>
-                <th>德宝村</th>
-                <td>@ViewBag.Eight</td>
+                <th>瓜菜</th>
+                <td>@ViewBag.Vegetables</td>
             </tr>
             <tr>
-                <th>祥顺村</th>
-                <td>@ViewBag.Nine</td>
+                <th>杂豆</th>
+                <td>@ViewBag.MixedBeans</td>
             </tr>
             <tr>
-                <th>诚顺村</th>
-                <td>@ViewBag.Ten</td>
+                <th>其它农作物</th>
+                <td>@ViewBag.OthersArea</td>
             </tr>
         </tbody>
     </table>
 </div>
 <script type="text/javascript">
-    $('#grains').highcharts({
+    $('#breeding').highcharts({
         chart: {
             plotBackgroundColor: null,
             plotBorderWidth: null,
@@ -93,35 +93,35 @@
             name: 'Brands',
             colorByPoint: true,
             data: [{
-                name: '长安村',
-                y: @ViewBag.One,
+                name: '玉米',
+                y: @ViewBag.Corn,
             }, {
-                name: '精进村',
-                y: @ViewBag.Two,
+                name: '大豆',
+                y: @ViewBag.SoyBeans,
             }, {
-                name: '东风村',
-                y: @ViewBag.Three,
+                name: '马铃薯',
+                y: @ViewBag.Potato,
             }, {
-                name: '民利村',
-                y: @ViewBag.Four,
+                name: '葵花',
+                y: @ViewBag.Sunflower,
             }, {
-                name: '龙泉村',
-                y: @ViewBag.Five,
+                name: '高粱',
+                y: @ViewBag.Sorghum,
             }, {
-                name: '福德村',
-                y: @ViewBag.Six,
+                name: '杂粮',
+                y: @ViewBag.Grains,
             }, {
-                name: '和乐村',
-                y: @ViewBag.Seven,
+                name: '水稻',
+                y: @ViewBag.Rice,
             }, {
-                name: '德宝村',
-                y: @ViewBag.Eight,
-            }, {
-                name: '祥顺村',
-                y: @ViewBag.Nine,
-            }, {
-                name: '诚顺村',
-                y: @ViewBag.Ten,
+                name: '瓜菜',
+                y: @ViewBag.Vegetables,
+            },{
+                name: '杂豆',
+                y: @ViewBag.MixedBeans,
+            },{
+                name: '其它农作物',
+                y: @ViewBag.OthersArea,
             }, ]
         }]
     });

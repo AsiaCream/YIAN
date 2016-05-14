@@ -1,0 +1,86 @@
+﻿@{
+    Layout = null;
+}
+<h3>@ViewBag.Title：收入统计<span>&nbsp;<i class="fa fa-anchor">@ViewBag.Time</i></span></h3>
+<div class="col-md-8">
+    <div id="Income"></div>
+</div>
+<div class="col-md-4">
+    <h4>统计数据</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>来源</th>
+                <th>收入(单位：元)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>种植业收入</th>
+                <td>@ViewBag.FarmingIncome</td>
+            </tr>
+            <tr>
+                <th>养殖业收入</th>
+                <td>@ViewBag.BreedingIncome</td>
+            </tr>
+            <tr>
+                <th>其它收入</th>
+                <td>@ViewBag.OthersIncome</td>
+            </tr>
+            <tr>
+                <th>补贴</th>
+                <td>@ViewBag.TipsIncome</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript">
+    $('#Income').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        colors: ['#058DC7', '#50B732', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'],
+        title: {
+            text: '扇形统计图'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        credits: {
+            enabled: false,
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
+            }
+        },
+        series: [{
+            name: 'Brands',
+            colorByPoint: true,
+            data: [{
+                name: '种植业收入',
+                y: @ViewBag.FarmingIncome,
+            }, {
+                name: '养殖业收入',
+                y: @ViewBag.BreedingIncome,
+            }, {
+                name: '其它收入',
+                y: @ViewBag.OthersIncome,
+            }, {
+                name: '补贴',
+                y: @ViewBag.TipsIncome,
+            }, ]
+        }]
+    });
+</script>

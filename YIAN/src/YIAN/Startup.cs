@@ -23,13 +23,13 @@ namespace YIAN
         {
             var appEnv = services.BuildServiceProvider().GetRequiredService<IApplicationEnvironment>();
 
-            services.AddEntityFramework()
-                .AddSqlite()
-                .AddDbContext<YIANContext>(x => x.UseSqlite("Data source=" + appEnv.ApplicationBasePath + "/Database/yian.db"));
-
             //services.AddEntityFramework()
-            //    .AddSqlServer()
-            //    .AddDbContext<YIANContext>(x => x.UseSqlServer("server=localhost;uid=sa;password=Cream2015!@#;database=yian"));
+            //    .AddSqlite()
+            //    .AddDbContext<YIANContext>(x => x.UseSqlite("Data source=" + appEnv.ApplicationBasePath + "/Database/yian.db"));
+
+            services.AddEntityFramework()
+                .AddSqlServer()
+                .AddDbContext<YIANContext>(x => x.UseSqlServer("server=localhost;uid=sa;password=Cream2015!@#;database=yian"));
 
             services.AddIdentity<User, IdentityRole<long>>(x =>
             {

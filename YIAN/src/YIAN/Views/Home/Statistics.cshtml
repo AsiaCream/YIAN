@@ -138,87 +138,31 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <select name="town" class="btn" style="border:2px solid rgb(51,122,183);">
+            <select id="town" name="town" class="btn" style="border:2px solid rgb(51,122,183);">
                 @foreach(var x in Model)
                 {
                     <option>@x.Title</option>
                 }
             </select>
-            <button class="btn btn-primary">养殖统计</button>
-            <button class="btn btn-primary">种植统计</button>
-            <button class="btn btn-primary">收入统计</button>
-            <button class="btn btn-primary">农机统计</button>
+            <button onclick="getFarmingStatistics()" class="btn btn-primary">养殖统计</button>
+            <button onclick="getBreedingStatistics()" class="btn btn-primary">种植统计</button>
+            <button onclick="getOthersStatistics()" class="btn btn-primary">收入统计</button>
+            <button onclick="getAgriculturalStatistics()" class="btn btn-primary">农机统计</button>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-8">
-            <div id="pieChart"></div>
-        </div>
-        <div class="col-md-4">
-            <h4>统计数据</h4>
+        <div class="col-md-12">
+            <div id="statistics"></div>
         </div>
     </div>
     
 </div>
 <script src="~/scripts/jquery-2.1.1.js"></script>
 <script type="text/javascript">
-$(function () {
-    $('#pieChart').highcharts({
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
-        title: {
-            text: '阳村乡统计图'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-        credits: {
-            enabled: false,
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: true,
-                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                    style: {
-                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                    }
-                }
-            }
-        },
-        series: [{
-            name: 'Brands',
-            colorByPoint: true,
-            data: [{
-                name: 'Internet Explorer',
-                y: 10,
-            }, {
-                name: 'Chrome',
-                y: 20,
-            }, {
-                name: 'Firefox',
-                y: 30,
-            }, {
-                name: 'Safari',
-                y: 40,
-            }, {
-                name: 'Opera',
-                y: 50,
-            }, {
-                name: 'Others',
-                y: 100,
-            }]
-        }]
-    });
-});
+
 var selectyear = $("#selectyear").val();
 var selectmonth = $("#selectmonth").val();
+var town = $("#town").val();
 //var startyear = $("#startyear").val();
 //var startmonth = $("#startmonth").val();
 //var endyear = $("#endyear").val();
@@ -229,6 +173,10 @@ $("#selectyear").change(function () {
 $("#selectmonth").change(function () {
     selectmonth = $(this).val();
 });
+$("#town").change(function () {
+    town = $(this).val();
+
+})
 //$("#startyear").change(function () {
 //    startyear = $(this).val();
 //});
@@ -240,7 +188,27 @@ $("#selectmonth").change(function () {
 //});
 //$("#endmonth").change(function () {
 //    endmonth = $(this).val();
-//});
+    //});
+function getFarmingStatistics() {
+    $.get("/Home/GetFarmingStatistics", { selectyear: selectyear, selectmonth: selectmonth, town: town }, function (html) {
+        $("#statistics").html(html);
+    });
+}
+function getBreedingStatistics() {
+    $.get("/Home/GetBreedingStatistics", { selectyear: selectyear, selectmonth: selectmonth, town: town }, function (html) {
+        $("#statistics").html(html);
+    });
+}
+function getOthersStatistics() {
+    $.get("/Home/GetOthersStatistics", { selectyear: selectyear, selectmonth: selectmonth, town: town }, function (html) {
+        $("#statistics").html(html);
+    });
+}
+function getAgriculturalStatistics() {
+    $.get("/Home/GetAgriculturalStatistics", { selectyear: selectyear, selectmonth: selectmonth, town: town }, function (html) {
+        $("#statistics").html(html);
+    });
+}
 function getFourTurbines() {
     $.get("/Home/GetFourTurbines", {selectyear:selectyear,selectmonth:selectmonth},function (html) {
         $("#getresult").html(html);

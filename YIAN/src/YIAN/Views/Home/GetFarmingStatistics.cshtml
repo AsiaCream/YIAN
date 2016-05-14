@@ -1,65 +1,57 @@
 ﻿@{
     Layout = null;
 }
-<h3>全镇：杂粮<span>&nbsp;<i class="fa fa-anchor">@ViewBag.Time</i></span></h3>
+<h3>@ViewBag.Title：养殖统计<span>&nbsp;<i class="fa fa-anchor">@ViewBag.Time</i></span></h3>
 <div class="col-md-8">
-    <div id="grains"></div>
+    <div id="farming"></div>
 </div>
 <div class="col-md-4">
     <h4>统计数据</h4>
     <table class="table">
         <thead>
             <tr>
-                <th>村庄</th>
-                <th>数量(单位：亩)</th>
+                <th>种类</th>
+                <th>数量(单位：只)</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <th>长安村</th>
-                <td>@ViewBag.One</td>
+                <th>牛</th>
+                <td>@ViewBag.cow</td>
             </tr>
             <tr>
-                <th>精进村</th>
-                <td>@ViewBag.Two</td>
+                <th>马</th>
+                <td>@ViewBag.horse</td>
             </tr>
             <tr>
-                <th>东风村</th>
-                <td>@ViewBag.Three</td>
+                <th>羊</th>
+                <td>@ViewBag.Sheep</td>
             </tr>
             <tr>
-                <th>民利村</th>
-                <td>@ViewBag.Four</td>
+                <th>鸡</th>
+                <td>@ViewBag.Chicken</td>
             </tr>
             <tr>
-                <th>龙泉村</th>
-                <td>@ViewBag.Five</td>
+                <th>鸭</th>
+                <td>@ViewBag.Duck</td>
             </tr>
             <tr>
-                <th>福德村</th>
-                <td>@ViewBag.Six</td>
+                <th>鹅</th>
+                <td>@ViewBag.Goose</td>
             </tr>
             <tr>
-                <th>和乐村</th>
-                <td>@ViewBag.Seven</td>
+                <th>猪</th>
+                <td>@ViewBag.Pig</td>
             </tr>
             <tr>
-                <th>德宝村</th>
-                <td>@ViewBag.Eight</td>
-            </tr>
-            <tr>
-                <th>祥顺村</th>
-                <td>@ViewBag.Nine</td>
-            </tr>
-            <tr>
-                <th>诚顺村</th>
-                <td>@ViewBag.Ten</td>
+                <th>其它牲口</th>
+                <td>@ViewBag.OthersAnimal</td>
             </tr>
         </tbody>
     </table>
 </div>
 <script type="text/javascript">
-    $('#grains').highcharts({
+    $('#farming').highcharts({
         chart: {
             plotBackgroundColor: null,
             plotBorderWidth: null,
@@ -93,35 +85,29 @@
             name: 'Brands',
             colorByPoint: true,
             data: [{
-                name: '长安村',
-                y: @ViewBag.One,
+                name: '牛',
+                y: @ViewBag.cow,
             }, {
-                name: '精进村',
-                y: @ViewBag.Two,
+                name: '马',
+                y: @ViewBag.horse,
             }, {
-                name: '东风村',
-                y: @ViewBag.Three,
+                name: '羊',
+                y: @ViewBag.Sheep,
             }, {
-                name: '民利村',
-                y: @ViewBag.Four,
+                name: '鸡',
+                y: @ViewBag.Chicken,
             }, {
-                name: '龙泉村',
-                y: @ViewBag.Five,
+                name: '鸭',
+                y: @ViewBag.Duck,
             }, {
-                name: '福德村',
-                y: @ViewBag.Six,
+                name: '鹅',
+                y: @ViewBag.Goose,
             }, {
-                name: '和乐村',
-                y: @ViewBag.Seven,
+                name: '猪',
+                y: @ViewBag.Pig,
             }, {
-                name: '德宝村',
-                y: @ViewBag.Eight,
-            }, {
-                name: '祥顺村',
-                y: @ViewBag.Nine,
-            }, {
-                name: '诚顺村',
-                y: @ViewBag.Ten,
+                name: '其它牲口',
+                y: @ViewBag.OthersAnimal,
             }, ]
         }]
     });
