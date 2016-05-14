@@ -81,5 +81,25 @@ namespace YIAN.Controllers
             }
             
         }
+        [Authorize]
+        [HttpGet]
+        public IActionResult Modify()
+        {
+            return View();
+        }
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Modify(string password,string newpwd)
+        {
+            var result = await userManager.ChangePasswordAsync(UserCurrent, password, newpwd);
+            if (result.Succeeded)
+            {
+                return Content("success");
+            }
+            else
+            {
+                return Content("error");
+            }
+        }
     }
 }

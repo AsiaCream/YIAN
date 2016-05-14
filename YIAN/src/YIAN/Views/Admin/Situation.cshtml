@@ -1,0 +1,32 @@
+﻿@model IEnumerable<FamilySituation>
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>@ViewBag.Family.Name 家庭情况 <label><a asp-action="CreateSituation" asp-controller="Admin" asp-route-id="@ViewBag.Family.Id" class="btn btn-success">添加家庭情况<i class="fa fa-plus"></i></a></label></h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>添加日期</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var x in Model)
+                    {
+                        <tr>
+                            <td>@x.Id</td>
+                            <td>@x.CreateTime</td>
+                            <td><a asp-action="SituationDetails" asp-controller="Home" asp-route-id="@ViewBag.Family.Id" class="btn btn-primary">查看</a></td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

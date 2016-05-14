@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using YIAN.Models;
 using YIAN.ViewModels;
+using Microsoft.AspNet.Authorization;
 using Microsoft.Data.Entity;
 
 namespace YIAN.Controllers
 {
+    [Authorize]
     public class HomeController : BaseController
     {
         public IActionResult Index()
@@ -934,8 +936,7 @@ namespace YIAN.Controllers
                 .Where(z => z.FamilyId == x.Id)
                 .ToList();
                 var membercount = DB.FamilyMembers.Where(i => i.FamilyId == x.Id).Count() + DB.Familys.Where(i => i.Id == x.Id).Count();
-                if (situation.Count() != 0)
-                {
+                
                     #region 垃圾循环法
                     foreach (var i in situation)
                     {
@@ -952,11 +953,7 @@ namespace YIAN.Controllers
                         }
                     }
                     #endregion
-                }
-                else
-                {
-                    return RedirectToAction("Error", "Home");
-                }
+                
             }
             
             return View(rich);
@@ -987,8 +984,7 @@ namespace YIAN.Controllers
                 .Where(z => z.FamilyId == x.Id)
                 .ToList();
                 var membercount = DB.FamilyMembers.Where(i => i.FamilyId == x.Id).Count() + DB.Familys.Where(i => i.Id == x.Id).Count();
-                if (situation.Count() != 0)
-                {
+                
                     #region 垃圾循环法
                     foreach (var i in situation)
                     {
@@ -1006,11 +1002,7 @@ namespace YIAN.Controllers
                         }
                     }
                     #endregion
-                }
-                else
-                {
-                    return RedirectToAction("Error", "Home");
-                }
+                
             }
 
             return View(poor);

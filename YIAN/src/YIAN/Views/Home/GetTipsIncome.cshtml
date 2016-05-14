@@ -83,9 +83,6 @@
                 dataLabels: {
                     enabled: true,
                     format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                    style: {
-                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                    }
                 }
             }
         },
@@ -95,7 +92,6 @@
             data: [{
                 name: '长安村',
                 y: @ViewBag.One, 
-                color:'red',
             }, {
                 name: '精进村',
                 y: @ViewBag.Two,

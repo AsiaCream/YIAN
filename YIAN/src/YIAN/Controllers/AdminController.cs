@@ -6,9 +6,11 @@ using Microsoft.AspNet.Mvc;
 using YIAN.Models;
 using YIAN.ViewModels;
 using Microsoft.Data.Entity;
+using Microsoft.AspNet.Authorization;
 
 namespace YIAN.Controllers
 {
+    [Authorize]
     public class AdminController : BaseController
     {
         #region 村庄管理
@@ -208,6 +210,17 @@ namespace YIAN.Controllers
                 return View(oldfamily);
             }
             
+        }
+        [HttpGet]
+        public IActionResult Situation(int id)
+        {
+            var ret = DB.FamilySituations
+                .Where(x => x.FamilyId == id)
+                .ToList();
+            ViewBag.Family = DB.Familys
+                .Where(x => x.Id == id)
+                .SingleOrDefault();
+            return View(ret);
         }
         /// <summary>
         /// 户主对应家庭情况创建

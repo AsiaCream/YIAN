@@ -57,13 +57,10 @@
             <ul class="nav navbar-top-links navbar-right">
                 <!-- /.dropdown -->
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">超级管理员
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">@ViewBag.UserCurrent.Name
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li>
-                            <a href="#"><i class="fa fa-user fa-fw"></i> 用户信息</a>
-                        </li>
                         <li>
                             <a asp-action="Modify" asp-controller="Account"><i class="fa fa-gear fa-fw"></i> 修改密码</a>
                         </li>
@@ -111,9 +108,13 @@
                                 <li>
                                     <a asp-action="Town" asp-controller="Admin"><i class="fa fa-building"></i> 乡镇管理</a>
                                 </li>
-                                <li>
-                                    <a asp-action="CreateAdmin" asp-controller="Account"><i class="fa fa-users"></i> 管理员管理</a>
-                                </li>
+                                @if (User.IsInRole("超级管理员"))
+                                {
+                                    <li>
+                                        <a asp-action="CreateAdmin" asp-controller="Account"><i class="fa fa-users"></i> 管理员管理</a>
+                                    </li>
+
+                                }
                                 <li>
                                     <a href="javascript:$('.logout').submit()"><i class="fa fa-power-off"></i> 退出登陆</a>
                                 </li>

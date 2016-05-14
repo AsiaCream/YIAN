@@ -23,13 +23,13 @@ namespace YIAN
         {
             var appEnv = services.BuildServiceProvider().GetRequiredService<IApplicationEnvironment>();
 
-            //services.AddEntityFramework()
-            //    .AddSqlite()
-            //    .AddDbContext<YIANContext>(x => x.UseSqlite("Data source=" + appEnv.ApplicationBasePath + "/Database/yian.db"));
-
             services.AddEntityFramework()
-                .AddSqlServer()
-                .AddDbContext<YIANContext>(x => x.UseSqlServer("server=localhost;uid=sa;password=Cream2015!@#;database=yian"));
+                .AddSqlite()
+                .AddDbContext<YIANContext>(x => x.UseSqlite("Data source=" + appEnv.ApplicationBasePath + "/Database/yian.db"));
+
+            //services.AddEntityFramework()
+            //    .AddSqlServer()
+            //    .AddDbContext<YIANContext>(x => x.UseSqlServer("server=localhost;uid=sa;password=Cream2015!@#;database=yian"));
 
             services.AddIdentity<User, IdentityRole<long>>(x =>
             {
@@ -54,7 +54,7 @@ namespace YIAN
             logger.MinimumLevel = LogLevel.Debug;
             app.UseStaticFiles();
             app.UseIdentity();
-            app.UseMvc(x => x.MapRoute("default", "{controller=Home}/{action=Index}/{id?}"));
+            app.UseMvc(x => x.MapRoute("default", "{controller=Account}/{action=Login}/{id?}"));
 
             await SampleData.InitDB(app.ApplicationServices);
             
