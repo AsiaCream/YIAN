@@ -426,5 +426,47 @@ namespace YIAN.Controllers
             DB.SaveChanges();
             return RedirectToAction("HostDetails", "Admin");
         }
+        [HttpGet]
+        public IActionResult Search()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Search(string key)
+        {
+            var host = DB.Familys
+                .Where(x => x.Name.Contains(key) || x.Address.Contains(key))
+                .ToList();
+            var Member = DB.FamilyMembers
+                .Where(x => x.Name.Contains(key) || x.Address.Contains(key))
+                .Count();
+            var poorno = DB.Familys
+                .Where(x => x.PoorNo.ToString() == key)
+                .SingleOrDefault();
+            if (host.Count() != 0 || Member != 0||poorno!=null)
+            {
+                return Content("success");
+            }
+            else
+            {
+                return Content("error");
+            }
+        }
+        [HttpGet]
+        public IActionResult GetSearch(string key)
+        {
+            var host = DB.Familys
+                .Where(x => x.Name.Contains(key) || x.Address.Contains(key))
+                .ToList();
+            var Member = DB.FamilyMembers
+                .Where(x => x.Name.Contains(key) || x.Address.Contains(key))
+                .ToList();
+            var p = DB.Familys
+                .Where(x => x.PoorNo.ToString() == key)
+                .SingleOrDefault();
+            ViewBag.Member = Member;
+            ViewBag.PoorMember = p;
+            return View(host);
+        }
     }
 }

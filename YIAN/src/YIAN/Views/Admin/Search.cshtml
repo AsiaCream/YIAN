@@ -1,0 +1,47 @@
+﻿<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h3>搜索</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-5">
+            <div class="input-group input-group-lg">
+                <input type="text" class="form-control" name="key" id="key" placeholder="请输入姓名/地址/身份证号码/贫困号...">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" id="send">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="getSearch">
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/scripts/jquery-2.1.1.min.js"></script>
+<script>
+    $(function () {
+        $("#send").click(function () {
+            $.post("/Admin/Search", { key: $("#key").val() },function(data){
+                if (data == "success") {
+                    $.get("/Admin/GetSearch", { key: $("#key").val() }, function (html) {
+                        $("#getSearch").html(html);
+                    });
+                } else if (data == "error") {
+                    alert("未找到请求信息");
+                   
+                } else {
+                    alert("出现异常");
+
+                }
+            });
+        })
+
+    });
+</script>

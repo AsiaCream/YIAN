@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Family>
+@{ 
+    Layout = null;
+}
+<h3>搜索结果如下：</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>编号</th>
+            <th>贫困号</th>
+            <th>姓名</th>
+            <th>家庭地址</th>
+            <th>身份证号码</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var x in Model)
+        {
+            <tr>
+                <td>@x.Id</td>
+                <td>@x.PoorNo</td>
+                <td>@x.Name</td>
+                <td>@x.Address</td>
+                <td>@x.CardNo</td>
+            </tr>
+        }
+    </tbody>
+    <tbody>
+        @foreach (var x in ViewBag.Member)
+        {
+            <tr>
+                <td>@x.Id</td>
+                <td>无</td>
+                <td>@x.Name</td>
+                <td>@x.Address</td>
+                <td>@x.CardNo</td>
+            </tr>
+        }
+    </tbody>
+    @if (ViewBag.PoorMember != null)
+    {
+        <tbody>
+            <tr>
+                <td>@ViewBag.PoorMember.Id</td>
+                <td>@ViewBag.PoorMember.PoorNo</td>
+                <td>@ViewBag.PoorMember.Name</td>
+                <td>@ViewBag.PoorMember.Address</td>
+                <td>@ViewBag.PoorMember.CardNo</td>
+            </tr>
+        </tbody>
+
+    }
+</table>
+
