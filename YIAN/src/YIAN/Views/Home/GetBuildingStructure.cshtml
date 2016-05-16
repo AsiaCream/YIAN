@@ -121,56 +121,21 @@
             column: {
                 pointPadding: 0,
                 borderWidth: 0
-            }
+            },
+            series: {
+                pointWidth: 35
+
+            },
         },
         series: [{
             name: '砖混',
             data: [@ViewBag.One, @ViewBag.Two, @ViewBag.Three, @ViewBag.Four, @ViewBag.Five, @ViewBag.Six, @ViewBag.Seven, @ViewBag.Eight, @ViewBag.Nine, @ViewBag.Ten],
-            dataLabels: {
-                enabled: true,
-                rotation: -90,
-                color: '#FFFFFF',
-                align: 'right',
-                x: 4,
-                y: 10,
-                style: {
-                    fontSize: '13px',
-                    fontFamily: 'Verdana, sans-serif',
-                    textShadow: '0 0 3px black'
-                }
-            }
         }, {
             name: '土木',
             data: [@ViewBag.One2, @ViewBag.Two2, @ViewBag.Three2, @ViewBag.Four2, @ViewBag.Five2, @ViewBag.Six2, @ViewBag.Seven2, @ViewBag.Eight2, @ViewBag.Nine2, @ViewBag.Ten2],
-            dataLabels: {
-                enabled: true,
-                rotation: -90,
-                color: 'red',
-                align: 'right',
-                x: 4,
-                y: 10,
-                style: {
-                    fontSize: '13px',
-                    fontFamily: 'Verdana, sans-serif',
-                    textShadow: '0 0 3px black'
-                }
-            }
         }, {
             name: '危房',
             data: [@ViewBag.One3, @ViewBag.Two3, @ViewBag.Three3, @ViewBag.Four3, @ViewBag.Five3, @ViewBag.Six3, @ViewBag.Seven3, @ViewBag.Eight3, @ViewBag.Nine3, @ViewBag.Ten3],
-            dataLabels: {
-                enabled: true,
-                rotation: -90,
-                color: '#FFFFFF',
-                align: 'right',
-                x: 4,
-                y: 10,
-                style: {
-                    fontSize: '13px',
-                    fontFamily: 'Verdana, sans-serif',
-                    textShadow: '0 0 3px black'
-                }
-            }
         }]
    });
 </script>
