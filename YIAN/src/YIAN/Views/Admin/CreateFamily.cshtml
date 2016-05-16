@@ -7,9 +7,9 @@
     </div>
     <div class="row">
         <div class="col-md-5 col-sx-12 col-lg-5 col-sm-12">
-            <form asp-action="CreateFamily" asp-controller="Admin" method="post" id="createfamily">
+            <form asp-action="CreateFamily" asp-controller="Admin" method="post" id="defaultForm">
                 <select name="townname" class="form-control" id="townname">
-                    <option>请选择村镇</option>
+                    @*<option>请选择村镇</option>*@
                     @foreach(var x in Model)
                     {
                         <option>@x.Title</option>
@@ -18,19 +18,27 @@
                 <label>
                     贫困户编号：
                 </label>
-                <input type="text" class="form-control" name="PoorNo" placeholder="贫困户编号" /><br />
+                <div class="form-group">
+                    <input type="text" class="form-control" name="PoorNo" placeholder="贫困户编号" /><br />
+                </div>               
                 <label>
                     联系电话：
                 </label>
-                <input type="text" class="form-control" name="PhoneNumber" placeholder="联系电话" /><br />
+                <div class="form-group">
+                    <input type="text" class="form-control" name="PhoneNumber" placeholder="联系电话" /><br />
+                </div>
                 <label>
                     户主姓名：
                 </label>
-                <input type="text" class="form-control" name="Name" placeholder="户主姓名" /><br />
+                <div class="form-group">
+                    <input type="text" class="form-control" name="Name" placeholder="户主姓名" /><br />
+                </div>              
                 <label>
                     年龄：
                 </label>
-                <input type="text" class="form-control" name="Age" placeholder="年龄" /><br />
+                <div class="form-group">
+                    <input type="text" class="form-control" name="Age" placeholder="年龄" /><br />
+                </div>                
                 <label>
                     性别：
                 </label>
@@ -41,11 +49,15 @@
                 <label>
                     地址：
                 </label>
-                <input type="text" class="form-control" name="Address" placeholder="地址" /><br />
+                <div class="form-group">
+                    <input type="text" class="form-control" name="Address" placeholder="地址" /><br />
+                </div>               
                 <label>
                     身份证号：
                 </label>
-                <input type="text" class="form-control" name="CardNo" placeholder="身份证号" /><br />
+                <div class="form-group">
+                    <input type="text" class="form-control" name="CardNo" placeholder="身份证号" /><br />
+                </div>                
                 <label>
                     属否残疾：
                 </label>
@@ -155,23 +167,9 @@
                     方法：
                 </label>
                 <input type="text" name="Measures" class="form-control" /><br />
-                @*<label>
-                    贫困原因：
-                </label>
-                <select name="PoorReasion" class="form-control">
-                    <option>因病</option>
-                    <option>教育投入</option>
-                    <option>自然灾害</option>
-                    <option>地少人多</option>
-                    <option>技能缺乏</option>
-                    <option>其它</option>
-                </select><br />
-                <label>
-                    帮扶措施：
-                </label>
-                <input type="text" name="SupportMeasures" class="form-control" /><br />*@
+                <button type="submit" id="send" class="btn btn-success form-control">添加</button><br />
             </form>
-            <button type="button" id="send" class="btn btn-success form-control">添加</button><br />
+            
         </div>
     </div>
     <div class="row">
@@ -181,14 +179,98 @@
     </div>
 </div>
 <script src="~/scripts/jquery-2.1.1.js"></script>
+<script src="~/scripts/bootstrap.js"></script>
+<script src="~/scripts/bootstrapValidator.min.js"></script>
 <script type="text/javascript">
-    $("#send").click(function () {
-        var town = $("#townname").val();
-        if (town == "请选择村镇") {
-            alert("请先选择村镇");
+    $('#defaultForm').bootstrapValidator({
+        message: '这个值没有被验证',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            PoorNo: {
+                message: '贫困编号还没有验证',
+                validators: {
+                    notEmpty: {
+                        message: '贫困编号不能为空'
+                    },
+                    digits: {
+                        message: '贫困编号只能是数字'
+                    }
+                }
+            },
+            PhoneNumber: {
+                message: '电话号码还没有验证',
+                validators: {
+                    notEmpty: {
+                        message: '电话号码不能为空'
+                    },
+                    regexp: {
+                        regexp: /^((13[0-9])|(15[^4,\\D])|(18[0,2,5-9]))\d{8}$/,
+                        message: '11位数字，格式如：13842174329'
+                    }
+                }
+            },
+            Name: {
+                message: '户主姓名还没有验证',
+                validators: {
+                    notEmpty: {
+                        message: '户主姓名不能为空'
+                    },
+                }
+            },
+            Age: {
+                message: '年龄还没有验证',
+                validators: {
+                    notEmpty: {
+                        message: '年龄不能为空'
+                    },
+                    digits: {
+                        message: "年龄只能为整数"
+                    },
+                    greaterThan: {
+                        value: 0,
+                        message: '年龄不能小于0'
+                    }
+                }
+
+            },
+            Address: {
+                message: '地址还没有验证',
+                validators: {
+                    notEmpty: {
+                        message: '地址不能为空'
+                    },
+                }
+            },
+            CardNo: {
+                message: '身份证号码还没有验证',
+                validators: {
+                    notEmpty: {
+                        message: '身份证号码不能为空'
+                    },
+                    
+                }
+            },
+
         }
-        else {
-            $("#createfamily").submit();
-        }
+    })
+    .on('success.form.bv', function (e) {
+        e.preventDefault();
+        var $form = $(e.target);
+        var bv = $form.data('bootstrapValidator');
+
+        $.post("/Admin/CreateFamily", $form.serialize(), function (data) {
+            if (data == "success") {
+                alert("添加成功");
+                window.location.href = "/Admin/HostDetails";
+            }else {
+                alert("未知错误");
+
+            }
+        });
     });
 </script>
+          

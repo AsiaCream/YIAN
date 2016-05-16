@@ -1082,7 +1082,7 @@ namespace YIAN.Controllers
             familyS.CreateTime = DateTime.Now;
             var z= familyS.FamilyId;
             DB.SaveChanges();
-            return Redirect("/Admin/Situation/"+z);
+            return Content("success");
         }
 
         /// <summary>

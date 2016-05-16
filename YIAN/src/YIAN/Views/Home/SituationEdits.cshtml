@@ -7,19 +7,23 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <form id="situationForm" asp-action="SituationEdits" asp-controller="Home" asp-route-id="@Model.Id">
+            <form id="defaultForm" asp-action="SituationEdits" asp-controller="Home">
+                <input type="hidden" name="Id" value="@Model.Id" />
                 <table class="table">
                     <caption>生产资料状况</caption>
                     <thead>
                         <tr>
                             <td>农用四轮机(台)</td>
-                            <td><input type="text" value="@Model.FourTurbines" name="FourTurbines" class="form-control" /></td>
+                            <td><div class="form-group"><input type="text" value="@Model.FourTurbines" name="FourTurbines" class="form-control" /></div></td>
                             <td>农机具(套)</td>
-                            <td><input type="text" value="@Model.AgriculturalMachinery" name="AgriculturalMachinery" class="form-control" /></td>
+                            <td><div class="form-group"><input type="text" value="@Model.AgriculturalMachinery" name="AgriculturalMachinery" class="form-control" /></div></td>
                             <td>耕地面积(亩)</td>
-                            <td><input type="text" value="@Model.ArableLand" name="ArableLand" class="form-control" /></td>
+                            <td><div class="form-group"><input type="text" value="@Model.ArableLand" name="ArableLand" class="form-control" /></div></td>
                             <td>住房状(面积)</td>
-                            <td><input type="text" value="@Model.HousingArea" name="HousingArea" class="form-control" /></td>
+                            <td><div class="form-group"><input type="text" value="@Model.HousingArea" name="HousingArea" class="form-control" /></div></td>
+                            
+                        </tr>
+                        <tr>
                             <td>房屋结构</td>
                             <td>
                                 <select name="BuildingStructure" id="BuildingStructure" class="form-control">
@@ -29,7 +33,6 @@
                                     <option>危房</option>
                                 </select>
                             </td>
-                            <td></td>
                         </tr>
                     </thead>
                 </table>
@@ -38,23 +41,23 @@
                     <thead>
                         <tr>
                             <td>牛(头)</td>
-                            <td><input type="text" value="@Model.Cow" name="Cow" class="form-control" /></td>
+                            <td><div class="form-group"><input type="text" value="@Model.Cow" name="Cow" class="form-control" /></div></td>
                             <td>马(匹)</td>
-                            <td><input type="text" value="@Model.Horse" name="Horse" class="form-control" /></td>
+                            <td><div class="form-group"><input type="text" value="@Model.Horse" name="Horse" class="form-control" /></div></td>
                             <td>羊(只)</td>
-                            <td><input type="text" value="@Model.Sheep" name="Sheep" class="form-control" /></td>
+                            <td><div class="form-group"><input type="text" value="@Model.Sheep" name="Sheep" class="form-control" /></div></td>
                             <td>鸡(只)</td>
-                            <td><input type="text" value="@Model.Chicken" name="Chicken" class="form-control" /></td>
+                            <td><div class="form-group"><input type="text" value="@Model.Chicken" name="Chicken" class="form-control" /></div></td>
                         </tr>
                         <tr>
                             <td>鸭(只)</td>
-                            <td><input type="text" value="@Model.Duck" name="Duck" class="form-control" /></td>
+                            <td><div class="form-group"><input type="text" value="@Model.Duck" name="Duck" class="form-control" /></div></td>
                             <td>鹅(只)</td>
-                            <td><input type="text" value="@Model.Goose" name="Goose" class="form-control" /></td>
+                            <td><div class="form-group"><input type="text" value="@Model.Goose" name="Goose" class="form-control" /></div></td>
                             <td>猪(头)</td>
-                            <td><input type="text" value="@Model.Pig" name="Pig" class="form-control" /></td>
+                            <td><div class="form-group"><input type="text" value="@Model.Pig" name="Pig" class="form-control" /></div></td>
                             <td>其它(头,只)</td>
-                            <td><input type="text" value="@Model.OthersAnimal" name="OthersAnimal" class="form-control" /></td>
+                            <td><div class="form-group"><input type="text" value="@Model.OthersAnimal" name="OthersAnimal" class="form-control" /></div></td>
                         </tr>
                     </thead>
                 </table>
@@ -63,27 +66,27 @@
                     <thead>
                         <tr>
                             <td>玉米(亩)</td>
-                            <td><input type="text" value="@Model.Corn" name="Corn" class="form-control" /></td>
+                            <td><div class="form-group"><input type="text" value="@Model.Corn" name="Corn" class="form-control" /></div></td>
                             <td>大豆(亩)</td>
-                            <td><input type="text" value="@Model.SoyBeans" name="SoyBeans" class="form-control" /></td>
+                            <td><div class="form-group"><input type="text" value="@Model.SoyBeans" name="SoyBeans" class="form-control" /></div></td>
                             <td>马铃薯(亩)</td>
-                            <td><input type="text" value="@Model.Potato" name="Potato" class="form-control" /></td>
+                            <td><div class="form-group"><input type="text" value="@Model.Potato" name="Potato" class="form-control" /></div></td>
                             <td>葵花(亩)</td>
-                            <td><input type="text" value="@Model.Sunflower" name="Sunflower" class="form-control" /></td>
+                            <td><div class="form-group"><input type="text" value="@Model.Sunflower" name="Sunflower" class="form-control" /></div></td>
                             <td>高粱(亩)</td>
-                            <td><input type="text" value="@Model.Sorghum" name="Sorghum" class="form-control" /></td>
+                            <td><div class="form-group"><input type="text" value="@Model.Sorghum" name="Sorghum" class="form-control" /></div></td>
                         </tr>
                         <tr>
                             <td>杂粮(亩)</td>
-                            <td><input type="text" value="@Model.Grains" name="Grains" class="form-control" /></td>
+                            <td><div class="form-group"><input type="text" value="@Model.Grains" name="Grains" class="form-control" /></div></td>
                             <td>水稻(亩)</td>
-                            <td><input type="text" value="@Model.Rice" name="Rice" class="form-control" /></td>
+                            <td><div class="form-group"><input type="text" value="@Model.Rice" name="Rice" class="form-control" /></div></td>
                             <td>瓜菜(亩)</td>
-                            <td><input type="text" value="@Model.Vegetables" name="Vegetables" class="form-control" /></td>
+                            <td><div class="form-group"><input type="text" value="@Model.Vegetables" name="Vegetables" class="form-control" /></div></td>
                             <td>杂豆(亩)</td>
-                            <td><input type="text" value="@Model.MixedBeans" name="MixedBeans" class="form-control" /></td>
+                            <td><div class="form-group"><input type="text" value="@Model.MixedBeans" name="MixedBeans" class="form-control" /></div></td>
                             <td>其它(亩)</td>
-                            <td><input type="text" value="@Model.OthersArea" name="OthersArea" class="form-control" /></td>
+                            <td><div class="form-group"><input type="text" value="@Model.OthersArea" name="OthersArea" class="form-control" /></div></td>
                         </tr>
                     </thead>
                 </table>
@@ -92,13 +95,13 @@
                     <thead>
                         <tr>
                             <td>种植业收入(元)</td>
-                            <td><input type="text" value="@Model.FarmingIncome" name="FarmingIncome" class="form-control" /></td>
+                            <td><div class="form-group"><input type="text" value="@Model.FarmingIncome" name="FarmingIncome" class="form-control" /></div></td>
                             <td>养殖业收入(元)</td>
-                            <td><input type="text" value="@Model.BreedingIncome" name="BreedingIncome" class="form-control" /></td>
+                            <td><div class="form-group"><input type="text" value="@Model.BreedingIncome" name="BreedingIncome" class="form-control" /></div></td>
                             <td>其它收入(元)</td>
-                            <td><input type="text" value="@Model.OthersIncome" name="OthersIncome" class="form-control" /></td>
+                            <td><div class="form-group"><input type="text" value="@Model.OthersIncome" name="OthersIncome" class="form-control" /></div></td>
                             <td>各类补贴(元)</td>
-                            <td><input type="text" value="@Model.TipsIncome" name="TipsIncome" class="form-control" /></td>
+                            <td><div class="form-group"><input type="text" value="@Model.TipsIncome" name="TipsIncome" class="form-control" /></div></td>
                         </tr>
                     </thead>
                 </table>
@@ -122,7 +125,7 @@
                         </tr>
                     </thead>
                 </table>
-                <input type="button" id="send" class="btn btn-success form-control" value="确认修改"/>
+                <input type="submit" id="send" class="btn btn-success form-control" value="确认修改"/>
             </form>
         </div>
     </div>
@@ -134,13 +137,432 @@
 
 
 </div>
-<script src="~/scripts/jquery-2.1.1.js"></script>
-<script type="text/javascript">
-    $("#send").click(function () {
-        $("#situationForm").submit();
 
-    });
+<script src="~/scripts/jquery-2.1.1.js"></script>
+<script src="~/scripts/bootstrap.js"></script>
+<script src="~/scripts/bootstrapValidator.min.js"></script>
+<script type="text/javascript">
     $("#BuildingStructure").click(function () {
         $("#selected").fadeOut(30);
     })
+    $('#defaultForm').bootstrapValidator({
+        message: '这个值没有被验证',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            FourTurbines: {
+                message: '还没有验证',
+                validators: {
+                    notEmpty: {
+                        message: '不能为空'
+                    },
+                    digits: {
+                        message: "只能为整数"
+                    },
+                    greaterThan: {
+                        value: 0,
+                        message: '不能小于0'
+                    }
+                }
+            },
+            AgriculturalMachinery: {
+                message: '还没有验证',
+                validators: {
+                    notEmpty: {
+                        message: '不能为空'
+                    },
+                    digits: {
+                        message: "只能为整数"
+                    },
+                    greaterThan: {
+                        value: 0,
+                        message: '不能小于0'
+                    }
+                }
+            },
+            ArableLand: {
+                message: '还没有验证',
+                validators: {
+                    notEmpty: {
+                        message: '不能为空'
+                    },
+                    numeric: {
+                        message: "只能为数字"
+                    },
+                    greaterThan: {
+                        value: 0,
+                        message: '不能小于0'
+                    }
+                }
+            },
+            HousingArea: {
+                message: '还没有验证',
+                validators: {
+                    notEmpty: {
+                        message: '不能为空'
+                    },
+                    numeric: {
+                        message: "只能为数字"
+                    },
+                    greaterThan: {
+                        value: 0,
+                        message: '不能小于0'
+                    }
+                }
+            },
+
+            Cow: {
+                message: '还没有验证',
+                validators: {
+                    notEmpty: {
+                        message: '不能为空'
+                    },
+                    digits: {
+                        message: "只能为整数"
+                    },
+                    greaterThan: {
+                        value: 0,
+                        message: '不能小于0'
+                    }
+                }
+            },
+            Chicken: {
+                message: '还没有验证',
+                validators: {
+                    notEmpty: {
+                        message: '不能为空'
+                    },
+                    digits: {
+                        message: "只能为整数"
+                    },
+                    greaterThan: {
+                        value: 0,
+                        message: '不能小于0'
+                    }
+                }
+            },
+            Horse: {
+                message: '还没有验证',
+                validators: {
+                    notEmpty: {
+                        message: '不能为空'
+                    },
+                    digits: {
+                        message: "只能为整数"
+                    },
+                    greaterThan: {
+                        value: 0,
+                        message: '不能小于0'
+                    }
+                }
+            },
+            Sheep: {
+                message: '还没有验证',
+                validators: {
+                    notEmpty: {
+                        message: '不能为空'
+                    },
+                    digits: {
+                        message: "只能为整数"
+                    },
+                    greaterThan: {
+                        value: 0,
+                        message: '不能小于0'
+                    }
+                }
+            },
+            Duck: {
+                message: '还没有验证',
+                validators: {
+                    notEmpty: {
+                        message: '不能为空'
+                    },
+                    digits: {
+                        message: "只能为整数"
+                    },
+                    greaterThan: {
+                        value: 0,
+                        message: '不能小于0'
+                    }
+                }
+            },
+            Goose: {
+                message: '还没有验证',
+                validators: {
+                    notEmpty: {
+                        message: '不能为空'
+                    },
+                    digits: {
+                        message: "只能为整数"
+                    },
+                    greaterThan: {
+                        value: 0,
+                        message: '不能小于0'
+                    }
+                }
+            },
+            Pig: {
+                message: '还没有验证',
+                validators: {
+                    notEmpty: {
+                        message: '不能为空'
+                    },
+                    digits: {
+                        message: "只能为整数"
+                    },
+                    greaterThan: {
+                        value: 0,
+                        message: '不能小于0'
+                    }
+                }
+            },
+            OthersAnimal: {
+                message: '还没有验证',
+                validators: {
+                    notEmpty: {
+                        message: '不能为空'
+                    },
+                    digits: {
+                        message: "只能为整数"
+                    },
+                    greaterThan: {
+                        value: 0,
+                        message: '不能小于0'
+                    }
+                }
+            },
+
+            Sorghum: {
+                message: '还没有验证',
+                validators: {
+                    notEmpty: {
+                        message: '不能为空'
+                    },
+                    numeric: {
+                        message: "只能为数字"
+                    },
+                    greaterThan: {
+                        value: 0,
+                        message: '不能小于0'
+                    }
+                }
+            },
+            Sunflower: {
+                message: '还没有验证',
+                validators: {
+                    notEmpty: {
+                        message: '不能为空'
+                    },
+                    numeric: {
+                        message: "只能为数字"
+                    },
+                    greaterThan: {
+                        value: 0,
+                        message: '不能小于0'
+                    }
+                }
+            },
+            Potato: {
+                message: '还没有验证',
+                validators: {
+                    notEmpty: {
+                        message: '不能为空'
+                    },
+                    numeric: {
+                        message: "只能为数字"
+                    },
+                    greaterThan: {
+                        value: 0,
+                        message: '不能小于0'
+                    }
+                }
+            },
+            SoyBeans: {
+                message: '还没有验证',
+                validators: {
+                    notEmpty: {
+                        message: '不能为空'
+                    },
+                    numeric: {
+                        message: "只能为数字"
+                    },
+                    greaterThan: {
+                        value: 0,
+                        message: '不能小于0'
+                    }
+                }
+            },
+            Corn: {
+                message: '还没有验证',
+                validators: {
+                    notEmpty: {
+                        message: '不能为空'
+                    },
+                    numeric: {
+                        message: "只能为数字"
+                    },
+                    greaterThan: {
+                        value: 0,
+                        message: '不能小于0'
+                    }
+                }
+            },
+
+            Grains: {
+                message: '还没有验证',
+                validators: {
+                    notEmpty: {
+                        message: '不能为空'
+                    },
+                    numeric: {
+                        message: "只能为数字"
+                    },
+                    greaterThan: {
+                        value: 0,
+                        message: '不能小于0'
+                    }
+                }
+            },
+            Rice: {
+                message: '还没有验证',
+                validators: {
+                    notEmpty: {
+                        message: '不能为空'
+                    },
+                    numeric: {
+                        message: "只能为数字"
+                    },
+                    greaterThan: {
+                        value: 0,
+                        message: '不能小于0'
+                    }
+                }
+            },
+            Vegetables: {
+                message: '还没有验证',
+                validators: {
+                    notEmpty: {
+                        message: '不能为空'
+                    },
+                    numeric: {
+                        message: "只能为数字"
+                    },
+                    greaterThan: {
+                        value: 0,
+                        message: '不能小于0'
+                    }
+                }
+            },
+            MixedBeans: {
+                message: '还没有验证',
+                validators: {
+                    notEmpty: {
+                        message: '不能为空'
+                    },
+                    numeric: {
+                        message: "只能为数字"
+                    },
+                    greaterThan: {
+                        value: 0,
+                        message: '不能小于0'
+                    }
+                }
+            },
+            FarmingIncome: {
+                message: '还没有验证',
+                validators: {
+                    notEmpty: {
+                        message: '不能为空'
+                    },
+                    numeric: {
+                        message: "只能为数字"
+                    },
+                    greaterThan: {
+                        value: 0,
+                        message: '不能小于0'
+                    }
+                }
+            },
+
+            TipsIncome: {
+                message: '补贴还没有验证',
+                validators: {
+                    notEmpty: {
+                        message: '补贴不能为空'
+                    },
+                    numeric: {
+                        message: "补贴只能为数字"
+                    },
+                    greaterThan: {
+                        value: 0,
+                        message: '补贴不能小于0'
+                    }
+                }
+            },
+            OthersIncome: {
+                message: '其他收入还没有验证',
+                validators: {
+                    notEmpty: {
+                        message: '其它收入不能为空'
+                    },
+                    numeric: {
+                        message: "其它收入只能为数字"
+                    },
+                    greaterThan: {
+                        value: 0,
+                        message: '其它收入不能小于0'
+                    }
+                }
+            },
+            BreedingIncome: {
+                message: '养殖业收入还没有验证',
+                validators: {
+                    notEmpty: {
+                        message: '养殖业收入不能为空'
+                    },
+                    numeric: {
+                        message: "养殖业收入只能为数字"
+                    },
+                    greaterThan: {
+                        value: 0,
+                        message: '养殖业收入不能小于0'
+                    }
+                }
+            },
+            FarmingIncome: {
+                message: '种植业收入还没有验证',
+                validators: {
+                    notEmpty: {
+                        message: '种植业收入不能为空'
+                    },
+                    numeric: {
+                        message: "种植业收入只能为数字"
+                    },
+                    greaterThan: {
+                        value: 0,
+                        message: '种植业收入不能小于0'
+                    }
+                }
+            },
+        }
+
+    })
+    .on('success.form.bv', function (e) {
+        e.preventDefault();
+        var $form = $(e.target);
+        var bv = $form.data('bootstrapValidator');
+
+        $.post("/Home/SituationEdits", $form.serialize(), function (data) {
+            if (data == "success") {
+                alert("修改成功");
+                window.location.href = "/Admin/Situation/"+@Model.Id;
+            }else {
+                alert("未知错误");
+
+            }
+        });
+    });
 </script>

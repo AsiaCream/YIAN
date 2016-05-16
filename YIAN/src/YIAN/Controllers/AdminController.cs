@@ -154,7 +154,7 @@ namespace YIAN.Controllers
                 family.TownId = town.Id;
                 DB.Familys.Add(family);
                 DB.SaveChanges();
-                return RedirectToAction("HostDetails","Admin");
+                return Content("success");
             }
             
         }
@@ -240,7 +240,7 @@ namespace YIAN.Controllers
             NewFamily.Measures = family.Measures;
       
             DB.SaveChanges();
-            return RedirectToAction("HostDetails", "Admin");
+            return Content("success");
         }
         //编辑家庭成员信息
         [HttpGet]
@@ -284,7 +284,7 @@ namespace YIAN.Controllers
             NewFamilyMember.Skills = familyMember.Skills;
 
             DB.SaveChanges();
-            return RedirectToAction("HostDetails", "Admin");
+            return Content("success");
         }
         [HttpGet]
         public IActionResult Situation(int id)
@@ -329,13 +329,13 @@ namespace YIAN.Controllers
         {
             var oldsituation = DB.FamilySituations
                 .Where(x => x.FamilyId == id)
-                .Where(x=>x.CreateTime.Month==DateTime.Now.Month)
+                .Where(x=>x.CreateTime.Month==DateTime.Now.Month && x.CreateTime.Year == DateTime.Now.Year)
                 .SingleOrDefault();
             if (oldsituation!=null)
             {
-                if(oldsituation.CreateTime.Month == DateTime.Now.Month)
+                if(oldsituation.CreateTime.Year == DateTime.Now.Year && oldsituation.CreateTime.Month == DateTime.Now.Month)
                 {
-                    return Content("本月已经创建过");
+                    return Content("created");
                 }
                 else
                 {
@@ -378,7 +378,7 @@ namespace YIAN.Controllers
                     situation.YearTotalIncome = Math.Round((situation.FarmingIncome + situation.BreedingIncome + situation.OthersIncome + situation.TipsIncome) * 12, 2);
                     situation.YearAnnualPerCapitaIncome = Math.Round(situation.YearTotalIncome / PCount, 2);
                     DB.SaveChanges();
-                    return RedirectToAction("CreateSituation","Admin");
+                    return Content("success");
                 }
             }
             else
@@ -422,7 +422,7 @@ namespace YIAN.Controllers
                 situation.YearTotalIncome = (situation.FarmingIncome + situation.BreedingIncome + situation.OthersIncome + situation.TipsIncome) * 12;
                 situation.YearAnnualPerCapitaIncome = situation.YearTotalIncome / PCount;
                 DB.SaveChanges();
-                return RedirectToAction("HostDetails","Admin");
+                return Content("success");
             }
         }
         [HttpGet]
@@ -475,6 +475,7 @@ namespace YIAN.Controllers
             string CardNo,string IsDisability,string RelationShip,string Education,string IsOnSchool,int Ability,string IsHealth,
             string Work,string IsLow,string IsNewFarm,string IsOldInurance,string IsWorkInsurance,string Skills,string Helper,string Measures)
         {
+
             var member = new FamilyMember
             {
                 Name = Name,
@@ -501,7 +502,7 @@ namespace YIAN.Controllers
             };
             DB.FamilyMembers.Add(member);
             DB.SaveChanges();
-            return RedirectToAction("HostDetails", "Admin");
+            return Content("success");
         }
         [HttpGet]
         public IActionResult Search()
