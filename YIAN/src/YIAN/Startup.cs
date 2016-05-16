@@ -29,7 +29,7 @@ namespace YIAN
 
             services.AddEntityFramework()
                 .AddSqlServer()
-                .AddDbContext<YIANContext>(x => x.UseSqlServer("server=localhost;uid=sa;password=Cream2015!@#;database=yian"));
+                .AddDbContext<YIANContext>(x => x.UseSqlServer("server=182.254.211.75;uid=sa;password=Cream2015!@#;database=yian"));
 
             services.AddIdentity<User, IdentityRole<long>>(x =>
             {
