@@ -211,6 +211,81 @@ namespace YIAN.Controllers
             }
             
         }
+        [HttpPost]
+        public IActionResult EditFamily(int id,Family family)
+        {
+            var NewFamily = DB.Familys
+                .Where(x => x.Id == id)
+                .SingleOrDefault();
+            NewFamily.PoorNo = family.PoorNo;
+            NewFamily.PhoneNumber = family.PhoneNumber;
+            NewFamily.Name = family.Name;
+            NewFamily.Age = family.Age;
+            NewFamily.Sex = family.Sex;
+            NewFamily.Address = family.Address;
+            NewFamily.CardNo = family.CardNo;
+            NewFamily.IsDisability = family.IsDisability;
+            NewFamily.RelationShip = family.RelationShip;
+            NewFamily.Education = family.Education;
+            NewFamily.IsOnSchool = family.IsOnSchool;
+            NewFamily.Ability = family.Ability;
+            NewFamily.IsHealth = family.IsHealth;
+            NewFamily.Work = family.Work;
+            NewFamily.IsLow = family.IsLow;
+            NewFamily.IsNewFarm = family.IsNewFarm;
+            NewFamily.IsOldInsurance = family.IsOldInsurance;
+            NewFamily.IsWorkInsurance = family.IsWorkInsurance;
+            NewFamily.Skills = family.Skills;
+            NewFamily.Helper = family.Helper;
+            NewFamily.Measures = family.Measures;
+      
+            DB.SaveChanges();
+            return RedirectToAction("HostDetails", "Admin");
+        }
+        //编辑家庭成员信息
+        [HttpGet]
+        public IActionResult EditFamilyMember(int id)
+        {
+            var member = DB.FamilyMembers
+                .Where(x => x.Id == id)
+                .SingleOrDefault();
+            if(member == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+            else
+            {
+                return View(member);
+            }
+        }
+        [HttpPost]
+        public IActionResult EditFamilyMember(int id,FamilyMember familyMember)
+        {
+            var NewFamilyMember = DB.FamilyMembers
+                .Where(x => x.Id == id)
+                .SingleOrDefault();
+            NewFamilyMember.PhoneNumber = familyMember.PhoneNumber;
+            NewFamilyMember.Name = familyMember.Name;
+            NewFamilyMember.Age = familyMember.Age;
+            NewFamilyMember.Sex = familyMember.Sex;
+            NewFamilyMember.Address = familyMember.Address;
+            NewFamilyMember.CardNo = familyMember.CardNo;
+            NewFamilyMember.IsDisability = familyMember.IsDisability;
+            NewFamilyMember.RelationShip = familyMember.RelationShip;
+            NewFamilyMember.Education = familyMember.Education;
+            NewFamilyMember.IsOnSchool = familyMember.IsOnSchool;
+            NewFamilyMember.Ability = familyMember.Ability;
+            NewFamilyMember.IsHealth = familyMember.IsHealth;
+            NewFamilyMember.Work = familyMember.Work;
+            NewFamilyMember.IsLow = familyMember.IsLow;
+            NewFamilyMember.IsNewFarm = familyMember.IsNewFarm;
+            NewFamilyMember.IsOldInsurance = familyMember.IsOldInsurance;
+            NewFamilyMember.IsWorkInsurance = familyMember.IsWorkInsurance;
+            NewFamilyMember.Skills = familyMember.Skills;
+
+            DB.SaveChanges();
+            return RedirectToAction("HostDetails", "Admin");
+        }
         [HttpGet]
         public IActionResult Situation(int id)
         {
@@ -398,7 +473,7 @@ namespace YIAN.Controllers
         [HttpPost]
         public IActionResult CreateFamilyMember(int id,string Name,int Age,string Sex,string Address,string PhoneNumber,
             string CardNo,string IsDisability,string RelationShip,string Education,string IsOnSchool,int Ability,string IsHealth,
-            string Work,string IsLow,string IsNewFarm,string IsOldInurance,string IsWorkInsurance,string Skills)
+            string Work,string IsLow,string IsNewFarm,string IsOldInurance,string IsWorkInsurance,string Skills,string Helper,string Measures)
         {
             var member = new FamilyMember
             {
@@ -421,6 +496,8 @@ namespace YIAN.Controllers
                 IsWorkInsurance = IsWorkInsurance,
                 Skills = Skills,
                 FamilyId=id,
+                Helper = Helper,
+                Measures = Measures,
             };
             DB.FamilyMembers.Add(member);
             DB.SaveChanges();

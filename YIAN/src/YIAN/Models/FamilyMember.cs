@@ -31,6 +31,8 @@ namespace YIAN.Models
         public string IsWorkInsurance { get; set; }//是否务工保险
         public string Skills { get; set; }//一技之长
 
+        public string Helper { get; set; }//对接人
+        public string Measures { get; set; }//方法
         [ForeignKey("Family")]
         public int FamilyId { get; set; }
         public virtual Family Family { get; set; }

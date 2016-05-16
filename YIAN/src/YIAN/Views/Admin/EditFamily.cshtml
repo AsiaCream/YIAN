@@ -23,17 +23,14 @@
                 <label>
                     年龄：
                 </label>
-                <input type="text" class="form-control" name="Age" placeholder="年龄" value="@Model.Age"/><br />
+                <input type="text" class="form-control" name="Age" placeholder="年龄" value="@Model.Age" /><br />
                 <label>
                     性别：
                 </label>
-                <select name="Sex" class="form-control">
-                    <option>@Model.Sex</option>
-                @*@foreach(var x in ViewBag.Sex)
-                {
-                    <option>@x.Sex</option>
-
-                }*@
+                <select name="Sex" class="selectHide form-control">
+                    <option class="optionHide">@Model.Sex</option>
+                    <option>男</option>
+                    <option>女</option>
                 </select><br />
                 <label>
                     地址：
@@ -46,12 +43,10 @@
                 <label>
                     属否残疾：
                 </label>
-                <select name="IsDisability" class="form-control">
-                    <option>@Model.IsDisability</option>
-                @*@foreach (var x in ViewBag.IsDisability)
-                {
-                    <option>@x.IsDiSability</option>
-                }*@
+                <select name="IsDisability" class="selectHide form-control">
+                    <option class="optionHide">@Model.IsDisability</option>
+                    <option>否</option>
+                    <option>是</option>
                 </select><br />
                 <label>
                     与户主关系：
@@ -62,107 +57,100 @@
                 <label>
                     教育程度：
                 </label>
-                <select name="Education" class="form-control">
-                    <option>@Model.Education</option>
-                @*@foreach (var x in ViewBag.Education)
-                {
-                    <option>@x.Education</option>
-                }*@
+                <select name="Education" class="selectHide form-control">
+                    <option class="optionHide">@Model.Education</option>
+                    <option>小学</option>
+                    <option>中学</option>
+                    <option>高中</option>
+                    <option>大学</option>
                 </select><br />
                 <label>
                     在校生情况：
                 </label>
-                <select name="IsOnSchool" class="form-control">
-                    <option>@Model.IsOnSchool</option>
-                @*@foreach (var x in ViewBag.IsOnSchool)
-                {
-                    <option>@x.IsOnSchool</option>
-
-                }*@
-                    
+                <select name="IsOnSchool" class="selectHide form-control">
+                    <option class="optionHide">@Model.IsOnSchool</option>
+                    <option>否</option>
+                    <option>是</option>
                 </select><br />
                 <label>
                     劳动能力：
                 </label>
-                <select name="Ability" class="form-control">
-                    <option>@Model.Ability</option>
-                    @*@foreach (var x in ViewBag.Ability)
-                    {
-                        <option>@x.Ability</option>
-                    }*@
+                <select name="Ability" class="selectHide form-control">
+                    <option class="optionHide">@Model.Ability</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
                 </select><br />
                 <label>
                     身体状况：
                 </label>
-                <select name="IsHealth" class="form-control">
-                    <option>@Model.IsHealth</option>
-                @*@foreach (var x in ViewBag.IsHealth)
-                {
-                    <option>@x.IsHealth</option>
-                }*@
+                <select name="IsHealth" class="selectHide form-control">
+                    <option class="optionHide">@Model.IsHealth</option>
+                    <option>健康</option>
+                    <option>患病</option>
                 </select><br />
                 <label>
                     务工情况：
                 </label>
-                <select name="Work" class="form-control">
-                    <option>@Model.Work</option>
-                @*@foreach (var x in ViewBag.Work)
-                {
-                    <option>@x.Work</option>
-                }*@
+                <select name="Work" class="selectHide form-control">
+                    <option class="optionHide">@Model.Work</option>
+                    <option>赋闲</option>
+                    <option>临时工</option>
+                    <option>短工</option>
+                    <option>长期工</option>
                 </select><br />
                 <label>
                     是否低（五）保：
                 </label>
-                <select name="IsLow" class="form-control">
-                    <option>@Model.IsLow</option>
-                    @*@foreach (var x in ViewBag.IsLow)
-                    {
-                        <option>@x.IsLow</option>
-                    }*@
+                <select name="IsLow" class="selectHide form-control">
+                    <option class="optionHide">@Model.IsLow</option>
+                    <option>是</option>
+                    <option>否</option>
                 </select><br />
                 <label>
                     是否参加新农合：
                 </label>
-                <select name="IsNewFarm" class="form-control">
-                    <option>@Model.IsNewFarm</option>
-                    @*@foreach (var x in ViewBag.IsNewFarm)
-                    {
-                        <option>@x.IsNewFarm</option>
-
-                    }*@
+                <select name="IsNewFarm" class="selectHide form-control">
+                    <option class="optionHide">@Model.IsNewFarm</option>
+                    <option>是</option>
+                    <option>否</option>
                 </select><br />
                 <label>
                     是否参加养老保险：
                 </label>
-                <select name="IsOldInsurance" class="form-control">
-                    <option>@Model.IsOldInsurance</option>
-                    @*@foreach (var x in ViewBag.IsOldInsurance)
-                    {
-                        <option>@x.IsOldInsurance</option>
-
-                    }*@
+                <select name="IsOldInsurance" class="selectHide form-control">
+                    <option class="optionHide">@Model.IsOldInsurance</option>
+                    <option>是</option>
+                    <option>否</option>
                 </select><br />
                 <label>
                     是否务工保险：
                 </label>
-                <select name="IsWorkInsurance" class="form-control">
-                    <option>@Model.IsWorkInsurance</option>
-                    @*@foreach (var x in ViewBag.IsWorkInsurance)
-                    {
-                        <option>@x.IsWorkInsurance</option>
-
-                    }*@
+                <select name="IsWorkInsurance" class="selectHide form-control">
+                    <option class="optionHide">@Model.IsWorkInsurance</option>
+                    <option>是</option>
+                    <option>否</option>
                 </select><br />
                 <label>
                     是否一技之长：
                 </label>
-                <select name="Skills" class="form-control">
-                    <option>@Model.Skills</option>
-                    @*@foreach (var x in ViewBag.Skills)
-                    {
-                        <option>@x.Skills</option>
-                    }*@
+                <select name="Skills" class="selectHide form-control">
+                    <option class="optionHide">@Model.Skills</option>
+                    <option>无</option>
+                    <option>瓦工</option>
+                    <option>木工</option>
+                    <option>力工</option>
+                    <option>手工业</option>
+                    <option>农业机械驾驶</option>
+                    <option>养殖</option>
+                    <option>种植</option>
                 </select><br />
                 <label>
                     对接人：
@@ -172,8 +160,17 @@
                     方法：
                 </label>
                 <input type="text" name="Measures" class="form-control" value="@Model.Measures" /><br />
+
+                <button type="submit" id="send" class="btn btn-success form-control">更新</button><br />
             </form>
-            <button type="button" id="send" class="btn btn-success form-control">更新</button><br />
         </div>
     </div>
 </div>
+<script src="~/scripts/jquery-2.1.1.min.js"></script>
+<script>
+    $(function () {
+        $("select.selectHide").click(function () {
+            $(this).children("option.optionHide").hide();
+        })
+    })
+</script>
