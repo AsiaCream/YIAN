@@ -1,28 +1,29 @@
-﻿@model Family
+﻿@model FamilySituation
 <div id="page-wrapper">
     <div class="row">
         <div class="col-md-12">
-            <h3>@Model.Name 家庭情况</h3>
+            <h3>@Model.Family.Name 家庭情况</h3>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <form id="situationForm" asp-action="CreateSituation" asp-controller="Admin" asp-route-id="@Model.Id">
+            <form id="situationForm" asp-action="SituationEdits" asp-controller="Home" asp-route-id="@Model.Id">
                 <table class="table">
                     <caption>生产资料状况</caption>
                     <thead>
                         <tr>
                             <td>农用四轮机(台)</td>
-                            <td><input type="text" value="0" name="FourTurbines" class="form-control"/></td>
+                            <td><input type="text" value="@Model.FourTurbines" name="FourTurbines" class="form-control" /></td>
                             <td>农机具(套)</td>
-                            <td><input type="text" value="0" name="AgriculturalMachinery" class="form-control"/></td>
+                            <td><input type="text" value="@Model.AgriculturalMachinery" name="AgriculturalMachinery" class="form-control" /></td>
                             <td>耕地面积(亩)</td>
-                            <td><input type="text" value="0" name="ArableLand" class="form-control"/></td>
+                            <td><input type="text" value="@Model.ArableLand" name="ArableLand" class="form-control" /></td>
                             <td>住房状(面积)</td>
-                            <td><input type="text" value="0" name="HousingArea" class="form-control"/></td>
+                            <td><input type="text" value="@Model.HousingArea" name="HousingArea" class="form-control" /></td>
                             <td>房屋结构</td>
                             <td>
-                                <select name="BuildingStructure" class="form-control">
+                                <select name="BuildingStructure" id="BuildingStructure" class="form-control">
+                                    <option id="selected">@Model.BuildingStructure</option>
                                     <option>砖混</option>
                                     <option>土木</option>
                                     <option>危房</option>
@@ -37,23 +38,23 @@
                     <thead>
                         <tr>
                             <td>牛(头)</td>
-                            <td><input type="text" value="0" name="Cow" class="form-control"/></td>
+                            <td><input type="text" value="@Model.Cow" name="Cow" class="form-control" /></td>
                             <td>马(匹)</td>
-                            <td><input type="text" value="0" name="Horse" class="form-control"/></td>
+                            <td><input type="text" value="@Model.Horse" name="Horse" class="form-control" /></td>
                             <td>羊(只)</td>
-                            <td><input type="text" value="0" name="Sheep" class="form-control"/></td>
+                            <td><input type="text" value="@Model.Sheep" name="Sheep" class="form-control" /></td>
                             <td>鸡(只)</td>
-                            <td><input type="text" value="0" name="Chicken" class="form-control"/></td>
+                            <td><input type="text" value="@Model.Chicken" name="Chicken" class="form-control" /></td>
                         </tr>
                         <tr>
                             <td>鸭(只)</td>
-                            <td><input type="text" value="0" name="Duck" class="form-control"/></td>
+                            <td><input type="text" value="@Model.Duck" name="Duck" class="form-control" /></td>
                             <td>鹅(只)</td>
-                            <td><input type="text" value="0" name="Goose" class="form-control"/></td>
+                            <td><input type="text" value="@Model.Goose" name="Goose" class="form-control" /></td>
                             <td>猪(头)</td>
-                            <td><input type="text" value="0" name="Pig" class="form-control"/></td>
+                            <td><input type="text" value="@Model.Pig" name="Pig" class="form-control" /></td>
                             <td>其它(头,只)</td>
-                            <td><input type="text" value="0" name="OthersAnimal" class="form-control"/></td>
+                            <td><input type="text" value="@Model.OthersAnimal" name="OthersAnimal" class="form-control" /></td>
                         </tr>
                     </thead>
                 </table>
@@ -62,27 +63,27 @@
                     <thead>
                         <tr>
                             <td>玉米(亩)</td>
-                            <td><input type="text" value="0" name="Corn" class="form-control"/></td>
+                            <td><input type="text" value="@Model.Corn" name="Corn" class="form-control" /></td>
                             <td>大豆(亩)</td>
-                            <td><input type="text" value="0" name="SoyBeans" class="form-control"/></td>
+                            <td><input type="text" value="@Model.SoyBeans" name="SoyBeans" class="form-control" /></td>
                             <td>马铃薯(亩)</td>
-                            <td><input type="text" value="0" name="Potato" class="form-control" /></td>
+                            <td><input type="text" value="@Model.Potato" name="Potato" class="form-control" /></td>
                             <td>葵花(亩)</td>
-                            <td><input type="text" value="0" name="Sunflower" class="form-control"/></td>
+                            <td><input type="text" value="@Model.Sunflower" name="Sunflower" class="form-control" /></td>
                             <td>高粱(亩)</td>
-                            <td><input type="text" value="0" name="Sorghum" class="form-control"/></td>
+                            <td><input type="text" value="@Model.Sorghum" name="Sorghum" class="form-control" /></td>
                         </tr>
                         <tr>
                             <td>杂粮(亩)</td>
-                            <td><input type="text" value="0" name="Grains" class="form-control"/></td>
+                            <td><input type="text" value="@Model.Grains" name="Grains" class="form-control" /></td>
                             <td>水稻(亩)</td>
-                            <td><input type="text" value="0" name="Rice" class="form-control"/></td>
+                            <td><input type="text" value="@Model.Rice" name="Rice" class="form-control" /></td>
                             <td>瓜菜(亩)</td>
-                            <td><input type="text" value="0" name="Vegetables" class="form-control"/></td>
+                            <td><input type="text" value="@Model.Vegetables" name="Vegetables" class="form-control" /></td>
                             <td>杂豆(亩)</td>
-                            <td><input type="text" value="0" name="MixedBeans" class="form-control" /></td>
+                            <td><input type="text" value="@Model.MixedBeans" name="MixedBeans" class="form-control" /></td>
                             <td>其它(亩)</td>
-                            <td><input type="text" value="0" name="OthersArea" class="form-control"/></td>
+                            <td><input type="text" value="@Model.OthersArea" name="OthersArea" class="form-control" /></td>
                         </tr>
                     </thead>
                 </table>
@@ -91,17 +92,13 @@
                     <thead>
                         <tr>
                             <td>种植业收入(元)</td>
-                            <td><input type="text" value="0" name="FarmingIncome" class="form-control"/></td>
+                            <td><input type="text" value="@Model.FarmingIncome" name="FarmingIncome" class="form-control" /></td>
                             <td>养殖业收入(元)</td>
-                            <td><input type="text" value="0" name="BreedingIncome" class="form-control" /></td>
+                            <td><input type="text" value="@Model.BreedingIncome" name="BreedingIncome" class="form-control" /></td>
                             <td>其它收入(元)</td>
-                            <td><input type="text" value="0" name="OthersIncome" class="form-control" /></td>
+                            <td><input type="text" value="@Model.OthersIncome" name="OthersIncome" class="form-control" /></td>
                             <td>各类补贴(元)</td>
-                            <td><input type="text" value="0" name="TipsIncome" class="form-control" /></td>
-                            @*<td>年总收入(元)</td>
-                            <td><input type="text" value="0" name="YearTotalIncome" class="form-control" disabled="disabled" /></td>
-                            <td>每人年均收入(元)</td>
-                            <td><input type="text" value="0" name="YearAnnualPerCapitaIncome" class="form-control" disabled="disabled" /></td>*@
+                            <td><input type="text" value="@Model.TipsIncome" name="TipsIncome" class="form-control" /></td>
                         </tr>
                     </thead>
                 </table>
@@ -112,7 +109,7 @@
                             <td>原因类型</td>
                             <td>
                                 <select name="PoorReason" class="form-control">
-                                    <option>因病</option>
+                                    <option>@Model.PoorReason</option>
                                     <option>教育投入</option>
                                     <option>自然灾害</option>
                                     <option>地少人多</option>
@@ -121,11 +118,11 @@
                                 </select>
                             </td>
                             <td>帮扶措施</td>
-                            <td><input type="text" name="SupportMeasures" class="form-control"/></td>
+                            <td><input type="text" name="SupportMeasures" class="form-control" value="@Model.SupportMeasures" /></td>
                         </tr>
                     </thead>
                 </table>
-                <input type="button" id="send" class="btn btn-success form-control" />
+                <input type="button" id="send" class="btn btn-success form-control" value="确认修改"/>
             </form>
         </div>
     </div>
@@ -143,4 +140,7 @@
         $("#situationForm").submit();
 
     });
+    $("#BuildingStructure").click(function () {
+        $("#selected").fadeOut(30);
+    })
 </script>

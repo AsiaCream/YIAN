@@ -1021,6 +1021,70 @@ namespace YIAN.Controllers
                 .ToList();
             return View(situation);
         }
+
+        [HttpGet]
+        public IActionResult SituationEdits(int id)
+        {
+            var situation = DB.FamilySituations
+                .Include(x=>x.Family)
+                .Where(x => x.Id == id)
+                .SingleOrDefault();
+            if(situation == null)
+            {
+                return Content("error");
+            }
+            else
+            {
+
+                return View(situation);
+            }
+        }
+        [HttpPost]
+        public IActionResult SituationEdits(int id, int FourTurbines, int AgriculturalMachinery, double ArableLand, double HousingArea, string BuildingStructure, int Cow,
+            int Horse, int Sheep, int Chicken, int Duck, int Goose, int Pig, int OthersAnimal, int Corn, double SoyBeans, double Potato, double Sunflower, double Sorghum, double Grains,
+            double Rice, double Vegetables, double MixedBeans, double OthersArea, double FarmingIncome, double BreedingIncome, double OthersIncome, double TipsIncome, string PoorReason,
+            string SupportMeasures)
+        {
+            var familyS = DB.FamilySituations
+                .Where(x=>x.Id == id)
+                .SingleOrDefault();
+            familyS.FourTurbines = FourTurbines;
+            familyS.ArableLand = ArableLand;
+            familyS.AgriculturalMachinery = AgriculturalMachinery;
+            familyS.HousingArea = HousingArea;
+            familyS.BuildingStructure = BuildingStructure;
+            familyS.Cow = Cow;
+            familyS.Horse = Horse;
+            familyS.Sheep = Sheep;
+            familyS.Chicken = Chicken;
+            familyS.Duck = Duck;
+            familyS.Goose = Goose;
+            familyS.Pig = Pig;
+            familyS.OthersAnimal = OthersAnimal;
+            familyS.Corn = Corn;
+            familyS.SoyBeans = SoyBeans;
+            familyS.Potato = Potato;
+            familyS.Sunflower = Sunflower;
+            familyS.Sorghum = Sorghum;
+            familyS.Grains = Grains;
+            familyS.Rice =Rice;
+            familyS.Vegetables = Vegetables;
+            familyS.MixedBeans = MixedBeans;
+            familyS.OthersArea = OthersArea;
+            familyS.FarmingIncome = FarmingIncome;
+            familyS.BreedingIncome = BreedingIncome;
+            familyS.OthersIncome = OthersIncome;
+            familyS.TipsIncome = TipsIncome;
+            familyS.PoorReason = PoorReason;
+            familyS.SupportMeasures = SupportMeasures;
+            familyS.YearTotalIncome = (familyS.FarmingIncome + familyS.BreedingIncome + familyS.OthersIncome + familyS.TipsIncome)*12;
+            familyS.YearAnnualPerCapitaIncome = familyS.YearTotalIncome / (DB.Familys.Where(x=>x.Id==familyS.FamilyId).Count()+DB.FamilyMembers.Where(x=>x.FamilyId==familyS.FamilyId).Count());
+            familyS.CreateTime = DateTime.Now;
+            var z= familyS.FamilyId;
+            DB.SaveChanges();
+            return Redirect("/Admin/Situation/"+z);
+        }
+
         /// <summary>
         /// 数据统计页面
         /// </summary>
