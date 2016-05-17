@@ -11,6 +11,7 @@
             <th>姓名</th>
             <th>家庭地址</th>
             <th>身份证号码</th>
+            <th>操作</th>
 
         </tr>
     </thead>
@@ -23,6 +24,7 @@
                 <td>@x.Name</td>
                 <td>@x.Address</td>
                 <td>@x.CardNo</td>
+                <td><a asp-action="FamilyDetails" asp-controller="Admin" asp-route-id="@x.Id">查看详细</a></td>
             </tr>
         }
     </tbody>
@@ -47,6 +49,7 @@
                 <td>@ViewBag.PoorMember.Name</td>
                 <td>@ViewBag.PoorMember.Address</td>
                 <td>@ViewBag.PoorMember.CardNo</td>
+                <td><a asp-action="FamilyDetails" asp-controller="Admin" asp-route-id="@ViewBag.PoorMember.Id">查看详细</a></td>
             </tr>
         </tbody>
 

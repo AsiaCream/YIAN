@@ -537,6 +537,7 @@ namespace YIAN.Controllers
                 .Where(x => x.Name.Contains(key) || x.Address.Contains(key))
                 .ToList();
             var Member = DB.FamilyMembers
+                .Include(x=>x.Family)
                 .Where(x => x.Name.Contains(key) || x.Address.Contains(key))
                 .ToList();
             var p = DB.Familys
