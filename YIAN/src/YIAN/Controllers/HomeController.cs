@@ -286,186 +286,367 @@ namespace YIAN.Controllers
             #region Rich
             var RichJan = rich.Where(x => x.Month == 1).ToList();
             double num = 0;
-            foreach (var x in RichJan)
+            if (RichJan.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in RichJan)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.AllRichJan = Math.Round(num / RichJan.Count(), 2);
+                ViewBag.AllRichJanCount = RichJan.Count();
             }
-            ViewBag.AllRichJan = Math.Round(num / RichJan.Count(), 2);
-            ViewBag.AllRichJanCount = RichJan.Count();
+            else
+            {
+                ViewBag.AllRichJan = 0;
+                ViewBag.AllRichJanCount = 0;
+            }
             num = 0;
             var RichFeb = rich.Where(x => x.Month == 2).ToList();
-            foreach (var x in RichFeb)
+            if (RichFeb.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in RichFeb)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.AllRichFeb = Math.Round(num / RichFeb.Count(), 2);
+                ViewBag.AllRichFebCount = RichFeb.Count();
             }
-            ViewBag.AllRichFeb = Math.Round(num / RichFeb.Count(), 2);
-            ViewBag.AllRichFebCount = RichFeb.Count();
+            else
+            {
+                ViewBag.AllRichFeb = 0;
+                ViewBag.AllRichFebCount = 0;
+            }
             num = 0;
             var RichMar = rich.Where(x => x.Month == 3).ToList();
-            foreach (var x in RichMar)
+            if (RichMar.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in RichMar)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.AllRichMar = Math.Round(num / RichMar.Count(), 2);
+                ViewBag.AllRichMarCount = RichMar.Count();
             }
-            ViewBag.AllRichMar = Math.Round(num / RichMar.Count(), 2);
-            ViewBag.AllRichMarCount = RichMar.Count();
+            else
+            {
+                ViewBag.AllRichMar = 0;
+                ViewBag.AllRichMarCount = 0;
+            }
             num = 0;
             var RichApr = rich.Where(x => x.Month == 4).ToList();
-            foreach (var x in RichApr)
+            if (RichApr.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in RichApr)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.AllRichApr = Math.Round(num / RichApr.Count(), 2);
+                ViewBag.AllRichAprCount = RichApr.Count();
             }
-            ViewBag.AllRichApr = Math.Round(num / RichApr.Count(), 2);
-            ViewBag.AllRichAprCount = RichApr.Count();
+            else
+            {
+                ViewBag.AllRichApr = 0;
+                ViewBag.AllRichAprCount = 0;
+            }
             num = 0;
             var RichMay = rich.Where(x => x.Month == 5).ToList();
-            foreach (var x in RichMay)
+            if (RichMay.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in RichMay)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.AllRichMay = Math.Round(num / RichMay.Count(), 2);
+                ViewBag.AllRichMayCount = RichMay.Count();
             }
-            ViewBag.AllRichMay = Math.Round(num / RichMay.Count(), 2);
-            ViewBag.AllRichMayCount = RichMay.Count();
+            else
+            {
+                ViewBag.AllRichMay = 0;
+                ViewBag.AllRichMayCount = 0;
+            }
+            
             num = 0;
             var RichJun = rich.Where(x => x.Month == 6).ToList();
-            foreach (var x in RichJun)
+            if (RichJun.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in RichJun)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.AllRichJun = Math.Round(num / RichJun.Count(), 2);
+                ViewBag.AllRichJunCount = RichJun.Count();
             }
-            ViewBag.AllRichJun = Math.Round(num / RichJun.Count(), 2);
-            ViewBag.AllRichJunCount = RichJun.Count();
+            else
+            {
+                ViewBag.AllRichJun = 0;
+                ViewBag.AllRichJunCount =0;
+            }
             num = 0;
             var RichJul = rich.Where(x => x.Month == 7).ToList();
-            foreach (var x in RichJul)
+            if (RichJul.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in RichJul)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.AllRichJul = Math.Round(num / RichJul.Count(), 2);
+                ViewBag.AllRichJulCount = RichJul.Count();
             }
-            ViewBag.AllRichJul = Math.Round(num / RichJul.Count(), 2);
-            ViewBag.AllRichJulCount = RichJul.Count();
+            else
+            {
+                ViewBag.AllRichJul = 0;
+                ViewBag.AllRichJulCount = 0;
+            }
             num = 0;
             var RichAug = rich.Where(x => x.Month == 8).ToList();
-            foreach (var x in RichAug)
+            if (RichAug.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in RichAug)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.AllRichAug = Math.Round(num / RichAug.Count(), 2);
+                ViewBag.AllRichAugCount = RichAug.Count();
             }
-            ViewBag.AllRichAug = Math.Round(num / RichAug.Count(), 2);
-            ViewBag.AllRichAugCount = RichAug.Count();
+            else
+            {
+                ViewBag.AllRichAug = 0;
+                ViewBag.AllRichAugCount = 0;
+            }
             num = 0;
             var RichSep = rich.Where(x => x.Month == 9).ToList();
-            foreach (var x in RichSep)
+            if (RichSep.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in RichSep)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.AllRichSep = Math.Round(num / RichSep.Count(), 2);
+                ViewBag.AllRichSepCount = RichSep.Count();
             }
-            ViewBag.AllRichSep = Math.Round(num / RichSep.Count(), 2);
-            ViewBag.AllRichSepCount = RichSep.Count();
+            else
+            {
+                ViewBag.AllRichSep = 0;
+                ViewBag.AllRichSepCount = 0;
+            }
             num = 0;
             var RichOct = rich.Where(x => x.Month == 10).ToList();
-            foreach (var x in RichOct)
+            if (RichOct.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in RichOct)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.AllRichOct = Math.Round(num / RichOct.Count(), 2);
+                ViewBag.AllRichOctCount = RichOct.Count();
             }
-            ViewBag.AllRichOct = Math.Round(num / RichOct.Count(), 2);
-            ViewBag.AllRichOctCount = RichOct.Count();
+            else
+            {
+                ViewBag.AllRichOct = 0;
+                ViewBag.AllRichOctCount = 0;
+            }
             num = 0;
             var RichNov = rich.Where(x => x.Month == 11).ToList();
-            foreach (var x in RichNov)
+            if (RichNov.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in RichNov)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.AllRichNov = Math.Round(num / RichNov.Count(), 2);
+                ViewBag.AllRichNovCount = RichNov.Count();
             }
-            ViewBag.AllRichNov = Math.Round(num / RichNov.Count(), 2);
-            ViewBag.AllRichNovCount = RichNov.Count();
+            else
+            {
+                ViewBag.AllRichNov = 0;
+                ViewBag.AllRichNovCount = 0;
+            }
             num = 0;
             var RichDec = rich.Where(x => x.Month == 12).ToList();
-            foreach (var x in RichDec)
+            if (RichDec.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in RichDec)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.AllRichDec = Math.Round(num / RichDec.Count(), 2);
+                ViewBag.AllRichDecCount = RichDec.Count();
             }
-            ViewBag.AllRichDec = Math.Round(num / RichDec.Count(), 2);
-            ViewBag.AllRichDecCount = RichDec.Count();
+            else
+            {
+                ViewBag.AllRichDec = 0;
+                ViewBag.AllRichDecCount = 0;
+            }
             num = 0;
             #endregion
             #region Poor
             var PoorJan = poor.Where(x => x.Month == 1).ToList();
-            foreach (var x in PoorJan)
+            if (PoorJan.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in PoorJan)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.AllPoorJan = Math.Round(num / PoorJan.Count(), 2);
             }
-            ViewBag.AllPoorJan = Math.Round(num / PoorJan.Count(), 2);
+            else
+            {
+                ViewBag.AllPoorJan = 0;
+            }
             num = 0;
             var PoorFeb = poor.Where(x => x.Month == 2).ToList();
-            foreach (var x in PoorFeb)
+            if (PoorFeb.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in PoorFeb)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.AllPoorFeb = Math.Round(num / PoorFeb.Count(), 2);
             }
-            ViewBag.AllPoorFeb = Math.Round(num / PoorFeb.Count(), 2);
+            else
+            {
+                ViewBag.AllPoorFeb = 0;
+            }
             num = 0;
             var PoorMar = poor.Where(x => x.Month == 3).ToList();
-            foreach (var x in PoorMar)
+            if (PoorMar.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in PoorMar)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.AllPoorMar = Math.Round(num / PoorMar.Count(), 2);
             }
-            ViewBag.AllPoorMar = Math.Round(num / PoorMar.Count(), 2);
+            else
+            {
+                ViewBag.AllPoorMar = 0;
+            }
             num = 0;
             var PoorApr = poor.Where(x => x.Month == 4).ToList();
-            foreach (var x in PoorApr)
+            if (PoorApr.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in PoorApr)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.AllPoorApr = Math.Round(num / PoorApr.Count(), 2);
             }
-            ViewBag.AllPoorApr = Math.Round(num / PoorApr.Count(), 2);
+            else
+            {
+                ViewBag.AllPoorApr = 0;
+            }
             num = 0;
             var PoorMay = poor.Where(x => x.Month == 5).ToList();
-            foreach (var x in PoorMay)
+            if (PoorMay.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in PoorMay)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.AllPoorMay = Math.Round(num / PoorMay.Count(), 2);
             }
-            ViewBag.AllPoorMay = Math.Round(num / PoorMay.Count(), 2);
+            else
+            {
+                ViewBag.AllPoorMay = 0;
+            }
             num = 0;
             var PoorJun = poor.Where(x => x.Month == 6).ToList();
-            foreach (var x in PoorJun)
+            if (PoorJun.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in PoorJun)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.AllPoorJun = Math.Round(num / PoorJun.Count(), 2);
             }
-            ViewBag.AllPoorJun = Math.Round(num / PoorJun.Count(), 2);
+            else
+            {
+                ViewBag.AllPoorJun = 0;
+            }
             num = 0;
             var PoorJul = poor.Where(x => x.Month == 7).ToList();
-            foreach (var x in PoorJul)
+            if (PoorJul.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in PoorJul)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.AllPoorJul = Math.Round(num / PoorJul.Count(), 2);
             }
-            ViewBag.AllPoorJul = Math.Round(num / PoorJul.Count(), 2);
+            else
+            {
+                ViewBag.AllPoorJul = 0;
+            }
             num = 0;
             var PoorAug = poor.Where(x => x.Month == 8).ToList();
-            foreach (var x in PoorAug)
+            if (PoorAug.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in PoorAug)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.AllPoorAug = Math.Round(num / PoorAug.Count(), 2);
             }
-            ViewBag.AllPoorAug = Math.Round(num / PoorAug.Count(), 2);
+            else
+            {
+                ViewBag.AllPoorAug = 0;
+            }
             num = 0;
             var PoorSep = poor.Where(x => x.Month == 9).ToList();
-            foreach (var x in PoorSep)
+            if (PoorSep.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in PoorSep)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.AllPoorSep = Math.Round(num / PoorSep.Count(), 2);
             }
-            ViewBag.AllPoorSep = Math.Round(num / PoorSep.Count(), 2);
+            else
+            {
+                ViewBag.AllPoorSep = 0;
+            }
             num = 0;
             var PoorOct = poor.Where(x => x.Month == 10).ToList();
-            foreach (var x in PoorOct)
+            if (PoorOct.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in PoorOct)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.AllPoorOct = Math.Round(num / PoorOct.Count(), 2);
             }
-            ViewBag.AllPoorOct = Math.Round(num / PoorOct.Count(), 2);
+            else
+            {
+                ViewBag.AllPoorOct = 0;
+            }
             num = 0;
             var PoorNov = poor.Where(x => x.Month == 11).ToList();
-            foreach (var x in PoorNov)
+            if (PoorNov.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in PoorNov)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.AllPoorNov = Math.Round(num / PoorNov.Count(), 2);
             }
-            ViewBag.AllPoorNov = Math.Round(num / PoorNov.Count(),2);
+            else
+            {
+                ViewBag.AllPoorNov = 0;
+            }
             num = 0;
             var PoorDec = poor.Where(x => x.Month == 12).ToList();
-            foreach (var x in PoorDec)
+            if (PoorDec.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in PoorDec)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.AllPoorDec = Math.Round(num / PoorDec.Count(), 2);
             }
-            ViewBag.AllPoorDec = Math.Round(num / PoorDec.Count(), 2);
+            else
+            {
+                ViewBag.AllPoorDec = 0;
+            }
             num = 0;
             #endregion
             return View();
@@ -723,186 +904,366 @@ namespace YIAN.Controllers
             #region Rich
             var RichJan = rich.Where(x => x.Month == 1).ToList();
             double num = 0;
-            foreach (var x in RichJan)
+            if (RichJan.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in RichJan)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.RichJan = Math.Round(num / RichJan.Count(), 2);
+                ViewBag.RichJanCount = RichJan.Count();
             }
-            ViewBag.RichJan = Math.Round(num / RichJan.Count(), 2);
-            ViewBag.RichJanCount = RichJan.Count();
+            else
+            {
+                ViewBag.RichJan = 0;
+                ViewBag.RichJanCount = 0;
+            }
             num = 0;
             var RichFeb = rich.Where(x => x.Month == 2).ToList();
-            foreach (var x in RichFeb)
+            if (RichFeb.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in RichFeb)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.RichFeb = Math.Round(num / RichFeb.Count(), 2);
+                ViewBag.RichFebCount = RichFeb.Count();
             }
-            ViewBag.RichFeb = Math.Round(num / RichFeb.Count(), 2);
-            ViewBag.RichFebCount = RichFeb.Count();
+            else
+            {
+                ViewBag.RichFeb = 0;
+                ViewBag.RichFebCount = 0;
+            }
             num = 0;
             var RichMar = rich.Where(x => x.Month == 3).ToList();
-            foreach (var x in RichMar)
+            if (RichMar.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in RichMar)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.RichMar = Math.Round(num / RichMar.Count(), 2);
+                ViewBag.RichMarCount = RichMar.Count();
             }
-            ViewBag.RichMar = Math.Round(num / RichMar.Count(), 2);
-            ViewBag.RichMarCount = RichMar.Count();
+            else
+            {
+                ViewBag.RichMar = 0;
+                ViewBag.RichMarCount = 0;
+            }
             num = 0;
             var RichApr = rich.Where(x => x.Month == 4).ToList();
-            foreach (var x in RichApr)
+            if (RichApr.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in RichApr)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.RichApr = Math.Round(num / RichApr.Count(), 2);
+                ViewBag.RichAprCount = RichApr.Count();
             }
-            ViewBag.RichApr = Math.Round(num / RichApr.Count(), 2);
-            ViewBag.RichAprCount = RichApr.Count();
+            else
+            {
+                ViewBag.RichApr = 0;
+                ViewBag.RichAprCount = 0;
+            }
             num = 0;
             var RichMay = rich.Where(x => x.Month == 5).ToList();
-            foreach (var x in RichMay)
+            if (RichMay.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in RichMay)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.RichMay = Math.Round(num / RichMay.Count(), 2);
+                ViewBag.RichMayCount = RichMay.Count();
             }
-            ViewBag.RichMay = Math.Round(num / RichMay.Count(), 2);
-            ViewBag.RichMayCount = RichMay.Count();
+            else
+            {
+                ViewBag.RichMay = 0;
+                ViewBag.RichMayCount = 0;
+            }
             num = 0;
             var RichJun = rich.Where(x => x.Month == 6).ToList();
-            foreach (var x in RichJun)
+            if (RichJun.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in RichJun)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.RichJun = Math.Round(num / RichJun.Count(), 2);
+                ViewBag.RichJunCount = RichJun.Count();
             }
-            ViewBag.RichJun = Math.Round(num / RichJun.Count(), 2);
-            ViewBag.RichJunCount = RichJun.Count();
+            else
+            {
+                ViewBag.RichJun = 0;
+                ViewBag.RichJunCount = 0;
+            }
             num = 0;
             var RichJul = rich.Where(x => x.Month == 7).ToList();
-            foreach (var x in RichJul)
+            if (RichJul.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in RichJul)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.RichJul = Math.Round(num / RichJul.Count(), 2);
+                ViewBag.RichJulCount = RichJul.Count();
             }
-            ViewBag.RichJul = Math.Round(num / RichJul.Count(), 2);
-            ViewBag.RichJulCount = RichJul.Count();
+            else
+            {
+                ViewBag.RichJul = 0;
+                ViewBag.RichJulCount = 0;
+            }
             num = 0;
             var RichAug = rich.Where(x => x.Month == 8).ToList();
-            foreach (var x in RichAug)
+            if (RichAug.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in RichAug)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.RichAug = Math.Round(num / RichAug.Count(), 2);
+                ViewBag.RichAugCount = RichAug.Count();
             }
-            ViewBag.RichAug = Math.Round(num / RichAug.Count(), 2);
-            ViewBag.RichAugCount = RichAug.Count();
+            else
+            {
+                ViewBag.RichAug = 0;
+                ViewBag.RichAugCount = 0;
+            }
             num = 0;
             var RichSep = rich.Where(x => x.Month == 9).ToList();
-            foreach (var x in RichSep)
+            if (RichSep.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in RichSep)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.RichSep = Math.Round(num / RichSep.Count(), 2);
+                ViewBag.RichSepCount = RichSep.Count();
             }
-            ViewBag.RichSep = Math.Round(num / RichSep.Count(), 2);
-            ViewBag.RichSepCount = RichSep.Count();
+            else
+            {
+                ViewBag.RichSep = 0;
+                ViewBag.RichSepCount = 0;
+            }
             num = 0;
             var RichOct = rich.Where(x => x.Month == 10).ToList();
-            foreach (var x in RichOct)
+            if (RichOct.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in RichOct)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.RichOct = Math.Round(num / RichOct.Count(), 2);
+                ViewBag.RichOctCount = RichOct.Count();
             }
-            ViewBag.RichOct = Math.Round(num / RichOct.Count(), 2);
-            ViewBag.RichOctCount = RichOct.Count();
+            else
+            {
+                ViewBag.RichOct = 0;
+                ViewBag.RichOctCount = 0;
+            }
             num = 0;
             var RichNov = rich.Where(x => x.Month == 11).ToList();
-            foreach (var x in RichNov)
+            if (RichNov.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in RichNov)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.RichNov = Math.Round(num / RichNov.Count(), 2);
+                ViewBag.RichNovCount = RichNov.Count();
             }
-            ViewBag.RichNov = Math.Round(num / RichNov.Count(), 2);
-            ViewBag.RichNovCount = RichNov.Count();
+            else
+            {
+                ViewBag.RichNov = 0;
+                ViewBag.RichNovCount = 0;
+            }
             num = 0;
             var RichDec = rich.Where(x => x.Month == 12).ToList();
-            foreach (var x in RichDec)
+            if (RichDec.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in RichDec)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.RichDec = Math.Round(num / RichDec.Count(), 2);
+                ViewBag.RichDecCount = RichDec.Count();
             }
-            ViewBag.RichDec = Math.Round(num / RichDec.Count(), 2);
-            ViewBag.RichDecCount = RichDec.Count();
+            else
+            {
+                ViewBag.RichDec = 0;
+                ViewBag.RichDecCount = 0;
+            }
             num = 0;
             #endregion
             #region Poor
             var PoorJan = poor.Where(x => x.Month == 1).ToList();
-            foreach (var x in PoorJan)
+            if (PoorJan.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in PoorJan)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.PoorJan = Math.Round(num / PoorJan.Count(), 2);
             }
-            ViewBag.PoorJan = Math.Round(num / PoorJan.Count(), 2);
+            else
+            {
+                ViewBag.PoorJan = 0;
+            }
             num = 0;
             var PoorFeb = poor.Where(x => x.Month == 2).ToList();
-            foreach (var x in PoorFeb)
+            if (PoorFeb.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in PoorFeb)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.PoorFeb = Math.Round(num / PoorFeb.Count(), 2);
             }
-            ViewBag.PoorFeb = Math.Round(num / PoorFeb.Count(), 2);
+            else
+            {
+                ViewBag.PoorFeb = 0;
+            }
             num = 0;
             var PoorMar = poor.Where(x => x.Month == 3).ToList();
-            foreach (var x in PoorMar)
+            if (PoorMar.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in PoorMar)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.PoorMar = Math.Round(num / PoorMar.Count(), 2);
             }
-            ViewBag.PoorMar = Math.Round(num / PoorMar.Count(), 2);
+            else
+            {
+                ViewBag.PoorMar = 0;
+            }
             num = 0;
             var PoorApr = poor.Where(x => x.Month == 4).ToList();
-            foreach (var x in PoorApr)
+            if (PoorApr.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in PoorApr)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.PoorApr = Math.Round(num / PoorApr.Count(), 2);
             }
-            ViewBag.PoorApr = Math.Round(num / PoorApr.Count(), 2);
+            else
+            {
+                ViewBag.PoorApr = 0;
+            }
             num = 0;
             var PoorMay = poor.Where(x => x.Month == 5).ToList();
-            foreach (var x in PoorMay)
+            if (PoorMay.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in PoorMay)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.PoorMay = Math.Round(num / PoorMay.Count(), 2);
             }
-            ViewBag.PoorMay = Math.Round(num / PoorMay.Count(), 2);
+            else
+            {
+                ViewBag.PoorMay = 0;
+            }
             num = 0;
             var PoorJun = poor.Where(x => x.Month == 6).ToList();
-            foreach (var x in PoorJun)
+            if (PoorJun.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in PoorJun)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.PoorJun = Math.Round(num / PoorJun.Count(), 2);
             }
-            ViewBag.PoorJun = Math.Round(num / PoorJun.Count(), 2);
+            else
+            {
+                ViewBag.PoorJun = 0;
+            }
             num = 0;
             var PoorJul = poor.Where(x => x.Month == 7).ToList();
-            foreach (var x in PoorJul)
+            if (PoorJul.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in PoorJul)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.PoorJul = Math.Round(num / PoorJul.Count(), 2);
             }
-            ViewBag.PoorJul = Math.Round(num / PoorJul.Count(), 2);
+            else
+            {
+                ViewBag.PoorJul = 0;
+            }
             num = 0;
             var PoorAug = poor.Where(x => x.Month == 8).ToList();
-            foreach (var x in PoorAug)
+            if (PoorAug.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in PoorAug)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.PoorAug = Math.Round(num / PoorAug.Count(), 2);
             }
-            ViewBag.PoorAug = Math.Round(num / PoorAug.Count(), 2);
+            else
+            {
+                ViewBag.PoorAug = 0;
+            }
             num = 0;
             var PoorSep = poor.Where(x => x.Month == 9).ToList();
-            foreach (var x in PoorSep)
+            if (PoorSep.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in PoorSep)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.PoorSep = Math.Round(num / PoorSep.Count(), 2);
             }
-            ViewBag.PoorSep = Math.Round(num / PoorSep.Count(), 2);
+            else
+            {
+                ViewBag.PoorSep = 0;
+            }
             num = 0;
             var PoorOct = poor.Where(x => x.Month == 10).ToList();
-            foreach (var x in PoorOct)
+            if (PoorOct.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in PoorOct)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.PoorOct = Math.Round(num / PoorOct.Count(), 2);
             }
-            ViewBag.PoorOct = Math.Round(num / PoorOct.Count(), 2);
+            else
+            {
+                ViewBag.PoorOct = 0;
+            }
             num = 0;
             var PoorNov = poor.Where(x => x.Month == 11).ToList();
-            foreach (var x in PoorNov)
+            if (PoorNov.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in PoorNov)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.PoorNov = Math.Round(num / PoorNov.Count(), 2);
             }
-            ViewBag.PoorNov = Math.Round(num / PoorNov.Count(), 2);
+            else
+            {
+                ViewBag.PoorNov = 0;
+            }
             num = 0;
             var PoorDec = poor.Where(x => x.Month == 12).ToList();
-            foreach (var x in PoorDec)
+            if (PoorDec.Count() != 0)
             {
-                num = x.Income + num;
+                foreach (var x in PoorDec)
+                {
+                    num = x.Income + num;
+                }
+                ViewBag.PoorDec = Math.Round(num / PoorDec.Count(), 2);
             }
-            ViewBag.PoorDec = Math.Round(num / PoorDec.Count(), 2);
+            else
+            {
+                ViewBag.PoorDec = 0;
+            }
             num = 0;
             #endregion
             ViewBag.Town = villege;

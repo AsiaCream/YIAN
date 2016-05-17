@@ -558,7 +558,7 @@
         $.post("/Home/SituationEdits", $form.serialize(), function (data) {
             if (data == "success") {
                 alert("修改成功");
-                window.location.href = "/Admin/Situation/"+@Model.Id;
+                window.location.href = "/Admin/Situation/"+@Model.Family.Id;
             }else {
                 alert("未知错误");
 
