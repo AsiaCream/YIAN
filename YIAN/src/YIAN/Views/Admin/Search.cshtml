@@ -5,11 +5,11 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-5">
+        <div class="col-lg-5 col-md-5 col-xs-12">
             <div class="input-group input-group-lg">
                 <input type="text" class="form-control" name="key" id="key" placeholder="请输入姓名/地址/身份证号码/贫困号...">
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" id="send">
+                    <button class="btn btn-primary" type="button" id="send">
                         <i class="fa fa-search"></i>
                     </button>
                 </span>
@@ -24,24 +24,54 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="infoModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    系统消息
+                </h4>
+            </div>
+            <div class="modal-body">
+                <h2>请输入姓名/地址/身份证号码/贫困号...</h2>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger"
+                        data-dismiss="modal">
+                    关闭
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
 <script src="~/scripts/jquery-2.1.1.min.js"></script>
 <script>
     $(function () {
         $("#send").click(function () {
-            $.post("/Admin/Search", { key: $("#key").val() },function(data){
-                if (data == "success") {
-                    $.get("/Admin/GetSearch", { key: $("#key").val() }, function (html) {
-                        $("#getSearch").html(html);
-                    });
-                } else if (data == "error") {
-                    alert("未找到请求信息");
-                   
-                } else {
-                    alert("出现异常");
+            if ($("#key").val() == "") {
+                $("#infoModal").modal("show");
+            }
+            else {
+                $.post("/Admin/Search", { key: $("#key").val() }, function (data) {
+                    if (data == "success") {
+                        $.get("/Admin/GetSearch", { key: $("#key").val() }, function (html) {
+                            $("#getSearch").html(html);
+                        });
+                    } else if (data == "error") {
+                        alert("未找到请求信息");
 
-                }
-            });
-        })
+                    } else {
+                        alert("出现异常");
+
+                    }
+                });
+            }
+        });
 
     });
 </script>

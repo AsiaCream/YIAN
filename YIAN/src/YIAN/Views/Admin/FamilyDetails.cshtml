@@ -55,7 +55,7 @@
                     </tr>
                     @foreach(var x in Model)
                     {
-                        <tr>
+                        <tr id="tr-@x.Id">
                             <td>@x.Name</td>
                             <td>@x.Sex</td>
                             <td>@x.PhoneNumber</td>
@@ -74,7 +74,9 @@
                             <td>@x.IsOldInsurance</td>
                             <td>@x.IsWorkInsurance</td>
                             <td>@x.Skills</td>
-                            <td><a asp-action="EditFamilyMember" asp-controller="Admin" asp-route-id="@x.Id" class="btn btn-primary fa fa-edit">修改</a></td>
+                            <td><a asp-action="EditFamilyMember" asp-controller="Admin" asp-route-id="@x.Id" class="btn btn-primary fa fa-edit">修改</a>
+                            <a href="javascript:remove(@x.Id)" class="btn btn-danger fa fa-scissors">删除</a>
+                            </td>
                         </tr>
                     }
                 </tbody>
@@ -82,3 +84,21 @@
         </div>
     </div>
 </div>
+<script src="~/scripts/jquery-2.1.1.js"></script>
+<script type="text/javascript">
+    function remove(id) {
+        var jug = confirm("确认删除吗？请三思...");
+        jug && $.post("/Admin/DeleteFamilyMember", { id: id }, function (data) {
+            if (data == "success") {
+                $("#tr-" + id).remove();
+                alert("删除成功...");
+            }
+            else if (data == "error") {
+                alert("删除失败...");
+            }
+            else {
+                alert("异常信息...");
+            }
+        });
+    }
+</script>

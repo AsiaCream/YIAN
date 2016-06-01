@@ -1,19 +1,16 @@
 ﻿@model IEnumerable<FamilyTown>
 <div id="page-wrapper">
     <div class="row">
-        <div class="col-md-12">
-            <h3>户主信息</h3>
-        </div>
-    </div>
-    <div class="row">
         <div class="col-md-12 col-lg-12 col-sx-12 col-sm-12">
-            <table class="table table-striped table-hover">
+            <table class="table table-striped table-hover table-bordered">
+                <caption>户主信息</caption>
                 <thead>
                     <tr>
                         <th>户主ID</th>
                         <th>户主姓名</th>
                         <th>身份证号</th>
                         <th>贫困号</th>
+                        <th>贫困标准</th>
                         <th>地址</th>
                         <th>所在村镇</th>
                         <th>家中人数</th>
@@ -23,15 +20,21 @@
                 <tbody>
                     @foreach (var x in Model)
                     {
-                        <tr>
+                        <tr id="tr-@x.Id">
                             <td>@x.Id</td>
                             <td>@x.HostName</td>
                             <td>@x.CardNo</td>
                             <td>@x.PoorNo</td>
+                            <td>@x.PoorDetails</td>
                             <td>@x.Address</td>
                             <td>@x.TownName</td>
                             <td>@x.MemberCount</td>
-                            <td><a asp-action="CreateFamilyMember" asp-controller="Admin" asp-route-id="@x.Id" class="btn btn-success">成员<i class="fa fa-plus"></i></a><a asp-action="Situation" asp-controller="Admin" asp-route-id="@x.Id" class="btn btn-info">家庭情况<i class="fa fa-search"></i></a><a asp-action="EditFamily" asp-controller="Admin" asp-route-id="@x.Id" class="btn btn-primary">编辑<i class="fa fa-wrench"></i></a><a asp-action="FamilyDetails" asp-controller="Admin" asp-route-id="@x.Id" class="btn btn-warning">查看<i class="fa fa-search"></i></a></td>
+                            <td><a asp-action="CreateFamilyMember" asp-controller="Admin" asp-route-id="@x.Id" class="btn btn-success">成员<i class="fa fa-plus"></i></a>
+                            <a asp-action="Situation" asp-controller="Admin" asp-route-id="@x.Id" class="btn btn-info">家庭情况<i class="fa fa-search"></i></a>
+                            <a asp-action="EditFamily" asp-controller="Admin" asp-route-id="@x.Id" class="btn btn-primary">编辑<i class="fa fa-wrench"></i></a>
+                            <a asp-action="FamilyDetails" asp-controller="Admin" asp-route-id="@x.Id" class="btn btn-warning">查看<i class="fa fa-search"></i></a>
+                            <a href="javascript:remove(@x.Id)" class="btn btn-danger fa fa-scissors">删除户主</a>
+                            </td>
                         </tr>
                     }
                 </tbody>
@@ -39,3 +42,21 @@
         </div>
     </div>
 </div>
+<script src="~/scripts/jquery-2.1.1.js"></script>
+<script type="text/javascript">
+    function remove(id) {
+        var jug = confirm("确认删除吗？请三思...");
+        jug && $.post("/Admin/DeleteFamily", { id: id }, function (data) {
+            if (data == "success") {
+                $("#tr-" + id).remove();
+                alert("删除成功...");
+            }
+            else if (data == "error") {
+                alert("删除失败...");
+            }
+            else {
+                alert("异常信息...");
+            }
+        });
+    }
+</script>

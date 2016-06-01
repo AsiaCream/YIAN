@@ -40,19 +40,5 @@
             </tr>
         }
     </tbody>
-    @if (ViewBag.PoorMember != null)
-    {
-        <tbody>
-            <tr>
-                <td>@ViewBag.PoorMember.Id</td>
-                <td>@ViewBag.PoorMember.PoorNo</td>
-                <td>@ViewBag.PoorMember.Name</td>
-                <td>@ViewBag.PoorMember.Address</td>
-                <td>@ViewBag.PoorMember.CardNo</td>
-                <td><a asp-action="FamilyDetails" asp-controller="Admin" asp-route-id="@ViewBag.PoorMember.Id">查看详细</a></td>
-            </tr>
-        </tbody>
-
-    }
 </table>
 
