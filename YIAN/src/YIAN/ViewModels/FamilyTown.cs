@@ -14,5 +14,6 @@ namespace YIAN.ViewModels
         public string CardNo { get; set; }
         public int PoorNo { get; set; }
         public int MemberCount { get; set; }
+        public string PoorDetails { get; set; }
     }
 }
