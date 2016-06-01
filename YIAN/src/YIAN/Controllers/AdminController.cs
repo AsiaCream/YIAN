@@ -169,12 +169,34 @@ namespace YIAN.Controllers
                 .Include(x=>x.Town)
                 .OrderByDescending(x => x.Id)
                 .ToList();
-            if (host.Count != 0)
-            {
                 var ret = new List<FamilyTown>();
                 foreach (var x in host)
                 {
-                    ret.Add(new FamilyTown
+                string details="";
+                var pd = DB.FamilySituations
+                    .Where(y => y.FamilyId == x.Id)
+                    .Where(y => y.CreateTime.Year == DateTime.Now.Year && y.CreateTime.Month == DateTime.Now.Month)
+                    .SingleOrDefault();
+                if (pd != null)
+                {
+                    if (pd.YearAnnualPerCapitaIncome < 2800)
+                    {
+                        details = "国标平困户";
+                    }
+                    else if (pd.YearAnnualPerCapitaIncome >= 2800 && pd.YearAnnualPerCapitaIncome <= 3400)
+                    {
+                        details = "省标贫困户";
+                    }
+                    else
+                    {
+                        details = "脱贫";
+                    }
+                }
+                else
+                {
+                    details = "";
+                }
+                ret.Add(new FamilyTown
                     {
                         Id = x.Id,
                         TownName = DB.Towns.Where(y => y.Id == x.TownId).SingleOrDefault().Title,
@@ -183,16 +205,10 @@ namespace YIAN.Controllers
                         CardNo = x.CardNo,
                         PoorNo = x.PoorNo,
                         MemberCount = DB.FamilyMembers.Where(y => y.FamilyId == x.Id).Count()+DB.Familys.Where(y=>y.Id==x.Id).Count(),
-                    });
+                        PoorDetails=details,
+                  });
                 }
-
                 return View(ret);
-            }
-            else
-            {
-                return RedirectToAction("Error", "Home");
-            }
-            
         }
         //编辑户主信息
         [HttpGet]
@@ -286,6 +302,67 @@ namespace YIAN.Controllers
             DB.SaveChanges();
             return Content("success");
         }
+        /// <summary>
+        /// 删除家庭成员
+        /// </summary>
+        /// <param name="id">家庭成员id</param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult DeleteFamilyMember(int id)
+        {
+            var ret = DB.FamilyMembers
+                .Where(x => x.Id == id)
+                .SingleOrDefault();
+            if (ret != null)
+            {
+                DB.FamilyMembers.Remove(ret);
+                DB.SaveChanges();
+                return Content("success");
+            }
+            else
+            {
+                return Content("error");
+            }
+        }
+        /// <summary>
+        /// 删除户主
+        /// </summary>
+        /// <param name="id">户主id</param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult DeleteFamily(int id)
+        {
+            var ret = DB.Familys
+                .Where(x => x.Id == id)
+                .SingleOrDefault();
+            if (ret != null)
+            {
+                //删除户主
+                DB.Familys.Remove(ret);
+                var situation = DB.FamilySituations
+                    .Where(x => x.FamilyId == id)
+                    .ToList();
+                foreach(var x in situation)
+                {
+                    //删除户主对应的家庭情况
+                    DB.FamilySituations.Remove(x);
+                }
+                var member = DB.FamilyMembers
+                    .Where(x => x.FamilyId == id)
+                    .ToList();
+                foreach(var x in member)
+                {
+                    //删除户主对应的家庭成员
+                    DB.FamilyMembers.Remove(x);
+                }
+                DB.SaveChanges();
+                return Content("success");
+            }
+            else
+            {
+                return Content("error");
+            }
+        }
         [HttpGet]
         public IActionResult Situation(int id)
         {
@@ -339,6 +416,7 @@ namespace YIAN.Controllers
                 }
                 else
                 {
+                    //查找家庭人数
                     var PCount = DB.FamilyMembers.Where(x => x.FamilyId == id).Count() + DB.Familys.Where(x => x.Id == id).Count();
                     var situation = new FamilySituation
                     {
@@ -473,7 +551,7 @@ namespace YIAN.Controllers
         [HttpPost]
         public IActionResult CreateFamilyMember(int id,string Name,int Age,string Sex,string Address,string PhoneNumber,
             string CardNo,string IsDisability,string RelationShip,string Education,string IsOnSchool,int Ability,string IsHealth,
-            string Work,string IsLow,string IsNewFarm,string IsOldInurance,string IsWorkInsurance,string Skills,string Helper,string Measures)
+            string Work,string IsLow,string IsNewFarm,string IsOldInsurance, string IsWorkInsurance,string Skills,string Helper,string Measures)
         {
 
             var member = new FamilyMember
@@ -493,7 +571,7 @@ namespace YIAN.Controllers
                 Work = Work,
                 IsLow = IsLow,
                 IsNewFarm = IsNewFarm,
-                IsOldInsurance = IsOldInurance,
+                IsOldInsurance = IsOldInsurance,
                 IsWorkInsurance = IsWorkInsurance,
                 Skills = Skills,
                 FamilyId=id,
@@ -513,15 +591,13 @@ namespace YIAN.Controllers
         public IActionResult Search(string key)
         {
             var host = DB.Familys
-                .Where(x => x.Name.Contains(key) || x.Address.Contains(key))
+                .Where(x => x.Name.Contains(key) || x.Address.Contains(key)||x.CardNo==key||x.PoorNo.ToString()==key)
                 .ToList();
             var Member = DB.FamilyMembers
-                .Where(x => x.Name.Contains(key) || x.Address.Contains(key))
+                .Where(x => x.Name.Contains(key) || x.Address.Contains(key)||x.CardNo==key)
                 .Count();
-            var poorno = DB.Familys
-                .Where(x => x.PoorNo.ToString() == key)
-                .SingleOrDefault();
-            if (host.Count() != 0 || Member != 0||poorno!=null)
+            
+            if (host.Count() != 0 || Member != 0)
             {
                 return Content("success");
             }
@@ -534,17 +610,14 @@ namespace YIAN.Controllers
         public IActionResult GetSearch(string key)
         {
             var host = DB.Familys
-                .Where(x => x.Name.Contains(key) || x.Address.Contains(key))
+                .Where(x => x.Name.Contains(key) || x.Address.Contains(key) || x.CardNo == key||x.PoorNo.ToString()==key)
                 .ToList();
             var Member = DB.FamilyMembers
                 .Include(x=>x.Family)
-                .Where(x => x.Name.Contains(key) || x.Address.Contains(key))
+                .Where(x => x.Name.Contains(key) || x.Address.Contains(key) || x.CardNo == key)
                 .ToList();
-            var p = DB.Familys
-                .Where(x => x.PoorNo.ToString() == key)
-                .SingleOrDefault();
+            
             ViewBag.Member = Member;
-            ViewBag.PoorMember = p;
             return View(host);
         }
     }
